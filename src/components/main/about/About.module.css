@@ -1,0 +1,15 @@
+.about {
+  max-width: 50%;
+  height: 477px;
+  background-color: whitesmoke;
+}
+.title {
+  padding-top: 20px;
+  text-align: center;
+}
+.text {
+}
+
+.information {
+  margin: 0 25px;
+}
