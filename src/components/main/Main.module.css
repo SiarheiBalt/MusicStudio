@@ -1,4 +1,8 @@
-.main {
-}
 .information {
+  display: flex;
+  justify-content: space-between;
+}
+.block__right {
+  width: 49%;
+  background-color: whitesmoke;
 }

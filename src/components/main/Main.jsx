@@ -6,10 +6,10 @@ import ServiceType from './serviceTypes/ServiceType';
 
 const Main = () => {
   return (
-    <div className={cl.main}>
+    <div>
       <div className={cl.information}>
         <About />
-        <div>
+        <div className={cl.block__right}>
           <Contacts />
           <AuthorizationForm />
         </div>
