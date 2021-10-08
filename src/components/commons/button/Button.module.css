@@ -1,0 +1,11 @@
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}
+.button:active {
+  background-color: rgb(203, 229, 238);
+}
+.button:hover {
+  background-color: rgb(203, 229, 238);
+}

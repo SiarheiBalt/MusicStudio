@@ -1,0 +1,19 @@
+.day {
+  width: 160px;
+  height: 200px;
+  margin: 15px 0;
+  background-color: antiquewhite;
+}
+.title {
+  text-align: center;
+}
+.label {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+}
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

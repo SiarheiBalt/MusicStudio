@@ -4,5 +4,7 @@
 }
 .block__right {
   width: 49%;
-  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
