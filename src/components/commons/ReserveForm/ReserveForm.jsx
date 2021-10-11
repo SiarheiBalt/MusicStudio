@@ -4,12 +4,15 @@ import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import { Button } from '../button/Button';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from '../../../redux/constants';
 
 registerLocale('ru', ru);
 
-const ReserveForm = ({ itemForReservation, itemInfo }) => {
+const ReserveForm = ({ size }) => {
   const [resrveDate, setReserveDate] = useState(new Date());
   const [select, setSelect] = useState('10');
+  const dispatch = useDispatch();
 
   const selectChange = (event) => {
     setSelect(event.target.value);
@@ -19,8 +22,9 @@ const ReserveForm = ({ itemForReservation, itemInfo }) => {
     const formData = {
       resrveDate,
       selectedTime: select,
+      size,
     };
-    console.log(formData.resrveDate.getMonth());
+    dispatch({ type: ACTIONS.RESERVE_ROOM, formData, customer: null });
   };
 
   return (

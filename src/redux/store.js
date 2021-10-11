@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from 'redux';
-import reserveTimeReducer from './reducers/reserveTimeReducer';
+import reserveRoomReducer from './reducers/reserveRoomReducer';
 
 const store = createStore(
   combineReducers({
-    reserveTimeReducer,
+    reserveRoomReducer,
   }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

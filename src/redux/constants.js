@@ -1,3 +1,3 @@
 export const ACTIONS = {
-  GET_TIME_DATA: 'GET_TIME_DATA',
+  RESERVE_ROOM: 'RESERVE_ROOM',
 };
