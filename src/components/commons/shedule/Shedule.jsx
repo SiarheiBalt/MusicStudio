@@ -1,23 +1,12 @@
 import DayShedule from './dayShedule/DayShedule';
 import cl from './Shedule.module.css';
 
-const Shedule = () => {
+const Shedule = ({ timeData }) => {
   return (
     <div className={cl.shedule}>
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
-      <DayShedule />
+      {timeData.map((day, i) => {
+        return i < 14 && <DayShedule key={day.id} day={day} />;
+      })}
     </div>
   );
 };

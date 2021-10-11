@@ -4,7 +4,8 @@ import cl from './Rooms.module.css';
 const Rooms = () => {
   return (
     <div>
-      <Room />
+      <Room size={'big'} />
+      <Room size={'small'} />
     </div>
   );
 };

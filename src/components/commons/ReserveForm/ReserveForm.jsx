@@ -7,12 +7,20 @@ import { Button } from '../button/Button';
 
 registerLocale('ru', ru);
 
-const ReserveForm = () => {
+const ReserveForm = ({ itemForReservation, itemInfo }) => {
   const [resrveDate, setReserveDate] = useState(new Date());
   const [select, setSelect] = useState('10');
 
   const selectChange = (event) => {
     setSelect(event.target.value);
+  };
+
+  const buttonClick = () => {
+    const formData = {
+      resrveDate,
+      selectedTime: select,
+    };
+    console.log(formData.resrveDate.getMonth());
   };
 
   return (
@@ -38,7 +46,7 @@ const ReserveForm = () => {
           <option value='18'>18:00 до 20:00</option>
           <option value='20'>20:00 до 22:00</option>
         </select>
-        <Button action={'Зарезервировать'} />
+        <Button action={'Зарезервировать'} onClick={buttonClick} />
       </div>
     </div>
   );
