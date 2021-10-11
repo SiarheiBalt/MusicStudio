@@ -1,32 +1,5 @@
 import { addDays, getYear, eachDayOfInterval } from 'date-fns';
 
-const reserveTime = {
-  10: {
-    isfree: true,
-    customer: null,
-  },
-  12: {
-    isfree: true,
-    customer: null,
-  },
-  14: {
-    isfree: true,
-    customer: null,
-  },
-  16: {
-    isfree: true,
-    customer: null,
-  },
-  18: {
-    isfree: true,
-    customer: null,
-  },
-  20: {
-    isfree: true,
-    customer: null,
-  },
-};
-
 function getNameofMounth(month) {
   month += 1;
   let mounthName = {
@@ -82,7 +55,33 @@ function getData(dateArray) {
       monthName: getNameofMounth(month),
       month,
       year: getYear(date),
-      reserveTime,
+      reserveTime: {
+        10: {
+          isfree: true,
+          customer: null,
+        },
+        12: {
+          isfree: true,
+          customer: null,
+        },
+        14: {
+          isfree: true,
+          customer: null,
+        },
+        16: {
+          isfree: true,
+          customer: null,
+        },
+        18: {
+          isfree: true,
+          customer: null,
+        },
+        20: {
+          isfree: true,
+          customer: null,
+        },
+      },
+
       id: Math.random().toString(36).substr(2, 9),
     };
   });

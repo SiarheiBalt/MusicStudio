@@ -2,10 +2,10 @@ import createData from '../../functions/date';
 import { ACTIONS } from '../constants';
 
 const defaultState = {
-  rooms: {
-    big: createData(),
-    small: createData(),
-  },
+  rooms: [
+    { dates: createData(), name: 'big' },
+    { dates: createData(), name: 'small' },
+  ],
 };
 
 const reserveRoomReducer = (state = defaultState, action) => {
@@ -13,14 +13,29 @@ const reserveRoomReducer = (state = defaultState, action) => {
     case ACTIONS.RESERVE_ROOM:
       const date = action.formData.resrveDate.getDate();
       const month = action.formData.resrveDate.getMonth();
+      const selectedTime = action.formData.selectedTime;
+      const size = action.formData.size;
+      let rooms = state.rooms.concat();
 
-      const roomArray = state.rooms[action.formData.size];
-
-      roomArray.map((day) => {
-        if (day.date === date && day.month === month) {
-          const reserveTime = day.reserveTime[action.formData.selectedTime];
-        }
+      rooms = rooms.map((room) => {
+        room.dates = room.dates.map((element) => {
+          if (
+            element.date === date &&
+            element.month === month &&
+            room.name === size
+          ) {
+            const obj = { isfree: false };
+            element.reserveTime[selectedTime] = obj;
+          }
+          return element;
+        });
+        return room;
       });
+
+      return {
+        ...state,
+        rooms,
+      };
 
     default:
       return state;

@@ -24,7 +24,7 @@ const ReserveForm = ({ size }) => {
       selectedTime: select,
       size,
     };
-    dispatch({ type: ACTIONS.RESERVE_ROOM, formData, customer: null });
+    dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
   };
 
   return (
@@ -34,7 +34,7 @@ const ReserveForm = ({ size }) => {
         <h4 className={cl.title}>Выберите дату</h4>
         <div>
           <DatePicker
-            locale='ru'
+            locale="ru"
             selected={resrveDate}
             onChange={(date) => {
               setReserveDate(date);
@@ -43,12 +43,12 @@ const ReserveForm = ({ size }) => {
         </div>
         <h4 className={cl.title}>Выберите время</h4>
         <select value={select} onChange={selectChange}>
-          <option value='10'>10:00 до 12:00</option>
-          <option value='12'>12:00 до 14:00</option>
-          <option value='14'>14:00 до 16:00</option>
-          <option value='16'>16:00 до 18:00</option>
-          <option value='18'>18:00 до 20:00</option>
-          <option value='20'>20:00 до 22:00</option>
+          <option value="10">10:00 до 12:00</option>
+          <option value="12">12:00 до 14:00</option>
+          <option value="14">14:00 до 16:00</option>
+          <option value="16">16:00 до 18:00</option>
+          <option value="18">18:00 до 20:00</option>
+          <option value="20">20:00 до 22:00</option>
         </select>
         <Button action={'Зарезервировать'} onClick={buttonClick} />
       </div>

@@ -11,7 +11,7 @@ const DayShedule = ({ day }) => {
           <span> 10:00 до 12:00 - </span>{' '}
           <div
             className={`${cl.label} ${
-              day.reserveTime['10'] ? cl.green : cl.red
+              day.reserveTime[10].isfree ? cl.green : cl.red
             }`}
           ></div>
         </div>
@@ -19,7 +19,7 @@ const DayShedule = ({ day }) => {
           <span> 12:00 до 14:00 - </span>{' '}
           <div
             className={`${cl.label} ${
-              day.reserveTime['10'] ? cl.green : cl.red
+              day.reserveTime[12].isfree ? cl.green : cl.red
             }`}
           ></div>
         </div>
@@ -27,7 +27,7 @@ const DayShedule = ({ day }) => {
           <span> 14:00 до 16:00 - </span>{' '}
           <div
             className={`${cl.label} ${
-              day.reserveTime['10'] ? cl.green : cl.red
+              day.reserveTime[14].isfree ? cl.green : cl.red
             }`}
           ></div>
         </div>
@@ -35,7 +35,7 @@ const DayShedule = ({ day }) => {
           <span> 16:00 до 18:00 - </span>{' '}
           <div
             className={`${cl.label} ${
-              day.reserveTime['10'] ? cl.green : cl.red
+              day.reserveTime[16].isfree ? cl.green : cl.red
             }`}
           ></div>
         </div>
@@ -43,7 +43,7 @@ const DayShedule = ({ day }) => {
           <span> 18:00 до 20:00 - </span>{' '}
           <div
             className={`${cl.label} ${
-              day.reserveTime['10'] ? cl.green : cl.red
+              day.reserveTime[18].isfree ? cl.green : cl.red
             }`}
           ></div>
         </div>
@@ -51,7 +51,7 @@ const DayShedule = ({ day }) => {
           <span> 20:00 до 22:00 - </span>{' '}
           <div
             className={`${cl.label} ${
-              day.reserveTime['10'] ? cl.green : cl.red
+              day.reserveTime[20].isfree ? cl.green : cl.red
             }`}
           ></div>
         </div>
