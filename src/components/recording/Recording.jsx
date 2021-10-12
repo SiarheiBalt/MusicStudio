@@ -1,15 +1,15 @@
+import RecordingTypes from './recordingTypes/RecordingTypes';
+import cl from './Recording.module.css';
 import { useSelector } from 'react-redux';
-import ReserveItem from '../commons/reserveItem/ReserveItem';
-import RoomsInfo from './roomsInfo/RoomsInfo';
-import cl from './Rooms.module.css';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ACTIONS } from './../../redux/constants';
+import ReserveItem from '../commons/reserveItem/ReserveItem';
+import { ACTIONS } from '../../redux/constants';
 
-const Rooms = () => {
+const Recording = () => {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.reserveTime.rooms);
+  const data = useSelector((store) => store.reserveTime.record);
 
   const reserveSubmit = (formData) => {
     dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
@@ -17,31 +17,31 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className={cl.rooms}>
-        <RoomsInfo />
+      <div className={cl.recording}>
+        <RecordingTypes />
 
-        <Route exact path='/rooms'>
+        <Route exact path='/record'>
           <Redirect to={`/${data[0].name}`} />
         </Route>
 
-        {data.map((room, i) => (
+        {data.map((record, i) => (
           <Route
             key={i}
-            path={`/${room.name}`}
+            path={`/${record.name}`}
             render={() => (
               <ReserveItem
                 key={i}
-                name={room.name}
-                dates={room.dates}
+                dates={record.dates}
+                name={record.name}
                 reserveSubmit={reserveSubmit}
-                type={'rooms'}
+                type={'record'}
               />
             )}
-          ></Route>
+          />
         ))}
       </div>
     </BrowserRouter>
   );
 };
 
-export default Rooms;
+export default Recording;

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Main from './components/main/Main';
 import Footer from './components/footer/Footer';
 import Rooms from './components/rooms/Rooms';
+import Recording from './components/recording/Recording';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Redirect to='/main' />
           </Route>
           <Route path='/rooms' component={Rooms} />
+          <Route path='/record' component={Recording} />
           <Footer />
         </div>
       </div>
