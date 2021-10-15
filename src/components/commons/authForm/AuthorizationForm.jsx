@@ -7,11 +7,16 @@ import { ACTIONS } from '../../../redux/constants';
 
 const AuthorizationForm = () => {
   const dispatch = useDispatch();
-  const [loginInput, setLoginInput] = useState();
-  const [passwordInput, setPasswordInput] = useState();
+  const [loginInput, setLoginInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
 
   const changeLoginInput = (event) => {
     setLoginInput(event.target.value);
+  };
+
+  const changeNameInput = (event) => {
+    setNameInput(event.target.value);
   };
   const changePasswordInput = (event) => {
     setPasswordInput(event.target.value);
@@ -20,6 +25,13 @@ const AuthorizationForm = () => {
   const registration = () => {
     dispatch({
       type: ACTIONS.REGISTRATION_USER,
+      userData: { email: loginInput, password: passwordInput, name: nameInput },
+    });
+  };
+
+  const login = () => {
+    dispatch({
+      type: ACTIONS.LOGIN_USER,
       userData: { email: loginInput, password: passwordInput },
     });
   };
@@ -29,9 +41,10 @@ const AuthorizationForm = () => {
       <h3 className={cl.title}>Войти в приложение</h3>
       <div className={cl.user}>
         <span>Login</span> <Input onchangeInput={changeLoginInput} />
-        <span>Password</span>{' '}
+        <span>Name</span> <Input onchangeInput={changeNameInput} />
+        <span>Password</span>
         <Input onchangeInput={changePasswordInput} type={'password'} />
-        <Button action={'Подтвердить'} />
+        <Button action={'Подтвердить'} onClick={login} />
         <Button action={'Зарегистрироваться'} onClick={registration} />
       </div>
     </div>

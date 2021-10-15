@@ -2,7 +2,7 @@ import createSagaMiddleware from '@redux-saga/core';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import authReducer from './reducers/authReducer';
 import reserveTime from './reducers/reserveTimeReducer';
-import { registrationUserSaga } from './sagas/authSagas';
+import { loginUserSaga, registrationUserSaga } from './sagas/authSagas';
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -17,6 +17,7 @@ const store = createStore(
 );
 
 sagaMiddleWare.run(registrationUserSaga);
+sagaMiddleWare.run(loginUserSaga);
 
 window.store = store;
 
