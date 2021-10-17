@@ -4,12 +4,7 @@ import { ACTIONS } from '../constants';
 function* getRegistrationUserSaga(action) {
   try {
     const response = yield call(() => {
-      let body = {
-        password: action.userData.password,
-        email: action.userData.email,
-        name: action.userData.name,
-      };
-      console.log(body);
+      let body = action.body;
       body = JSON.stringify(body);
       let headers = {};
       const method = 'POST';
@@ -20,7 +15,17 @@ function* getRegistrationUserSaga(action) {
         headers,
       });
     });
-    console.log(response);
+
+    const data = yield response.json();
+    if (response.status === 500) {
+      yield put({ type: ACTIONS.SET_USER_ERROR, errorText: data.message });
+    }
+    if (response.ok) {
+      yield put({
+        type: ACTIONS.REGISTRATION_USER_SUCCES,
+        message: data.message,
+      });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -32,10 +37,7 @@ export function* registrationUserSaga() {
 function* getLoginUserSaga(action) {
   try {
     const response = yield call(() => {
-      let body = {
-        password: action.userData.password,
-        email: action.userData.email,
-      };
+      let body = action.body;
 
       body = JSON.stringify(body);
       let headers = {};
@@ -48,7 +50,11 @@ function* getLoginUserSaga(action) {
       });
     });
     const data = yield response.json();
-    yield put({ type: ACTIONS.SET_USER, data });
+    if (response.status === 200) {
+      yield put({ type: ACTIONS.SET_USER, data });
+    } else {
+      yield put({ type: ACTIONS.SET_USER_ERROR, errorText: data.message });
+    }
   } catch (error) {
     console.log(error);
   }

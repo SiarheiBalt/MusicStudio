@@ -8,7 +8,6 @@ import Recording from './components/recording/Recording';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from './redux/constants';
 import { useEffect } from 'react';
-import { checkUserLocalStorage } from './functions/localStorage';
 
 function App() {
   const dispatch = useDispatch();
