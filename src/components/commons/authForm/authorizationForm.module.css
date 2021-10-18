@@ -48,3 +48,13 @@
   display: flex;
   justify-content: center;
 }
+.registration__message {
+  display: flex;
+  justify-content: center;
+  height: 35px;
+  align-items: center;
+}
+.message__text {
+  color: green;
+  font-weight: 600;
+}

@@ -52,8 +52,8 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
         </div>
       )}
       {!!registrationUserMessage && (
-        <div>
-          <span>{registrationUserMessage}</span>
+        <div className={cl.registration__message}>
+          <span className={cl.message__text}>{registrationUserMessage}</span>
         </div>
       )}
     </div>

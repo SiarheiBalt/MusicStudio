@@ -24,6 +24,9 @@ const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
       validateOnBlur
       onSubmit={(values) => {
         onClick(values);
+        for (const key in values) {
+          values[key] = '';
+        }
       }}
       validationSchema={validationsShema}
     >
