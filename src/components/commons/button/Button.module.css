@@ -1,7 +1,10 @@
 .button {
-  border: none;
   cursor: pointer;
-  background-color: white;
+  background-color: whitesmoke;
+  max-width: 130px;
+  height: 30px;
+  border-radius: 10px;
+  font-weight: 600;
 }
 .button:active {
   background-color: rgb(203, 229, 238);

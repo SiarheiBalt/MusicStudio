@@ -1,0 +1,27 @@
+.text {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.reserve {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 130px;
+  justify-content: space-around;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.hours {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 5px;
+}
+.title {
+  margin-top: 0;
+}

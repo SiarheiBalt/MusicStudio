@@ -1,12 +1,17 @@
 .day {
   width: 160px;
-  height: 200px;
-  margin: 15px 0;
-  background-color: antiquewhite;
+  height: 170px;
+  margin: 10px 0;
+  border-radius: 15px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+.day:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 .title {
   text-align: center;
-  font-size: 0.77em;
+  font-weight: 300;
 }
 .label {
   width: 15px;
@@ -23,4 +28,11 @@
 }
 .red {
   background-color: red;
+}
+.status {
+  display: flex;
+}
+.status__text {
+  text-align: center;
+  color: green;
 }
