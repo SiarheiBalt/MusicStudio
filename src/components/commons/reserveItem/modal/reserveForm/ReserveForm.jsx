@@ -5,7 +5,7 @@ import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import Hour from '../hour/Hour';
 
 const ReserveForm = ({ closeModal, day, hourClick }) => {
-  const resrveTime = [
+  const reserveTime = [
     { hour: '10:00', isFree: true },
     { hour: '11:00', isFree: true },
     { hour: '12:00', isFree: true },
@@ -19,6 +19,7 @@ const ReserveForm = ({ closeModal, day, hourClick }) => {
     { hour: '20:00', isFree: true },
     { hour: '21:00', isFree: true },
   ];
+
   return (
     <div className={cl.container}>
       <CloseIcoButton close={closeModal} />
@@ -27,7 +28,7 @@ const ReserveForm = ({ closeModal, day, hourClick }) => {
       >{`${day.date} - ${day.monthName} (${day.dayofWeek})`}</h3>
       <h3 className={cl.title}>Резервирование времени</h3>
       <div className={cl.hours}>
-        {resrveTime.map((time, i) => (
+        {reserveTime.map((time, i) => (
           <Hour key={i} time={time} hourClick={hourClick} />
         ))}
       </div>

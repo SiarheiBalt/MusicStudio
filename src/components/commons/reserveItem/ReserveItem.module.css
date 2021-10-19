@@ -4,8 +4,3 @@
 .title {
   text-align: center;
 }
-.button__container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

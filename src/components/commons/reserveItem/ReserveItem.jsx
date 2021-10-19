@@ -2,10 +2,11 @@ import Shedule from '../shedule/Shedule';
 import cl from './ReserveItem.module.css';
 import { useState } from 'react';
 import Modal from './modal/Modal';
+import DataSelect from '../dateSelect/DateSelect';
 
 const ReserveItem = ({ dates, name, reserveSubmit, type }) => {
   const [isModal, setIsModal] = useState(false);
-  const [dayForModal, setDayForModal] = useState();
+  const [dayForModal, setDayForModal] = useState({});
 
   const openModal = (day) => {
     setIsModal(true);
@@ -16,12 +17,27 @@ const ReserveItem = ({ dates, name, reserveSubmit, type }) => {
     setIsModal(false);
   };
 
+  const getDateFromPicker = (date) => {
+    const dayFromPicker = dates.filter(
+      (element) =>
+        element.date === date.date &&
+        element.month === date.month &&
+        element.year === date.year
+    );
+
+    if (dayFromPicker.length === 1) {
+      const day = dayFromPicker[0];
+      setDayForModal(day);
+      setIsModal(true);
+    }
+  };
+
   return (
     <div className={cl.room}>
       {isModal && <Modal closeModal={closeModal} day={dayForModal} />}
 
       <h2 className={cl.title}>Комната {name}</h2>
-      <div className={cl.button__container}></div>
+      <DataSelect getDateFromPicker={getDateFromPicker} />
       <Shedule timeData={dates} openModal={openModal} />
     </div>
   );
