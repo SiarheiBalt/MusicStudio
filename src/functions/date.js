@@ -55,33 +55,68 @@ function getData(dateArray) {
       monthName: getNameofMounth(month),
       month,
       year: getYear(date),
-      reserveTime: {
-        10: {
-          isfree: true,
+      reserveTime: [
+        {
+          hour: '10:00',
+          isFree: false,
           customer: null,
         },
-        12: {
-          isfree: true,
+        {
+          hour: '11:00',
+          isFree: true,
           customer: null,
         },
-        14: {
-          isfree: true,
+        {
+          hour: '12:00',
+          isFree: false,
           customer: null,
         },
-        16: {
-          isfree: true,
+        {
+          hour: '13:00',
+          isFree: false,
           customer: null,
         },
-        18: {
-          isfree: true,
+        {
+          hour: '14:00',
+          isFree: true,
           customer: null,
         },
-        20: {
-          isfree: true,
+        {
+          hour: '15:00',
+          isFree: true,
           customer: null,
         },
-      },
-
+        {
+          hour: '16:00',
+          isFree: true,
+          customer: null,
+        },
+        {
+          hour: '17:00',
+          isFree: true,
+          customer: null,
+        },
+        {
+          hour: '18:00',
+          isFree: true,
+          customer: null,
+        },
+        {
+          hour: '19:00',
+          isFree: true,
+          customer: null,
+        },
+        {
+          hour: '20:00',
+          isFree: true,
+          customer: null,
+        },
+        {
+          hour: '21:00',
+          isFree: true,
+          customer: null,
+        },
+      ],
       id: Math.random().toString(36).substr(2, 9),
     };
   });

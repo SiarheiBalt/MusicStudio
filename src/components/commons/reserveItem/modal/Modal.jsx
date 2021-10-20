@@ -6,7 +6,6 @@ import SelectedHour from './selectedHour/SelectedHour';
 const Modal = ({ closeModal, day }) => {
   const [isHourSelected, setIsHourSelected] = useState(false);
   const [time, setTime] = useState({});
-
   const hourClick = (time) => {
     setTime(time);
     setIsHourSelected(true);

@@ -3,8 +3,6 @@ import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import cl from './SelectedHour.module.css';
 
 const SelectedHour = ({ closeHourSelected, closeModal, day, time }) => {
-  console.log(day);
-  console.log(time);
   return (
     <div>
       <CloseIcoButton close={closeModal} />

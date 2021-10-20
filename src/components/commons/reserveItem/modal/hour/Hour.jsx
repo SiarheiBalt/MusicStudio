@@ -2,7 +2,7 @@ import cl from './Hour.module.css';
 
 const Hour = ({ time, hourClick }) => {
   const onClick = () => {
-    hourClick(time);
+    time.isFree && hourClick(time);
   };
   return (
     <div

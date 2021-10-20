@@ -2,7 +2,7 @@ import cl from './DateSelect.module.css';
 import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 registerLocale('ru', ru);
 
@@ -18,10 +18,10 @@ const DataSelect = ({ getDateFromPicker }) => {
     getDateFromPicker(obj);
   };
 
-  useEffect(() => {
-    reserveDate.getSeconds() !== new Date().getSeconds() &&
-      selectDate(reserveDate);
-  }, [reserveDate]);
+  const onChangeDataPicker = (date) => {
+    setReserveDate(date);
+    selectDate(date);
+  };
 
   return (
     <div className={cl.container}>
@@ -34,9 +34,7 @@ const DataSelect = ({ getDateFromPicker }) => {
           className={cl.datapicker}
           locale="ru"
           selected={reserveDate}
-          onChange={(date) => {
-            setReserveDate(date);
-          }}
+          onChange={onChangeDataPicker}
         />
       </div>
     </div>
