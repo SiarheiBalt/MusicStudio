@@ -1,10 +1,11 @@
 import cl from './Select.module.css';
 import { useState } from 'react';
 
-const Select = ({ selectTime }) => {
+const Select = ({ selectTime, setError }) => {
   const [select, setSelect] = useState('');
 
   const selectChange = (event) => {
+    setError('');
     setSelect(event.target.value);
     selectTime(event.target.value);
   };
@@ -23,6 +24,7 @@ const Select = ({ selectTime }) => {
       <option value="19:00">19:00 </option>
       <option value="20:00">20:00 </option>
       <option value="21:00">21:00 </option>
+      <option value="22:00">22:00 </option>
     </select>
   );
 };

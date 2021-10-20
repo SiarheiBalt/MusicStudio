@@ -1,6 +1,13 @@
 import cl from './DayShedule.module.css';
 
 const DayShedule = ({ day, openModal }) => {
+  const countFreeTime = day.reserveTime.reduce((acc, time) => {
+    if (time.isFree) {
+      acc++;
+    }
+    return acc;
+  }, 0);
+
   return (
     <div className={cl.day} onClick={() => openModal(day)}>
       <h4 className={cl.title}>
@@ -8,7 +15,9 @@ const DayShedule = ({ day, openModal }) => {
         {day.dayofWeek}
       </h4>
       <div className={cl.status}>
-        <span className={cl.status__text}>Имеется свободное время</span>
+        <span className={`${cl.status__text} ${countFreeTime === 0 && cl.red}`}>
+          Свободных часов - {countFreeTime}
+        </span>
       </div>
     </div>
   );

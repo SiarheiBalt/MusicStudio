@@ -6,8 +6,11 @@ import Hour from '../hour/Hour';
 import { useState } from 'react';
 import timeValidator from '../../../../../functions/time';
 import ErrorSelect from './error/ErrorSelect';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from '../../../../../redux/constants';
 
-const ReserveForm = ({ closeModal, day, hourClick }) => {
+const ReserveForm = ({ closeModal, day, hourClick, itemInfo }) => {
+  const dispatch = useDispatch();
   const [error, setError] = useState('');
   const textError = 'Некорректно введено время';
   const [selectTimeStart, setSelectTimeStart] = useState('');
@@ -26,7 +29,12 @@ const ReserveForm = ({ closeModal, day, hourClick }) => {
       setError(textError);
       return;
     }
-    console.log('dispatch');
+    const formData = {
+      resrveDate: day,
+      selectedTime: { start: selectTimeStart, end: selectTimeEnd },
+      itemInfo,
+    };
+    dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
   };
 
   return (
@@ -43,8 +51,9 @@ const ReserveForm = ({ closeModal, day, hourClick }) => {
       </div>
       <div className={cl.reserve}>
         <span className={cl.text}>
-          Выбрать время с <Select selectTime={setSelectTimeStart} /> до{' '}
-          <Select selectTime={setSelectTimeEnd} />{' '}
+          Выбрать время с{' '}
+          <Select selectTime={setSelectTimeStart} setError={setError} /> до{' '}
+          <Select selectTime={setSelectTimeEnd} setError={setError} />{' '}
         </span>
         <Button action={'Зарезервировать'} onClick={addReserve} />
       </div>

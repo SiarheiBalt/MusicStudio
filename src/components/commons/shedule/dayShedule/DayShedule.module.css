@@ -27,12 +27,14 @@
   background-color: green;
 }
 .red {
-  background-color: red;
+  color: red !important;
 }
 .status {
   display: flex;
+  justify-content: center;
 }
 .status__text {
   text-align: center;
   color: green;
+  width: 110px;
 }

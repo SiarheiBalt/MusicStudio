@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
 
-const ReserveItem = ({ dates, name, reserveSubmit, type }) => {
+const ReserveItem = ({ dates, itemInfo }) => {
   const [isModal, setIsModal] = useState(false);
   const [dayForModal, setDayForModal] = useState({});
 
@@ -34,9 +34,11 @@ const ReserveItem = ({ dates, name, reserveSubmit, type }) => {
 
   return (
     <div className={cl.room}>
-      {isModal && <Modal closeModal={closeModal} day={dayForModal} />}
+      {isModal && (
+        <Modal closeModal={closeModal} day={dayForModal} itemInfo={itemInfo} />
+      )}
 
-      <h2 className={cl.title}>Комната {name}</h2>
+      <h2 className={cl.title}>Комната {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
       <Shedule timeData={dates} openModal={openModal} />
     </div>
