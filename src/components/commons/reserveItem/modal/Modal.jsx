@@ -18,7 +18,6 @@ const Modal = ({ closeModal, day, itemInfo }) => {
   };
 
   const hourReserve = () => {
-    console.log(time);
     const formData = {
       resrveDate: day,
       selectedTime: { start: time, end: `${parseInt(time) + 1}:00` },

@@ -1,4 +1,4 @@
-import createData from '../../functions/date';
+import createData from '../../utils/date';
 import { ACTIONS } from '../constants';
 
 const defaultState = {
@@ -7,8 +7,8 @@ const defaultState = {
     { dates: createData(), name: 'small' },
   ],
   record: [
-    { dates: createData(), name: 'Solo' },
-    { dates: createData(), name: 'Live' },
+    { dates: createData(), name: 'solo' },
+    { dates: createData(), name: 'live' },
   ],
 };
 

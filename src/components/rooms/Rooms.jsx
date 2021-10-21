@@ -8,30 +8,28 @@ import { BrowserRouter } from 'react-router-dom';
 const Rooms = () => {
   const data = useSelector((store) => store.reserveTime.rooms);
 
+  const reserveItem = data.map((room, i) => (
+    <Route
+      key={i}
+      path={`/${room.name}`}
+      render={() => {
+        const itemInfo = {
+          name: room.name,
+          type: 'rooms',
+        };
+        return <ReserveItem key={i} dates={room.dates} itemInfo={itemInfo} />;
+      }}
+    ></Route>
+  ));
+
   return (
     <BrowserRouter>
       <div className={cl.rooms}>
         <RoomsInfo />
-
         <Route exact path="/rooms">
           <Redirect to={`/${data[0].name}`} />
         </Route>
-
-        {data.map((room, i) => (
-          <Route
-            key={i}
-            path={`/${room.name}`}
-            render={() => {
-              const itemInfo = {
-                name: room.name,
-                type: 'rooms',
-              };
-              return (
-                <ReserveItem key={i} dates={room.dates} itemInfo={itemInfo} />
-              );
-            }}
-          ></Route>
-        ))}
+        {reserveItem}
       </div>
     </BrowserRouter>
   );

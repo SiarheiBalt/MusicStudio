@@ -2,36 +2,42 @@ import cl from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+  const main = 'Главная';
+  const profile = 'Профиль';
+  const admin = 'Администратор';
+  const rooms = 'Комнаты';
+  const instruments = 'Инструменты';
+  const soundRecord = 'Звукозапись';
   return (
     <header className={cl.header}>
       <span className={cl.link}>
-        <NavLink to='/main' activeClassName={cl.activ}>
-          Главная
+        <NavLink to="/main" activeClassName={cl.activ}>
+          {main}
         </NavLink>
       </span>
       <span className={cl.link}>
-        <NavLink to='/profile' activeClassName={cl.activ}>
-          Профиль
+        <NavLink to="/profile" activeClassName={cl.activ}>
+          {profile}
         </NavLink>
       </span>
       <span className={cl.link}>
-        <NavLink to='/admin' activeClassName={cl.activ}>
-          Администратор
+        <NavLink to="/admin" activeClassName={cl.activ}>
+          {admin}
         </NavLink>
       </span>
       <span className={cl.link}>
-        <NavLink to='/rooms' activeClassName={cl.activ}>
-          Комнаты
+        <NavLink to="/rooms" activeClassName={cl.activ}>
+          {rooms}
         </NavLink>
       </span>
       <span className={cl.link}>
-        <NavLink to='/instruments' activeClassName={cl.activ}>
-          Инструменты
+        <NavLink to="/instruments" activeClassName={cl.activ}>
+          {instruments}
         </NavLink>
       </span>
       <span className={cl.link}>
-        <NavLink to='/record' activeClassName={cl.activ}>
-          Звукозапись
+        <NavLink to="/record" activeClassName={cl.activ}>
+          {soundRecord}
         </NavLink>
       </span>
     </header>

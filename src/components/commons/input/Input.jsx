@@ -4,9 +4,11 @@ export const Input = ({ onchangeInput, value, type }) => {
   const onchange = (event) => {
     onchangeInput(event);
   };
+  const inputType = type ? type : 'text';
+
   return (
     <input
-      type={type ? type : 'text'}
+      type={inputType}
       value={value}
       onChange={onchange}
       className={cl.input}

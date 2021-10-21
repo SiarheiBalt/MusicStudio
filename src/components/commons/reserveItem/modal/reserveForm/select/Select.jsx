@@ -9,22 +9,32 @@ const Select = ({ selectTime, setError }) => {
     setSelect(event.target.value);
     selectTime(event.target.value);
   };
+
+  const optionsArray = [
+    '',
+    '10:00',
+    '11:00',
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
+  ];
+  const options = optionsArray.map((option, i) => (
+    <option key={i} className={'option'} value={option}>
+      {option}
+    </option>
+  ));
+
   return (
     <select className={cl.select} value={select} onChange={selectChange}>
-      <option value=""></option>
-      <option value="10:00">10:00</option>
-      <option value="11:00">11:00</option>
-      <option value="12:00">12:00</option>
-      <option value="13:00">13:00</option>
-      <option value="14:00">14:00 </option>
-      <option value="15:00">15:00 </option>
-      <option value="16:00">16:00 </option>
-      <option value="17:00">17:00 </option>
-      <option value="18:00">18:00 </option>
-      <option value="19:00">19:00 </option>
-      <option value="20:00">20:00 </option>
-      <option value="21:00">21:00 </option>
-      <option value="22:00">22:00 </option>
+      {options}
     </select>
   );
 };

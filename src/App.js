@@ -8,23 +8,23 @@ import Recording from './components/recording/Recording';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className='app'>
-        <div className='app-container'>
+    <div className="app">
+      <div className="app-container">
+        <BrowserRouter>
           <Header />
-          <Route path='/main' component={Main} />
-          <Route exact path='/MusicStudio'>
-            <Redirect to='/main' />
+          <Route path="/main" component={Main} />
+          <Route exact path="/studio">
+            <Redirect to="/main" />
           </Route>
-          <Route exact path='/'>
-            <Redirect to='/main' />
+          <Route exact path="/">
+            <Redirect to="/main" />
           </Route>
-          <Route path='/rooms' component={Rooms} />
-          <Route path='/record' component={Recording} />
-          <Footer />
-        </div>
+          <Route path="/rooms" component={Rooms} />
+          <Route path="/record" component={Recording} />
+        </BrowserRouter>
+        <Footer />
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 

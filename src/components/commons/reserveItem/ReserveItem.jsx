@@ -38,7 +38,7 @@ const ReserveItem = ({ dates, itemInfo }) => {
         <Modal closeModal={closeModal} day={dayForModal} itemInfo={itemInfo} />
       )}
 
-      <h2 className={cl.title}>Комната {itemInfo.name}</h2>
+      <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
       <Shedule timeData={dates} openModal={openModal} />
     </div>

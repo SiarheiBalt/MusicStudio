@@ -23,12 +23,11 @@ const DataSelect = ({ getDateFromPicker }) => {
     selectDate(date);
   };
 
+  const text = ' Выберите дату, либо кликните на ближайший день ниже';
+
   return (
     <div className={cl.container}>
-      <span className={cl.text}>
-        {' '}
-        Выберите дату, либо кликните на ближайший день ниже{' '}
-      </span>{' '}
+      <span className={cl.text}> {text} </span>{' '}
       <div className={cl.picker__container}>
         <DatePicker
           className={cl.datapicker}

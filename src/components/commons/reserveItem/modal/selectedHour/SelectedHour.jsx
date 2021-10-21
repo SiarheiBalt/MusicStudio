@@ -9,13 +9,13 @@ const SelectedHour = ({
   time,
   hourReserve,
 }) => {
+  const title = 'Зарезервировать время на 1 час начиная от';
   return (
     <div>
       <CloseIcoButton close={closeModal} />
       <div className={cl.container}>
         <h3 className={cl.title}>
-          Зарезервировать время на 1 час начиная от{' '}
-          <span className={cl.text}>{time}</span>,{' '}
+          {title} <span className={cl.text}>{time}</span>,{' '}
           <span className={cl.text}>
             {day.date} {day.monthName}
           </span>
