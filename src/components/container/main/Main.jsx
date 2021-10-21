@@ -1,4 +1,4 @@
-import AuthorizationForm from '../commons/authForm/AuthorizationForm';
+import AuthorizationForm from './../../commons/authForm/AuthorizationForm';
 import About from './about/About';
 import Contacts from './contacts/Contacts';
 import cl from './Main.module.css';

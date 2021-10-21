@@ -3,6 +3,7 @@ import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 registerLocale('ru', ru);
 
@@ -38,6 +39,10 @@ const DataSelect = ({ getDateFromPicker }) => {
       </div>
     </div>
   );
+};
+
+DataSelect.propTypes = {
+  getDateFromPicker: PropTypes.func.isRequired,
 };
 
 export default DataSelect;

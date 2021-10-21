@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SelectedHour from './selectedHour/SelectedHour';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../../../../redux/constants';
+import PropTypes from 'prop-types';
 
 const Modal = ({ closeModal, day, itemInfo }) => {
   const dispatch = useDispatch();
@@ -49,6 +50,15 @@ const Modal = ({ closeModal, day, itemInfo }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  day: PropTypes.shape().isRequired,
+  itemInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Modal;

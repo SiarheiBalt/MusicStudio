@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import Main from './../main/Main';
-import Rooms from './../rooms/Rooms';
-import Recording from './../recording/Recording';
+import Main from './../container/main/Main';
+import Rooms from './../container/rooms/Rooms';
+import Recording from './../container/recording/Recording';
 import Header from './../header/Header';
 
 const Routers = () => {

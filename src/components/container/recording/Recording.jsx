@@ -3,7 +3,7 @@ import cl from './Recording.module.css';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import ReserveItem from '../commons/reserveItem/ReserveItem';
+import ReserveItem from '../../commons/reserveItem/ReserveItem';
 
 const Recording = () => {
   const data = useSelector((store) => store.reserveTime.record);

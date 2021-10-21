@@ -3,6 +3,7 @@ import cl from './ReserveItem.module.css';
 import { useState } from 'react';
 import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
+import PropTypes from 'prop-types';
 
 const ReserveItem = ({ dates, itemInfo }) => {
   const [isModal, setIsModal] = useState(false);
@@ -43,6 +44,14 @@ const ReserveItem = ({ dates, itemInfo }) => {
       <Shedule timeData={dates} openModal={openModal} />
     </div>
   );
+};
+
+ReserveItem.propTypes = {
+  dates: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  itemInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }),
 };
 
 export default ReserveItem;

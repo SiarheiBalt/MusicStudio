@@ -1,6 +1,7 @@
 import { Button } from '../../../button/Button';
 import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import cl from './SelectedHour.module.css';
+import PropTypes from 'prop-types';
 
 const SelectedHour = ({
   closeHourSelected,
@@ -28,6 +29,21 @@ const SelectedHour = ({
       </div>
     </div>
   );
+};
+
+SelectedHour.propTypes = {
+  closeHourSelected: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  hourReserve: PropTypes.func.isRequired,
+  day: PropTypes.shape({
+    date: PropTypes.number.isRequired,
+    dayofWeek: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    month: PropTypes.number.isRequired,
+    monthName: PropTypes.string.isRequired,
+    reserveTime: PropTypes.arrayOf(PropTypes.shape),
+    year: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default SelectedHour;

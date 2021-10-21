@@ -1,4 +1,5 @@
 import cl from './Day.module.css';
+import PropTypes from 'prop-types';
 
 const Day = ({ day, openModal }) => {
   const countFreeTime = day.reserveTime.reduce((acc, time) => {
@@ -21,6 +22,19 @@ const Day = ({ day, openModal }) => {
       </div>
     </div>
   );
+};
+
+Day.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  day: PropTypes.shape({
+    date: PropTypes.number.isRequired,
+    dayofWeek: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    month: PropTypes.number.isRequired,
+    monthName: PropTypes.string.isRequired,
+    reserveTime: PropTypes.arrayOf(PropTypes.shape),
+    year: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Day;

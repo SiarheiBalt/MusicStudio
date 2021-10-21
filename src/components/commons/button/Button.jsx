@@ -1,4 +1,5 @@
 import cl from './Button.module.css';
+import PropTypes from 'prop-types';
 
 export const Button = ({ action, onClick, disabled }) => {
   const click = (event) => {
@@ -9,4 +10,8 @@ export const Button = ({ action, onClick, disabled }) => {
       {action}
     </button>
   );
+};
+
+Button.propTypes = {
+  action: PropTypes.string,
 };

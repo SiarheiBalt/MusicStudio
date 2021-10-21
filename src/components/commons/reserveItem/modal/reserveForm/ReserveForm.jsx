@@ -8,6 +8,7 @@ import timeValidator from '../../../../../utils/time';
 import ErrorSelect from './error/ErrorSelect';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../../../../../redux/constants';
+import PropTypes from 'prop-types';
 
 const ReserveForm = ({ closeModal, day, hourClick, itemInfo }) => {
   const dispatch = useDispatch();
@@ -65,6 +66,20 @@ const ReserveForm = ({ closeModal, day, hourClick, itemInfo }) => {
       {!!error && <ErrorSelect error={error} />}
     </div>
   );
+};
+
+ReserveForm.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  hourClick: PropTypes.func.isRequired,
+  day: PropTypes.shape({
+    date: PropTypes.number.isRequired,
+    dayofWeek: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    month: PropTypes.number.isRequired,
+    monthName: PropTypes.string.isRequired,
+    reserveTime: PropTypes.arrayOf(PropTypes.shape),
+    year: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default ReserveForm;

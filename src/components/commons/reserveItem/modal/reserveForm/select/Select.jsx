@@ -1,5 +1,6 @@
 import cl from './Select.module.css';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Select = ({ selectTime, setError }) => {
   const [select, setSelect] = useState('');
@@ -38,4 +39,10 @@ const Select = ({ selectTime, setError }) => {
     </select>
   );
 };
+
+Select.propTypes = {
+  selectTime: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
+};
+
 export default Select;
