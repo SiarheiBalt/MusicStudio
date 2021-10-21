@@ -6,6 +6,7 @@ const Shedule = ({ timeData, openModal }) => {
   const days = timeData.map((day, i) => {
     return i < 14 && <Day key={day.id} day={day} openModal={openModal} />;
   });
+
   return <div className={cl.shedule}>{days}</div>;
 };
 

@@ -28,26 +28,26 @@ const Modal = ({ closeModal, day, itemInfo }) => {
     setIsHourSelected(false);
   };
 
+  const container = isHourSelected ? (
+    <SelectedHour
+      closeHourSelected={closeHourSelected}
+      closeModal={closeModal}
+      day={day}
+      time={time}
+      hourReserve={hourReserve}
+    />
+  ) : (
+    <ReserveForm
+      closeModal={closeModal}
+      day={day}
+      hourClick={hourClick}
+      itemInfo={itemInfo}
+    />
+  );
+
   return (
     <div className={cl.background}>
-      <div className={cl.container}>
-        {isHourSelected ? (
-          <SelectedHour
-            closeHourSelected={closeHourSelected}
-            closeModal={closeModal}
-            day={day}
-            time={time}
-            hourReserve={hourReserve}
-          />
-        ) : (
-          <ReserveForm
-            closeModal={closeModal}
-            day={day}
-            hourClick={hourClick}
-            itemInfo={itemInfo}
-          />
-        )}
-      </div>
+      <div className={cl.container}>{container}</div>
     </div>
   );
 };

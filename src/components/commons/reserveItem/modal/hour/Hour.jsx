@@ -5,13 +5,13 @@ const Hour = ({ time, hourClick }) => {
   const onClick = () => {
     time.isFree && hourClick(time.hour);
   };
+
+  const timeClass = time.isFree
+    ? `${cl.time} ${cl.green}`
+    : `${cl.time} ${cl.red}`;
+
   return (
-    <div
-      className={
-        time.isFree ? `${cl.time} ${cl.green}` : `${cl.time} ${cl.red}`
-      }
-      onClick={onClick}
-    >
+    <div className={timeClass} onClick={onClick}>
       <span className={cl.time__text}>{time.hour}</span>
     </div>
   );

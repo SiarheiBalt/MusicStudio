@@ -33,12 +33,13 @@ const ReserveItem = ({ dates, itemInfo }) => {
     }
   };
 
+  const modall = isModal && (
+    <Modal closeModal={closeModal} day={dayForModal} itemInfo={itemInfo} />
+  );
+
   return (
     <div className={cl.room}>
-      {isModal && (
-        <Modal closeModal={closeModal} day={dayForModal} itemInfo={itemInfo} />
-      )}
-
+      {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
       <Shedule timeData={dates} openModal={openModal} />

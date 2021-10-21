@@ -8,7 +8,11 @@ const Day = ({ day, openModal }) => {
     }
     return acc;
   }, 0);
+
+  const statusClass = `${cl.status__text} ${countFreeTime === 0 && cl.red}`;
+
   const status__text = 'Свободных часов -';
+
   return (
     <div className={cl.day} onClick={() => openModal(day)}>
       <h4 className={cl.title}>
@@ -16,7 +20,7 @@ const Day = ({ day, openModal }) => {
         {day.dayofWeek}
       </h4>
       <div className={cl.status}>
-        <span className={`${cl.status__text} ${countFreeTime === 0 && cl.red}`}>
+        <span className={statusClass}>
           {status__text} {countFreeTime}
         </span>
       </div>
