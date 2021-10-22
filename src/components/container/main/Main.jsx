@@ -4,7 +4,7 @@ import Contacts from './contacts/Contacts';
 import cl from './Main.module.css';
 import ServiceType from './serviceTypes/ServiceType';
 import { useSelector } from 'react-redux';
-import LogoutForm from '../commons/authForm/logoutForm.jsx/LogoutForm';
+import LogoutForm from '../../commons/authForm/logoutForm/LogoutForm';
 
 const Main = () => {
   const data = useSelector((state) => state.authReducer);
