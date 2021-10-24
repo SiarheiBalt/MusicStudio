@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 import RoomsInfo from './roomsInfo/RoomsInfo';
-import cl from './Rooms.module.css';
+// import cl from './Rooms.module.css';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import './../../../App.css';
