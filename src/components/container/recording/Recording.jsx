@@ -1,5 +1,6 @@
 import RecordingTypes from './recordingTypes/RecordingTypes';
 import cl from './Recording.module.css';
+import './../../../App.css';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -24,7 +25,7 @@ const Recording = () => {
 
   return (
     <BrowserRouter>
-      <div className={cl.recording}>
+      <div className={`recording form`}>
         <RecordingTypes />
 
         <Route exact path="/record">

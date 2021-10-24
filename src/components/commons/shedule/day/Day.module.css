@@ -3,15 +3,16 @@
   height: 170px;
   margin: 10px 0;
   border-radius: 15px;
-  border: 1px solid lightgray;
   cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 .day:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 .title {
   text-align: center;
-  font-weight: 300;
+  color: whitesmoke;
+  font-weight: 700;
 }
 .label {
   width: 15px;
@@ -27,7 +28,7 @@
   background-color: green;
 }
 .red {
-  color: red !important;
+  color: #ffa726 !important;
 }
 .status {
   display: flex;
@@ -35,6 +36,7 @@
 }
 .status__text {
   text-align: center;
-  color: green;
+  color: black;
   width: 110px;
+  font-weight: 600;
 }

@@ -1,5 +1,4 @@
 .form {
-  background-color: antiquewhite;
   height: 300px;
   border-radius: 20px;
 }
@@ -11,13 +10,14 @@
   border-radius: 15px;
   background-color: whitesmoke;
 }
+
 .button__container {
   display: flex;
   justify-content: flex-end;
 }
 
 .error {
-  color: red;
+  color: #ffa726;
 }
 
 .input {

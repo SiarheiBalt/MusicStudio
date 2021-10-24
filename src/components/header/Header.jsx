@@ -17,16 +17,6 @@ const Header = () => {
           </NavLink>
         </span>
         <span className={cl.link}>
-          <NavLink to="/profile" activeClassName={cl.activ}>
-            {profile}
-          </NavLink>
-        </span>
-        <span className={cl.link}>
-          <NavLink to="/admin" activeClassName={cl.activ}>
-            {admin}
-          </NavLink>
-        </span>
-        <span className={cl.link}>
           <NavLink to="/rooms" activeClassName={cl.activ}>
             {rooms}
           </NavLink>
@@ -39,6 +29,16 @@ const Header = () => {
         <span className={cl.link}>
           <NavLink to="/record" activeClassName={cl.activ}>
             {soundRecord}
+          </NavLink>
+        </span>
+        <span className={cl.link}>
+          <NavLink to="/profile" activeClassName={cl.activ}>
+            {profile}
+          </NavLink>
+        </span>
+        <span className={cl.link}>
+          <NavLink to="/admin" activeClassName={cl.activ}>
+            {admin}
           </NavLink>
         </span>
       </header>

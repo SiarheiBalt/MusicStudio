@@ -1,5 +1,7 @@
 .footer {
   height: 100px;
-  background-color: whitesmoke;
   margin-top: 25px;
+  color: whitesmoke;
+  box-shadow: 0 0 20px rgb(0 0 0 / 50%);
+  background-color: black;
 }

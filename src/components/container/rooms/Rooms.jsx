@@ -4,6 +4,7 @@ import RoomsInfo from './roomsInfo/RoomsInfo';
 import cl from './Rooms.module.css';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import './../../../App.css';
 
 const Rooms = () => {
   const data = useSelector((store) => store.reserveTime.rooms);
@@ -24,7 +25,7 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className={cl.rooms}>
+      <div className={`rooms form`}>
         <RoomsInfo />
         <Route exact path="/rooms">
           <Redirect to={`/${data[0].name}`} />

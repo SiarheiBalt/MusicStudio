@@ -38,7 +38,7 @@ const ReserveItem = ({ dates, itemInfo }) => {
   );
 
   return (
-    <div className={cl.room}>
+    <div className={'room'}>
       {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />

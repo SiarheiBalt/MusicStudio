@@ -1,4 +1,5 @@
 import cl from './About.module.css';
+import './../../../../App.css';
 
 const About = () => {
   const title = 'Музыкальная студия BestSound';
@@ -18,7 +19,7 @@ const About = () => {
   itaque magni architecto!'`;
 
   return (
-    <div className={cl.about}>
+    <div className={`${cl.about} form`}>
       <h2 className={cl.title}>{title}</h2>
       <div className={cl.information}>
         <span className={cl.text}>{text}</span>

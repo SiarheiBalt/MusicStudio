@@ -1,4 +1,5 @@
 import cl from './ServiceType.module.css';
+import './../../../../App.css';
 
 const ServiceType = () => {
   const typeServiseText = 'Виды услуг';
@@ -28,7 +29,7 @@ const ServiceType = () => {
   reiciendis, aut inventore?`;
 
   return (
-    <div className={cl.services}>
+    <div className={`services form`}>
       <h1 className={cl.title}>{typeServiseText}</h1>
       <div className={cl.content}>
         <h2 className={'title'}>{titleRoomText}</h2>
