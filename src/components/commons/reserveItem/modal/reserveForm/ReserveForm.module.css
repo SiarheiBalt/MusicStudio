@@ -1,12 +1,13 @@
 .text {
   font-size: 1.1em;
   font-weight: 600;
+  margin: 20px 0;
 }
 .reserve {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 130px;
+  height: 100px;
   justify-content: space-around;
 }
 .container {

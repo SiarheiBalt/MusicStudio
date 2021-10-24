@@ -1,13 +1,13 @@
 import cl from './Hour.module.css';
 import PropTypes from 'prop-types';
 
-const Hour = ({ time, hourClick }) => {
+const Hour = ({ time, hourClick, isSelected }) => {
   const onClick = () => {
     time.isFree && hourClick(time.hour);
   };
 
   const timeClass = time.isFree
-    ? `${cl.time} ${cl.green}`
+    ? `${cl.time} ${isSelected ? cl.gray : cl.green}`
     : `${cl.time} ${cl.red}`;
 
   return (

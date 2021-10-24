@@ -3,7 +3,7 @@ import {
   cleanUserLocalStorage,
   getUserLocalStorage,
   setUserLocalStorage,
-} from '../../functions/localStorage';
+} from './../../utils/localStorage';
 import { ACTIONS } from '../constants';
 
 let defaultState = {

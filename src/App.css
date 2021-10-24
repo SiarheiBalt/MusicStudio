@@ -20,8 +20,6 @@ body {
   box-shadow: 0 0 25px rgb(0 0 0 / 50%);
 }
 
-.form h1,
-h2,
-h4 {
+.form h1 {
   color: lightgrey;
 }

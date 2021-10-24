@@ -1,4 +1,9 @@
-import cl from './DateSelect.module.css';
+import {
+  container,
+  text,
+  picker__container,
+  datapicker,
+} from './DateSelect.module.css';
 import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -24,14 +29,14 @@ const DataSelect = ({ getDateFromPicker }) => {
     selectDate(date);
   };
 
-  const text = ' Выберите дату, либо кликните на ближайший день ниже';
+  const staticText = 'Выберите дату, либо кликните на ближайший день ниже';
 
   return (
-    <div className={cl.container}>
-      <span className={cl.text}> {text} </span>{' '}
-      <div className={cl.picker__container}>
+    <div className={container}>
+      <span className={text}> {staticText} </span>{' '}
+      <div className={picker__container}>
         <DatePicker
-          className={cl.datapicker}
+          className={datapicker}
           locale="ru"
           selected={reserveDate}
           onChange={onChangeDataPicker}

@@ -1,53 +1,47 @@
 import cl from './Modal.module.css';
 import ReserveForm from './reserveForm/ReserveForm';
 import { useState } from 'react';
-import SelectedHour from './selectedHour/SelectedHour';
 import { useDispatch } from 'react-redux';
-import { ACTIONS } from '../../../../redux/constants';
 import PropTypes from 'prop-types';
+import { ACTIONS } from '../../../../redux/constants';
 
 const Modal = ({ closeModal, day, itemInfo }) => {
+  const [selectedHours, setSelectedHours] = useState([]);
   const dispatch = useDispatch();
-  const [isHourSelected, setIsHourSelected] = useState(false);
-  const [time, setTime] = useState();
-  const hourClick = (time) => {
-    setTime(time);
-    setIsHourSelected(true);
-  };
-  const closeHourSelected = () => {
-    setIsHourSelected(false);
+
+  const hourClick = (hour) => {
+    let array = selectedHours.concat();
+    if (selectedHours.some((element) => element === hour)) {
+      array = selectedHours.filter((element) => element !== hour && element);
+    } else {
+      array.push(hour);
+    }
+    setSelectedHours(array);
   };
 
-  const hourReserve = () => {
+  const addReserve = () => {
     const formData = {
       resrveDate: day,
-      selectedTime: { start: time, end: `${parseInt(time) + 1}:00` },
+      selectedTime: selectedHours,
       itemInfo,
     };
     dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
-    setIsHourSelected(false);
+    setSelectedHours([]);
   };
-
-  const container = isHourSelected ? (
-    <SelectedHour
-      closeHourSelected={closeHourSelected}
-      closeModal={closeModal}
-      day={day}
-      time={time}
-      hourReserve={hourReserve}
-    />
-  ) : (
-    <ReserveForm
-      closeModal={closeModal}
-      day={day}
-      hourClick={hourClick}
-      itemInfo={itemInfo}
-    />
-  );
 
   return (
     <div className={cl.background}>
-      <div className={cl.container}>{container}</div>
+      <div className={cl.container}>
+        {' '}
+        <ReserveForm
+          selectedHours={selectedHours}
+          closeModal={closeModal}
+          day={day}
+          hourClick={hourClick}
+          itemInfo={itemInfo}
+          addReserve={addReserve}
+        />
+      </div>
     </div>
   );
 };
