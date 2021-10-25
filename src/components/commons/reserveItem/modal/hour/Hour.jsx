@@ -7,11 +7,14 @@ const Hour = ({ time, hourClick, isSelected }) => {
   };
 
   const timeClass = time.isFree
-    ? `${cl.time} ${isSelected ? cl.gray : cl.green}`
-    : `${cl.time} ${cl.red}`;
+    ? `${cl.time} ${cl.tooltip} ${isSelected ? cl.gray : cl.green}`
+    : `${cl.time} ${cl.red} ${cl.tooltip}`;
+
+  const promptText = time.isFree ? 'час свободен' : 'час занят';
 
   return (
     <div className={timeClass} onClick={onClick}>
+      <span className={cl.tooltiptext}>{promptText}</span>
       <span className={cl.time__text}>{time.hour}</span>
     </div>
   );
