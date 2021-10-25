@@ -1,6 +1,7 @@
 import createSagaMiddleware from '@redux-saga/core';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import authReducer from './reducers/authReducer';
+import reserveInstruments from './reducers/reserveInstrumentsReducer';
 import reserveTime from './reducers/reserveTimeReducer';
 import { loginUserSaga, registrationUserSaga } from './sagas/authSagas';
 
@@ -12,6 +13,7 @@ const store = createStore(
   combineReducers({
     reserveTime,
     authReducer,
+    reserveInstruments,
   }),
   composeEnhancers(applyMiddleware(sagaMiddleWare))
 );

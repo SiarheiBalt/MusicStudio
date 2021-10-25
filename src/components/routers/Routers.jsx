@@ -5,6 +5,7 @@ import Recording from './../container/recording/Recording';
 import Header from './../header/Header';
 import Profile from '../container/profile/Profile';
 import Authorization from '../container/authorization/Authorization';
+import Instruments from '../container/instruments/Instruments';
 
 const Routers = () => {
   return (
@@ -22,6 +23,7 @@ const Routers = () => {
         <Route path="/record" component={Recording} />
         <Route path="/login" component={Authorization} />
         <Route path="/profile" component={Profile} />
+        <Route path="/instruments" component={Instruments} />
       </div>
     </BrowserRouter>
   );
