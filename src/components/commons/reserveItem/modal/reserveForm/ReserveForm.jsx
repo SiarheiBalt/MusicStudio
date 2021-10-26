@@ -1,6 +1,5 @@
 import cl from './ReserveForm.module.css';
 import { Button } from '../../../button/Button';
-import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import Hour from '../hour/Hour';
 import PropTypes from 'prop-types';
 

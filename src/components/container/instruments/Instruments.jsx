@@ -11,6 +11,7 @@ const Instruments = () => {
       key={i}
       image={element.image}
       specifications={element.specifications}
+      instrumentId={element.instrumentId}
     />
   ));
 
