@@ -4,13 +4,7 @@ import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import Hour from '../hour/Hour';
 import PropTypes from 'prop-types';
 
-const ReserveForm = ({
-  closeModal,
-  day,
-  hourClick,
-  selectedHours,
-  addReserve,
-}) => {
+const ReserveForm = ({ day, hourClick, selectedHours, addReserve }) => {
   const hours = day.reserveTime.map((time, i) => {
     const isSelected = selectedHours.some((item) => item === time.hour);
     return (
@@ -25,7 +19,6 @@ const ReserveForm = ({
 
   return (
     <div className={cl.container}>
-      <CloseIcoButton close={closeModal} />
       <h3
         className={cl.title}
       >{`${day.date} - ${day.monthName} (${day.dayofWeek})`}</h3>
@@ -44,7 +37,6 @@ const ReserveForm = ({
 };
 
 ReserveForm.propTypes = {
-  closeModal: PropTypes.func.isRequired,
   hourClick: PropTypes.func.isRequired,
   day: PropTypes.shape({
     date: PropTypes.number.isRequired,

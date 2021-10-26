@@ -1,6 +1,5 @@
 import {
   container,
-  text,
   picker__container,
   datapicker,
 } from './DateSelect.module.css';
@@ -25,19 +24,22 @@ const DataSelect = ({ getDateFromPicker }) => {
   };
 
   const onChangeDataPicker = (date) => {
-    setReserveDate(date);
-    selectDate(date);
+    const today = new Date();
+    if (date > today) {
+      setReserveDate(date);
+      selectDate(date);
+    } else {
+      setReserveDate(today);
+      selectDate(today);
+    }
   };
-
-  const staticText = 'Выберите дату, либо кликните на ближайший день ниже';
 
   return (
     <div className={container}>
-      <span className={text}> {staticText} </span>{' '}
       <div className={picker__container}>
         <DatePicker
           className={datapicker}
-          locale="ru"
+          locale='ru'
           selected={reserveDate}
           onChange={onChangeDataPicker}
         />

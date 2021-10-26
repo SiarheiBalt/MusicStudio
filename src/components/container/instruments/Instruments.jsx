@@ -7,13 +7,18 @@ const Instruments = () => {
 
   const instruments = data.map((element, i) => (
     <Instrument
+      dates={element.dates}
       key={i}
       image={element.image}
       specifications={element.specifications}
     />
   ));
 
-  return <div className={cl.instruments}>{instruments}</div>;
+  return (
+    <>
+      <div className={cl.instruments}>{instruments}</div>
+    </>
+  );
 };
 
 export default Instruments;
