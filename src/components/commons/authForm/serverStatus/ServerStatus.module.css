@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+text {
+  font-weight: 600;
+}
+.red {
+  color: #ffa726;
+}
+.green {
+  color: green;
+}

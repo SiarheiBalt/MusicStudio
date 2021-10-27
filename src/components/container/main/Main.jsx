@@ -8,9 +8,7 @@ import LogoutForm from '../../commons/authForm/logoutForm/LogoutForm';
 
 const Main = () => {
   const data = useSelector((state) => state.authReducer);
-  const isAuth = data.isAuth;
-  const error = data.error;
-  const registrationUserMessage = data.registrationMessage;
+  const { isAuth, error, registrationMessage } = data;
 
   return (
     <div className={'main'}>
@@ -23,7 +21,7 @@ const Main = () => {
           ) : (
             <AuthorizationForm
               error={error}
-              registrationUserMessage={registrationUserMessage}
+              registrationUserMessage={registrationMessage}
             />
           )}
         </div>

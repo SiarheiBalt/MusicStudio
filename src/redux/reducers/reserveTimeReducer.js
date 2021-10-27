@@ -19,25 +19,26 @@ const reserveTime = (state = defaultState, action) => {
       const dayId = action.formData.resrveDate.id;
       const reserveTime = action.formData.selectedTime;
 
+      const reserveType = state[`${type}`].map((type) => {
+        type.dates = type.dates.map((day) => {
+          if (dayId === day.id) {
+            day.reserveTime = day.reserveTime.map((hourInfo) => {
+              const hour = hourInfo.hour;
+              if (reserveTime.some((el) => el === hour)) {
+                hourInfo.isFree = false;
+              }
+              return hourInfo;
+            });
+          }
+          return day;
+        });
+        return type;
+      });
+
       return {
         ...state,
-        [`${type}`]: state[`${type}`].map((item) => {
-          item.dates = item.dates.map((element) => {
-            if (dayId === element.id) {
-              element.reserveTime = element.reserveTime.map((time) => {
-                const hour = time.hour;
-                if (reserveTime.some((el) => el === hour)) {
-                  time.isFree = false;
-                }
-                return time;
-              });
-            }
-            return element;
-          });
-          return item;
-        }),
+        [`${type}`]: reserveType,
       };
-
     default:
       return state;
   }

@@ -34,7 +34,7 @@ const ReserveForm = ({
       <span className={cl.text}>{text}</span>
       <div className={cl.reserve}>
         <Button
-          action={buttonActionText}
+          text={buttonActionText}
           onClick={addReserve}
           disabled={isButtonDisabled}
         />

@@ -1,22 +1,29 @@
-import cl from './Modal.module.css';
-import ReserveForm from './reserveForm/ReserveForm';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import ReserveForm from './reserveForm/ReserveForm';
 import { ACTIONS } from '../../../../redux/constants';
+
+import cl from './Modal.module.css';
 
 const Modal = ({ closeModal, day, itemInfo }) => {
   const [selectedHours, setSelectedHours] = useState([]);
   const dispatch = useDispatch();
 
   const hourClick = (hour) => {
-    let array = selectedHours.concat();
-    if (selectedHours.some((element) => element === hour)) {
-      array = selectedHours.filter((element) => element !== hour && element);
+    let selectedHoursClone = selectedHours.concat();
+    const isHourInSelectedHours = selectedHours.some(
+      (element) => element === hour
+    );
+    if (isHourInSelectedHours) {
+      selectedHoursClone = selectedHours.filter(
+        (element) => element !== hour && element
+      );
     } else {
-      array.push(hour);
+      selectedHoursClone.push(hour);
     }
-    setSelectedHours(array);
+    setSelectedHours(selectedHoursClone);
   };
 
   const addReserve = () => {

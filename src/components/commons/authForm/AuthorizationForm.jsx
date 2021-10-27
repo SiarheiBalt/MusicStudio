@@ -1,9 +1,12 @@
-import cl from './AuthorizationForm.module.css';
-import './../../../App.css';
-import LoginRegisterationForm from './LoginRegisterationForm';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
+import LoginRegisterationForm from './LoginRegisterationForm';
 import { ACTIONS } from '../../../redux/constants';
+
+import './../../../App.css';
+import cl from './AuthorizationForm.module.css';
+import ServerStatus from './serverStatus/ServerStatus';
 
 const AuthorizationForm = ({ error, registrationUserMessage }) => {
   const dispatch = useDispatch();
@@ -42,16 +45,6 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
       />
     );
 
-  const serverError = !!error && (
-    <div className={cl.container__error}>
-      <span className={cl.error}>{error}</span>
-    </div>
-  );
-  const serverMessage = !!registrationUserMessage && (
-    <div className={cl.registration__message}>
-      <span className={cl.message__text}>{registrationUserMessage}</span>
-    </div>
-  );
   return (
     <div className={`${cl.form} form`}>
       <div className={cl.button__container}>
@@ -60,8 +53,7 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
         </button>
       </div>
       {formType}
-      {serverError}
-      {serverMessage}
+      <ServerStatus error={error} message={registrationUserMessage} />
     </div>
   );
 };

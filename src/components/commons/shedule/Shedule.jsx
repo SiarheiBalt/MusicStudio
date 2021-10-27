@@ -3,11 +3,11 @@ import cl from './Shedule.module.css';
 import PropTypes from 'prop-types';
 
 const Shedule = ({ timeData, openModal }) => {
-  const days = timeData.map((day, i) => {
+  const daysNextTwoWeeks = timeData.map((day, i) => {
     return i < 14 && <Day key={day.id} day={day} openModal={openModal} />;
   });
 
-  return <div className={cl.shedule}>{days}</div>;
+  return <div className={cl.shedule}>{daysNextTwoWeeks}</div>;
 };
 
 Shedule.propTypes = {
