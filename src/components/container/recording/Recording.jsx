@@ -1,18 +1,25 @@
-import { Redirect, Route } from 'react-router';
 import { useSelector } from 'react-redux';
+import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+import { ACTIONS } from '../../../redux/constants';
 import RecordingTypes from './recordingTypes/RecordingTypes';
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 
 import './../../../App.css';
 
 const Recording = () => {
-  const data = useSelector((store) => store.reserveTime.record);
+  const data = useSelector((store) => store.reserveRecord.record);
+  const dispatch = useDispatch();
 
-  const reserveItem = data.map((record, i) => (
+  const addReserveTime = (formData) => {
+    dispatch({ type: ACTIONS.RESERVE_RECORD, formData });
+  };
+
+  const reserveItem = data.map((record) => (
     <Route
-      key={Math.random().toString(36).substr(2, 9)}
+      key={record.id}
       path={`/${record.name}`}
       render={() => {
         const itemInfo = {
@@ -21,9 +28,9 @@ const Recording = () => {
         };
         return (
           <ReserveItem
-            key={Math.random().toString(36).substr(2, 9)}
             dates={record.dates}
             itemInfo={itemInfo}
+            addReserveTime={addReserveTime}
           />
         );
       }}
@@ -32,9 +39,8 @@ const Recording = () => {
 
   return (
     <BrowserRouter>
-      <div className={`recording form`}>
+      <div className='recording form'>
         <RecordingTypes />
-
         <Route exact path='/record'>
           <Redirect to={`/${data[0].name}`} />
         </Route>

@@ -5,7 +5,7 @@ import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
 import PropTypes from 'prop-types';
 
-const ReserveItem = ({ dates, itemInfo }) => {
+const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
   const [isModal, setIsModal] = useState(false);
   const [dayForModal, setDayForModal] = useState({});
 
@@ -34,7 +34,12 @@ const ReserveItem = ({ dates, itemInfo }) => {
   };
 
   const modall = isModal && (
-    <Modal closeModal={closeModal} day={dayForModal} itemInfo={itemInfo} />
+    <Modal
+      closeModal={closeModal}
+      day={dayForModal}
+      itemInfo={itemInfo}
+      addReserveTime={addReserveTime}
+    />
   );
 
   return (
@@ -53,6 +58,7 @@ ReserveItem.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }),
+  addReserveTime: PropTypes.func.isRequired,
 };
 
 export default ReserveItem;

@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ReserveForm from './reserveForm/ReserveForm';
-import { ACTIONS } from '../../../../redux/constants';
 
 import cl from './Modal.module.css';
 
-const Modal = ({ closeModal, day, itemInfo }) => {
+const Modal = ({ closeModal, day, itemInfo, addReserveTime }) => {
   const [selectedHours, setSelectedHours] = useState([]);
-  const dispatch = useDispatch();
 
   const hourClick = (hour) => {
     let selectedHoursClone = selectedHours.concat();
@@ -32,7 +29,7 @@ const Modal = ({ closeModal, day, itemInfo }) => {
       selectedTime: selectedHours,
       itemInfo,
     };
-    dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
+    addReserveTime(formData);
     setSelectedHours([]);
   };
 
@@ -60,6 +57,7 @@ Modal.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  addReserveTime: PropTypes.func.isRequired,
 };
 
 export default Modal;
