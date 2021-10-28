@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import LoginRegisterationForm from './LoginRegisterationForm';
 import { ACTIONS } from '../../../redux/constants';
+import ServerStatus from './serverStatus/ServerStatus';
+import LoginForm from './loginForm/LoginForm';
+import RegisterationForm from './registrationForm/RegistrationForm';
 
 import './../../../App.css';
 import cl from './AuthorizationForm.module.css';
-import ServerStatus from './serverStatus/ServerStatus';
 
 const AuthorizationForm = ({ error, registrationUserMessage }) => {
   const dispatch = useDispatch();
@@ -32,17 +33,9 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
 
   const formType =
     formState === typeForm.registration ? (
-      <LoginRegisterationForm
-        onClick={loginSubmit}
-        type={typeForm.login}
-        typeForm={typeForm}
-      />
+      <LoginForm submit={loginSubmit} />
     ) : (
-      <LoginRegisterationForm
-        onClick={registrationSubmit}
-        type={typeForm.registration}
-        typeForm={typeForm}
-      />
+      <RegisterationForm submit={registrationSubmit} />
     );
 
   return (

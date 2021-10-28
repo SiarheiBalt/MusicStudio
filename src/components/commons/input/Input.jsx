@@ -1,5 +1,6 @@
-import cl from './Input.module.css';
 import PropTypes from 'prop-types';
+
+import cl from './Input.module.css';
 
 export const Input = ({ onchangeInput, value, type = 'text' }) => {
   const onchange = (event) => {

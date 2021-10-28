@@ -1,24 +1,20 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import PropTypes from 'prop-types';
 
-import cl from './AuthorizationForm.module.css';
+import cl from './LoginForm.module.css';
 
-const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
-  const typeText = type === typeForm.login ? 'входа' : 'регистрации';
-
-  const titleText = 'Введите данные для ';
-  const fieldText = { name: 'Имя', email: 'Email', password: 'Пароль' };
-  const submitText = 'Подтвердить';
+const LoginForm = ({ submit }) => {
+  const titleText = 'Введите данные для входа';
+  const fieldText = { email: 'Email', password: 'Пароль' };
+  const submitText = 'Войти в приложение';
 
   const initialValues = {
-    name: '',
     email: '',
     password: '',
   };
 
   const validationsShema = yup.object().shape({
-    name:
-      type === typeForm.registration && yup.string().required('Обязательно'),
     password: yup
       .string()
       .typeError('Должно быть строкой')
@@ -39,30 +35,9 @@ const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
   }) => {
     return (
       <div className={cl.user__form}>
-        <h3>
-          {titleText}
-          {typeText}
-        </h3>
-        {type === typeForm.registration && (
-          <div className={cl.item}>
-            <div>
-              <label htmlFor={'name'}>{fieldText.name}</label>
-              <input
-                className={cl.input}
-                type={'text'}
-                name={'name'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
-              />
-            </div>
-            {touched.name && errors.name && (
-              <span className={cl.error}>{errors.name}</span>
-            )}
-          </div>
-        )}
+        <h3 className='title'>{titleText}</h3>
         <div className={cl.item}>
-          <div>
+          <div className='field'>
             <label htmlFor={'email'}>{fieldText.email}</label>
             <input
               className={cl.input}
@@ -78,7 +53,7 @@ const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
           )}
         </div>
         <div className={cl.item}>
-          <div>
+          <div className='field'>
             <label htmlFor={'password'}>{fieldText.password}</label>
             <input
               className={cl.input}
@@ -93,8 +68,8 @@ const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
             <span className={cl.error}>{errors.password}</span>
           )}
         </div>
-
         <button
+          className={cl.button}
           disabled={!isValid && !dirty}
           onClick={handleSubmit}
           type={'submit'}
@@ -108,7 +83,7 @@ const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => onClick(values)}
+      onSubmit={(values) => submit(values)}
       validationSchema={validationsShema}
     >
       {form}
@@ -116,4 +91,8 @@ const LoginRegisterationForm = ({ onClick, type, typeForm }) => {
   );
 };
 
-export default LoginRegisterationForm;
+LoginForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+};
+
+export default LoginForm;

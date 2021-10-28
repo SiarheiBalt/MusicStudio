@@ -1,6 +1,6 @@
 .form {
   height: 300px;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 .button {
   border: none;
@@ -14,46 +14,4 @@
 .button__container {
   display: flex;
   justify-content: flex-end;
-}
-
-.input {
-  border: none;
-  border-bottom: solid gray 1px;
-  background-color: inherit;
-  margin-left: 5px;
-}
-.input:focus {
-  background-color: rgb(203, 229, 238);
-  border-bottom: solid rgb(170, 170, 170) 1px;
-  border: none;
-  outline: none;
-}
-.input:hover {
-  background-color: rgb(218, 230, 233);
-}
-.item {
-  height: 50px;
-}
-.user__form {
-  height: 220px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.error {
-  color: #ffa726;
-}
-.container__error {
-  display: flex;
-  justify-content: center;
-}
-.registration__message {
-  display: flex;
-  justify-content: center;
-  height: 35px;
-  align-items: center;
-}
-.message__text {
-  color: green;
-  font-weight: 600;
 }

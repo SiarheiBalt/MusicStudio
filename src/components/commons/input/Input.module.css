@@ -1,4 +1,4 @@
-.input {
+/* .input {
   border: none;
 }
 .input:focus {
@@ -9,4 +9,22 @@
 }
 .input:hover {
   background-color: rgb(203, 229, 238);
+} */
+.input {
+  border: none;
+  border-bottom: solid gray 1px;
+  background-color: inherit;
+  margin-left: 5px;
+}
+.input:focus {
+  background-color: rgb(203, 229, 238);
+  border-bottom: solid rgb(170, 170, 170) 1px;
+  border: none;
+  outline: none;
+}
+.input:hover {
+  background-color: rgb(218, 230, 233);
+}
+.item {
+  height: 50px;
 }
