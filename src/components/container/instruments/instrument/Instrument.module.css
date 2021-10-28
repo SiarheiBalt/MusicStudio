@@ -2,13 +2,14 @@
   max-width: -webkit-fill-available;
   max-height: -webkit-fill-available;
   object-fit: cover;
-  cursor: pointer;
   border-radius: 15px;
-  border: solid 2px;
   box-shadow: 0 0 40px rgb(0 0 0 / 85%);
 }
 .image__container {
   width: inherit;
+  position: relative;
+  border-radius: 15px;
+  border: solid 2px;
 }
 .instrument {
   width: 285px;
