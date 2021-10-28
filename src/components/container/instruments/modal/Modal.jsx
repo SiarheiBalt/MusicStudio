@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { ACTIONS } from '../../../../redux/constants';
 import { findDayFromPicker } from '../../../../utils/time';
 import DataSelect from '../../../commons/dateSelect/DateSelect';
 import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';
 import ReserveForm from '../../../commons/reserveItem/modal/reserveForm/ReserveForm';
+
 import cl from './Modal.module.css';
 
 const Modal = ({ closeModal, dates, instrumentId }) => {
@@ -66,6 +69,12 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  dates: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  instrumentId: PropTypes.string.isRequired,
 };
 
 export default Modal;

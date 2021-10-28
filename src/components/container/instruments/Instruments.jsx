@@ -8,10 +8,11 @@ const Instruments = () => {
   const instruments = data.map((element, i) => (
     <Instrument
       dates={element.dates}
-      key={i}
+      key={element.instrumentId}
       image={element.image}
       specifications={element.specifications}
       instrumentId={element.instrumentId}
+      name={element.name}
     />
   ));
 

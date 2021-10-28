@@ -1,8 +1,9 @@
-.container {
-  width: 100%;
-  background-color: #5f9ea0f5;
-  position: absolute;
-  bottom: 0;
-  border-radius: inherit;
-  height: 200px;
+.list__item {
+  color: whitesmoke;
+}
+.list__item::marker {
+  color: whitesmoke;
+}
+.list {
+  margin-top: 8px;
 }
