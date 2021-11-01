@@ -2,3 +2,10 @@
   display: grid;
   color: whitesmoke;
 }
+.title {
+  text-align: center;
+  color: whitesmoke;
+}
+.profile {
+  min-height: 600px;
+}

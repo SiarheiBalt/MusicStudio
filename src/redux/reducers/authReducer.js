@@ -21,12 +21,19 @@ const authReducer = (state = defaultState, action) => {
       const data = {
         type: action.formData.itemInfo.type,
         name: action.formData.itemInfo.name,
+        dayId: action.formData.resrveDate.id,
         reservedTime: action.formData.selectedTime,
         date: action.formData.resrveDate,
         actionTime: getTimeNow(),
       };
 
       return { ...state, orderedServices: [...state.orderedServices, data] };
+    case ACTIONS.DELL_ORDER_IN_USER:
+      const orderedServices = state.orderedServices.filter(
+        (order) => action.dayId !== order.dayId
+      );
+
+      return { ...state, orderedServices };
     case ACTIONS.REGISTRATION_USER:
       return { ...state };
     case ACTIONS.LOGIN_USER:

@@ -40,9 +40,9 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className='rooms form'>
+      <div className="rooms form">
         <RoomsInfo />
-        <Route exact path='/rooms'>
+        <Route exact path="/rooms">
           <Redirect to={`/${data[0].name}`} />
         </Route>
         {reserveItem}
