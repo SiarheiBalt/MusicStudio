@@ -15,6 +15,7 @@ const Rooms = () => {
 
   const addReserveTime = (formData) => {
     dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
+    dispatch({ type: ACTIONS.ADD_ORDER_IN_USER, formData });
   };
 
   const reserveItem = data.map((room) => (

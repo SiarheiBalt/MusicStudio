@@ -1,4 +1,5 @@
-import createData from '../../utils/date';
+import { createData } from '../../utils/date';
+import { getUserLocalStorage } from '../../utils/localStorage';
 import { ACTIONS } from '../constants';
 
 const defaultState = {
@@ -30,6 +31,7 @@ const reserveRoom = (state = defaultState, action) => {
               const findHour = reserveTime.some((el) => el === hour);
               if (findHour) {
                 hourInfo.isFree = false;
+                hourInfo.customer = getUserLocalStorage();
               }
               return hourInfo;
             });

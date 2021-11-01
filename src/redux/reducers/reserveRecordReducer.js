@@ -1,4 +1,4 @@
-import createData from '../../utils/date';
+import { createData } from '../../utils/date';
 import { ACTIONS } from '../constants';
 
 const defaultState = {
