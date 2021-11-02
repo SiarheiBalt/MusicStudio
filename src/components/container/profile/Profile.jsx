@@ -7,9 +7,11 @@ import cl from './Profile.module.css';
 const Profile = () => {
   const data = useSelector((store) => store.authReducer);
 
+  const title = 'Нет заказанных услуг';
+
   const orderedServices =
     data.orderedServices.length === 0 ? (
-      <h2 className={cl.title}>Нет заказанных услуг</h2>
+      <h2 className={cl.title}>{title}</h2>
     ) : (
       <ReserveServicesTable data={data.orderedServices} />
     );

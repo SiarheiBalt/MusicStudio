@@ -24,14 +24,16 @@ const authReducer = (state = defaultState, action) => {
         dayId: action.formData.resrveDate.id,
         reservedTime: action.formData.selectedTime,
         date: action.formData.resrveDate,
+        orderId: Math.random().toString(36).substr(2, 9),
         actionTime: getTimeNow(),
       };
 
       return { ...state, orderedServices: [...state.orderedServices, data] };
     case ACTIONS.DELL_ORDER_IN_USER:
-      const orderedServices = state.orderedServices.filter(
-        (order) => action.dayId !== order.dayId
-      );
+      const orderId = action.orderId;
+      const orderedServices = state.orderedServices.filter((order) => {
+        return orderId !== order.orderId;
+      });
 
       return { ...state, orderedServices };
     case ACTIONS.REGISTRATION_USER:

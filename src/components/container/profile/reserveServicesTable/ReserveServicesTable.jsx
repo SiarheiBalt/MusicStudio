@@ -6,9 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { Button } from './../../../commons/button/Button';
 import { ACTIONS } from '../../../../redux/constants';
-import { useDispatch } from 'react-redux';
+
+import cl from './../Profile.module.css';
 
 function createData(service, date, time, button) {
   return { service, date, time, button };
@@ -28,7 +32,7 @@ const ReserveServicesTable = ({ data }) => {
       reservedTime: info.reservedTime,
     };
     dispatch({ type: actions[info.type], formData });
-    dispatch({ type: ACTIONS.DELL_ORDER_IN_USER, dayId: formData.dayId });
+    dispatch({ type: ACTIONS.DELL_ORDER_IN_USER, orderId: info.orderId });
   };
 
   const rowsArray = data.map((element) => {
@@ -40,32 +44,52 @@ const ReserveServicesTable = ({ data }) => {
     );
   });
 
-  const rows = rowsArray.map((row, i) => (
-    <TableRow key={i}>
-      <TableCell component="th" scope="row">
-        {row.service}
-      </TableCell>
-      <TableCell align="right">{row.date}</TableCell>
-      <TableCell align="right">{row.time}</TableCell>
-      <TableCell align="right">{row.button}</TableCell>
-    </TableRow>
-  ));
+  const rows = rowsArray.map((row, i) => {
+    return (
+      <TableRow key={row.date + row.time}>
+        <TableCell component='th' scope='row'>
+          {row.service}
+        </TableCell>
+        <TableCell align='right'>{row.date}</TableCell>
+        <TableCell align='right'>{row.time}</TableCell>
+        <TableCell align='right'>{row.button}</TableCell>
+      </TableRow>
+    );
+  });
+
+  const tableHeaderText = {
+    col1: 'Заказанная услуга',
+    col2: 'На дату',
+    col3: 'Зарезервированные часы',
+  };
 
   return (
     <TableContainer component={Paper}>
-      <Table style={{ minWidth: 650 }} aria-label="simple table">
+      <Table className={cl.table} aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell>Заказанная услуга</TableCell>
-            <TableCell align="right">На дату</TableCell>
-            <TableCell align="right">Зарезервированные часы</TableCell>
-            <TableCell align="right"></TableCell>
+            <TableCell>{tableHeaderText.col1}</TableCell>
+            <TableCell align='right'>{tableHeaderText.col2}</TableCell>
+            <TableCell align='right'>{tableHeaderText.col3}</TableCell>
+            <TableCell align='right'></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{rows}</TableBody>
       </Table>
     </TableContainer>
   );
+};
+
+ReserveServicesTable.propTypes = {
+  data: PropTypes.shape({
+    orderId: PropTypes.string.isRequired,
+    reservedTime: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    actionTime: PropTypes.string.isRequired,
+    dayId: PropTypes.string.isRequired,
+    date: PropTypes.shape().isRequired,
+  }),
 };
 
 export default ReserveServicesTable;
