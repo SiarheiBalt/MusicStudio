@@ -1,14 +1,25 @@
+import { useSelector } from 'react-redux';
+
 import AuthorizationForm from './../../commons/authForm/AuthorizationForm';
 import About from './about/About';
 import Contacts from './contacts/Contacts';
-import cl from './Main.module.css';
 import ServiceType from './serviceTypes/ServiceType';
-import { useSelector } from 'react-redux';
 import LogoutForm from '../../commons/authForm/logoutForm/LogoutForm';
+
+import cl from './Main.module.css';
 
 const Main = () => {
   const data = useSelector((state) => state.authReducer);
   const { isAuth, error, registrationMessage } = data;
+
+  const userForm = isAuth ? (
+    <LogoutForm />
+  ) : (
+    <AuthorizationForm
+      error={error}
+      registrationUserMessage={registrationMessage}
+    />
+  );
 
   return (
     <div className={'main'}>
@@ -16,14 +27,7 @@ const Main = () => {
         <About />
         <div className={cl.block__right}>
           <Contacts />
-          {isAuth ? (
-            <LogoutForm />
-          ) : (
-            <AuthorizationForm
-              error={error}
-              registrationUserMessage={registrationMessage}
-            />
-          )}
+          {userForm}
         </div>
       </div>
       <ServiceType />

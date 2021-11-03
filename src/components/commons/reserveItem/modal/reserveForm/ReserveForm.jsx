@@ -1,8 +1,14 @@
-import cl from './ReserveForm.module.css';
+import PropTypes from 'prop-types';
+
 import { Button } from '../../../button/Button';
 import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import Hour from '../hour/Hour';
-import PropTypes from 'prop-types';
+
+import cl from './ReserveForm.module.css';
+
+const title = 'Резервирование времени';
+const buttonActionText = 'Зарезервировать';
+const text = 'Кликайте по свободным часам чтобы выбрать время';
 
 const ReserveForm = ({
   closeModal,
@@ -19,9 +25,6 @@ const ReserveForm = ({
   });
 
   const isButtonDisabled = selectedHours.length === 0;
-  const title = 'Резервирование времени';
-  const buttonActionText = 'Зарезервировать';
-  const text = 'Кликайте по свободным часам чтобы выбрать время';
 
   return (
     <div className={cl.container}>

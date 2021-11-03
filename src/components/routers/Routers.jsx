@@ -9,6 +9,7 @@ import Profile from '../container/profile/Profile';
 import Authorization from '../container/authorization/Authorization';
 import Instruments from '../container/instruments/Instruments';
 import PrivateRoute from './PrivateRoute';
+import NoPage from '../container/nopage/NoPage';
 
 const Routers = () => {
   const isAuth = useSelector((store) => store.authReducer.isAuth);
@@ -34,6 +35,7 @@ const Routers = () => {
             component={Profile}
           />
           <Route path='/instruments' component={Instruments} />
+          <Route component={NoPage} />
         </Switch>
       </div>
     </BrowserRouter>

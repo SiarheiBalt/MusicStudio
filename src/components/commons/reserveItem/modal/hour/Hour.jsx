@@ -9,21 +9,22 @@ import {
   gray,
   tooltip,
   tooltiptext,
+  disabled,
 } from './Hour.module.css';
 
 const Hour = ({ time, hourClick, isSelected }) => {
   const onClick = () => {
-    time.isFree && hourClick(time.hour);
+    hourClick(time.hour);
   };
 
   const isFree = time.isFree;
-
   const timeClass = classNames(
     tooltip,
     hour,
     { [green]: isFree },
     { [red]: !isFree },
-    { [gray]: isSelected }
+    { [gray]: isSelected },
+    { [disabled]: !isFree }
   );
 
   const promptText = time.isFree ? 'час свободен' : 'час занят';

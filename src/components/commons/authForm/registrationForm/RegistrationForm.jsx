@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import cl from './RegistrationForm.module.css';
 
-const RegisterationForm = ({ submit }) => {
-  const titleText = 'Введите данные для регистрации';
-  const fieldText = { name: 'Имя', email: 'Email', password: 'Пароль' };
-  const submitText = 'Зарегистрироваться';
+const titleText = 'Введите данные для регистрации';
+const fieldText = { name: 'Имя', email: 'Email', password: 'Пароль' };
+const submitText = 'Зарегистрироваться';
 
+const RegisterationForm = ({ submit }) => {
   const initialValues = {
     name: '',
     email: '',

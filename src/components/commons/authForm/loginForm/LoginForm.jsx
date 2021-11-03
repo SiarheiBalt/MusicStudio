@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import cl from './LoginForm.module.css';
 
-const LoginForm = ({ submit }) => {
-  const titleText = 'Введите данные для входа';
-  const fieldText = { email: 'Email', password: 'Пароль' };
-  const submitText = 'Войти в приложение';
+const fieldText = { email: 'Email', password: 'Пароль' };
+const titleText = 'Введите данные для входа';
+const submitText = 'Войти в приложение';
 
+const LoginForm = ({ submit }) => {
   const initialValues = {
     email: '',
     password: '',

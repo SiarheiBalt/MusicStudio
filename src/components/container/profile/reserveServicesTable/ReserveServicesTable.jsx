@@ -14,6 +14,12 @@ import { ACTIONS } from '../../../../redux/constants';
 
 import cl from './../Profile.module.css';
 
+const tableHeaderText = {
+  col1: 'Заказанная услуга',
+  col2: 'На дату',
+  col3: 'Зарезервированные часы',
+};
+
 function createData(service, date, time, button) {
   return { service, date, time, button };
 }
@@ -44,7 +50,7 @@ const ReserveServicesTable = ({ data }) => {
     );
   });
 
-  const rows = rowsArray.map((row, i) => {
+  const rows = rowsArray.map((row) => {
     return (
       <TableRow key={row.date + row.time}>
         <TableCell component='th' scope='row'>
@@ -56,12 +62,6 @@ const ReserveServicesTable = ({ data }) => {
       </TableRow>
     );
   });
-
-  const tableHeaderText = {
-    col1: 'Заказанная услуга',
-    col2: 'На дату',
-    col3: 'Зарезервированные часы',
-  };
 
   return (
     <TableContainer component={Paper}>
@@ -81,15 +81,17 @@ const ReserveServicesTable = ({ data }) => {
 };
 
 ReserveServicesTable.propTypes = {
-  data: PropTypes.shape({
-    orderId: PropTypes.string.isRequired,
-    reservedTime: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    actionTime: PropTypes.string.isRequired,
-    dayId: PropTypes.string.isRequired,
-    date: PropTypes.shape().isRequired,
-  }),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      orderId: PropTypes.string.isRequired,
+      reservedTime: PropTypes.arrayOf(PropTypes.string).isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      actionTime: PropTypes.string.isRequired,
+      dayId: PropTypes.string.isRequired,
+      date: PropTypes.shape().isRequired,
+    })
+  ),
 };
 
 export default ReserveServicesTable;
