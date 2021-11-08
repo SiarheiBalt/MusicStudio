@@ -8,6 +8,7 @@ import RecordingTypes from './recordingTypes/RecordingTypes';
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 
 import './../../../App.css';
+import cl from './Recording.module.css';
 
 const Recording = () => {
   const data = useSelector((store) => store.reserveRecord.record);
@@ -40,7 +41,7 @@ const Recording = () => {
 
   return (
     <BrowserRouter>
-      <div className='recording form'>
+      <div className={`${cl.recording} form`}>
         <RecordingTypes />
         <Route exact path='/record'>
           <Redirect to={`/${data[0].name}`} />

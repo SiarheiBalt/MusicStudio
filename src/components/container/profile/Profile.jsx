@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ReserveServicesTable from './reserveServicesTable/ReserveServicesTable';
 
 import cl from './Profile.module.css';
+import UserInfo from './userInfo/UserInfo';
 
 const Profile = () => {
   const data = useSelector((store) => store.authReducer);
@@ -16,7 +17,13 @@ const Profile = () => {
       <ReserveServicesTable data={data.orderedServices} />
     );
 
-  return <div className={cl.profile}>{orderedServices}</div>;
+  return (
+    <div className={cl.profile}>
+      <UserInfo />
+
+      {orderedServices}
+    </div>
+  );
 };
 
 export default Profile;

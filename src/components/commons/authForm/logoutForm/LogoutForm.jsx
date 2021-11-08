@@ -5,9 +5,12 @@ import { Button } from './../../button/Button';
 
 import './../../../../App.css';
 import cl from './LogoutForm.module.css';
+import { getUserLocalStorage } from '../../../../utils/localStorage';
+
+const { name } = getUserLocalStorage();
 
 const buttomText = 'Выйти из профиля';
-const titleText = 'Информация о пользователе';
+const titleText = `Выполнен вход пользователя - ${name}`;
 
 const LogoutForm = () => {
   const dispatch = useDispatch();
