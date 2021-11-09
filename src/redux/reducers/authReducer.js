@@ -23,11 +23,14 @@ const authReducer = (state = defaultState, action) => {
         name: action.formData.itemInfo.name,
         dayId: action.formData.resrveDate.id,
         reservedTime: action.formData.selectedTime,
-        date: action.formData.resrveDate,
+        date: {
+          date: action.formData.resrveDate.date,
+          monthName: action.formData.resrveDate.monthName,
+        },
         orderId: Math.random().toString(36).substr(2, 9),
         actionTime: getTimeNow(),
       };
-
+      console.log(data);
       return { ...state, orderedServices: [...state.orderedServices, data] };
     case ACTIONS.DELL_ORDER_IN_USER:
       const orderId = action.orderId;
