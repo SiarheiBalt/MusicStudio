@@ -9,9 +9,9 @@ import { getUserLocalStorage } from '../../../../utils/localStorage';
 
 import cl from './UserInfo.module.css';
 
-const { email, name } = getUserLocalStorage();
-
 export default function UserInfo() {
+  const { email, name } = getUserLocalStorage();
+
   return (
     <List className={cl.list}>
       <ListItem>
