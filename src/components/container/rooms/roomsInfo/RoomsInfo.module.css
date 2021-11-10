@@ -1,0 +1,27 @@
+.title {
+  text-align: center;
+}
+.type {
+  margin: 0 25px;
+}
+.link {
+  white-space: nowrap;
+}
+.link a {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  border-radius: 15px;
+}
+.link a:hover {
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+}
+.link a.activ {
+  color: whitesmoke;
+  background-color: #00000091;
+}

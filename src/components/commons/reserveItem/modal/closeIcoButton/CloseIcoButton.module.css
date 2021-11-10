@@ -1,0 +1,13 @@
+.closeIco {
+  height: 30px !important;
+  width: 30px !important;
+  color: dimgray;
+  cursor: pointer;
+}
+.container {
+  width: 99%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

@@ -1,0 +1,73 @@
+.hour {
+  width: 60px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.red {
+  background-color: rgb(255 106 106 / 39%);
+  cursor: default;
+}
+.green {
+  background-color: rgb(36 171 36 / 30%);
+}
+.green:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+  background-color: rgb(36 171 36 / 42%);
+}
+.time__text {
+  user-select: none;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+.gray {
+  background-color: #808080ad;
+}
+.gray:hover {
+  background-color: gray;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+}
+
+.tooltip {
+  position: relative;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+}

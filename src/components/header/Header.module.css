@@ -8,9 +8,14 @@
   white-space: nowrap;
 }
 .link a {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  height: 30px;
   text-decoration: none;
-  font-weight: 600;
-  color: gray;
+  color: whitesmoke;
+  border-radius: 15px;
 }
 .link a:hover {
   background-color: #bbdefb;

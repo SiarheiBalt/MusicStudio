@@ -1,22 +1,21 @@
 import './App.css';
-import Header from './components/header/Header';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import Main from './components/main/Main';
+import Footer from './components/footer/Footer';
+import Routers from './components/routers/Routers';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from './redux/constants';
+import { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: ACTIONS.DEFINE_USER });
+  });
+
   return (
-    <BrowserRouter>
-      <div className="app-container">
-        <Header />
-        <Route path="/main" component={Main} />
-        <Route exact path="/MusicStudio">
-          <Redirect to="/main" />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/main" />
-        </Route>
-      </div>
-    </BrowserRouter>
+    <div className="app">
+      <Routers />
+      <Footer />
+    </div>
   );
 }
 

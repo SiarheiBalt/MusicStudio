@@ -1,0 +1,42 @@
+.day {
+  width: 160px;
+  height: 170px;
+  margin: 10px 0;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.day:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.title {
+  text-align: center;
+  color: whitesmoke;
+  font-weight: 700;
+}
+.label {
+  width: 15px;
+  height: 15px;
+}
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.green {
+  background-color: green;
+}
+.red {
+  color: #ffa726 !important;
+}
+.status {
+  display: flex;
+  justify-content: center;
+}
+.status__text {
+  text-align: center;
+  color: black;
+  width: 110px;
+  font-weight: 600;
+}

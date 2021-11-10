@@ -1,0 +1,17 @@
+.form {
+  height: 300px;
+  border-radius: 15px;
+}
+.button {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  margin: 10px 10px 0 0;
+  border-radius: 15px;
+  background-color: whitesmoke;
+}
+
+.button__container {
+  display: flex;
+  justify-content: flex-end;
+}
