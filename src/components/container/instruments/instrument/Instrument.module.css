@@ -11,6 +11,8 @@
   border-radius: 15px;
   border: solid 2px;
   display: flex;
+  height: 380px;
+  background-color: #00000078;
 }
 .instrument {
   width: 285px;
