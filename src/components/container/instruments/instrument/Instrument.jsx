@@ -7,6 +7,9 @@ import Specifications from './specifications/Specifications';
 
 import cl from './Instrument.module.css';
 
+const altText = 'image not find';
+const buttonText = 'Зарезервировать';
+
 const Instrument = ({ image, specifications, dates, instrumentId, name }) => {
   const [isModal, setModal] = useState(false);
 
@@ -17,12 +20,9 @@ const Instrument = ({ image, specifications, dates, instrumentId, name }) => {
     <Modal closeModal={closeModal} dates={dates} instrumentId={instrumentId} />
   );
 
-  const altText = 'image not find';
-  const buttonText = 'Зарезервировать';
-
   return (
     <>
-      <div className={`${cl.instrument} `}>
+      <div className={cl.instrument}>
         <div className={cl.image__container}>
           <img className={cl.image} src={image} alt={altText} />
           <Specifications specifications={specifications} />;

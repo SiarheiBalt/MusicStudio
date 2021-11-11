@@ -10,6 +10,8 @@ import ReserveForm from '../../../commons/reserveItem/modal/reserveForm/ReserveF
 
 import cl from './Modal.module.css';
 
+const text = 'Выберите интересующую дату';
+
 const Modal = ({ closeModal, dates, instrumentId }) => {
   const dispatch = useDispatch();
 
@@ -25,13 +27,18 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
   const [day, setDay] = useState(initDay);
 
   const hourClick = (hour) => {
-    let array = selectedHours.concat();
-    if (selectedHours.some((element) => element === hour)) {
-      array = selectedHours.filter((element) => element !== hour && element);
+    let selectedHoursClone = selectedHours.concat();
+    const isHourInSelectedHours = selectedHours.some(
+      (element) => element === hour
+    );
+    if (isHourInSelectedHours) {
+      selectedHoursClone = selectedHours.filter(
+        (element) => element !== hour && element
+      );
     } else {
-      array.push(hour);
+      selectedHoursClone.push(hour);
     }
-    setSelectedHours(array);
+    setSelectedHours(selectedHoursClone);
   };
 
   const addReserve = () => {
@@ -57,7 +64,7 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
         <CloseIcoButton close={closeModal} />
         <div className={cl.picker}>
           <DataSelect getDateFromPicker={getDateFromPicker} />{' '}
-          <span className={cl.text}>Выберите интересующую дату </span>
+          <span className={cl.text}>{text} </span>
         </div>
         <ReserveForm
           selectedHours={selectedHours}
