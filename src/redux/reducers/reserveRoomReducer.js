@@ -1,24 +1,41 @@
-import { createData } from '../../utils/date';
+import { getDateInfo } from '../../utils/date';
 import { getUserLocalStorage } from '../../utils/localStorage';
 import { ACTIONS } from '../constants';
 
 const defaultState = {
-  rooms: [
-    {
-      dates: createData(),
-      name: 'big',
-      id: Math.random().toString(36).substr(2, 9),
-    },
-    {
-      dates: createData(),
-      name: 'small',
-      id: Math.random().toString(36).substr(2, 9),
-    },
-  ],
+  rooms: null,
 };
 
 const reserveRoom = (state = defaultState, action) => {
   switch (action.type) {
+    case ACTIONS.GET_ROOMS_SUCCES: {
+      const rooms = action.data.map((room) => {
+        room.dates = room.dates.map((day) => {
+          let { date, dayofWeek, monthName, month, year } = getDateInfo(
+            day.date
+          );
+          day.dayofWeek = dayofWeek;
+          day.monthName = monthName;
+          day.month = month;
+          day.year = year;
+          day.date = date;
+          return day;
+        });
+        return room;
+      });
+      return { ...state, rooms };
+    }
+    case ACTIONS.GET_ROOMS: {
+      return { ...state };
+    }
+    case ACTIONS.GET_DATES_IN_ROOM_SUCCES: {
+      console.log(action.data);
+      // return { ...state };
+    }
+    case ACTIONS.GET_DATES_IN_ROOM: {
+      return { ...state };
+    }
+
     case ACTIONS.RESERVE_ROOM: {
       const dayId = action.formData.resrveDate.id;
       const reserveTime = action.formData.selectedTime;

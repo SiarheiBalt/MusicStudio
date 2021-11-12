@@ -8,6 +8,8 @@ import ReserveItem from '../../commons/reserveItem/ReserveItem';
 import RoomsInfo from './roomsInfo/RoomsInfo';
 
 import './../../../App.css';
+import { useEffect } from 'react';
+import Preloader from '../../commons/preloader/Preloader';
 
 const Rooms = () => {
   const data = useSelector((store) => store.reserveRoom.rooms);
@@ -17,6 +19,14 @@ const Rooms = () => {
     dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
     dispatch({ type: ACTIONS.ADD_ORDER_IN_USER, formData });
   };
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.GET_ROOMS });
+  }, [dispatch]);
+
+  if (!data) {
+    return <Preloader />;
+  }
 
   const reserveItem = data.map((room) => (
     <Route
@@ -40,9 +50,9 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className="rooms form">
+      <div className='rooms form'>
         <RoomsInfo />
-        <Route exact path="/rooms">
+        <Route exact path='/rooms'>
           <Redirect to={`/${data[0].name}`} />
         </Route>
         {reserveItem}

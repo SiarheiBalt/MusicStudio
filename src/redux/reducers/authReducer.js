@@ -30,7 +30,6 @@ const authReducer = (state = defaultState, action) => {
         orderId: Math.random().toString(36).substr(2, 9),
         actionTime: getTimeNow(),
       };
-      console.log(data);
       return { ...state, orderedServices: [...state.orderedServices, data] };
     case ACTIONS.DELL_ORDER_IN_USER:
       const orderId = action.orderId;
