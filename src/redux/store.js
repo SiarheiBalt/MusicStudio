@@ -5,7 +5,7 @@ import reserveInstruments from './reducers/reserveInstrumentsReducer';
 import reserveRoom from './reducers/reserveRoomReducer';
 import reserveRecord from './reducers/reserveRecordReducer';
 import { loginUserSaga, registrationUserSaga } from './sagas/authSagas';
-import { allRoomsSaga } from './sagas/roomsSagas';
+import { allRoomsSaga, dayInRoomSaga } from './sagas/roomsSagas';
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -24,6 +24,7 @@ const store = createStore(
 sagaMiddleWare.run(registrationUserSaga);
 sagaMiddleWare.run(loginUserSaga);
 sagaMiddleWare.run(allRoomsSaga);
+sagaMiddleWare.run(dayInRoomSaga);
 
 window.store = store;
 

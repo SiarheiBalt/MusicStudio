@@ -4,6 +4,7 @@ import { ACTIONS } from '../constants';
 
 const defaultState = {
   rooms: null,
+  chosenDay: null,
 };
 
 const reserveRoom = (state = defaultState, action) => {
@@ -28,11 +29,14 @@ const reserveRoom = (state = defaultState, action) => {
     case ACTIONS.GET_ROOMS: {
       return { ...state };
     }
-    case ACTIONS.GET_DATES_IN_ROOM_SUCCES: {
-      console.log(action.data);
-      // return { ...state };
+    case ACTIONS.GET_DAY_IN_ROOM_SUCCES: {
+      let chosenDay = getDateInfo(action.day.date);
+      chosenDay.reserveTime = action.day.reserveTime;
+      chosenDay.id = action.day.id;
+
+      return { ...state, chosenDay };
     }
-    case ACTIONS.GET_DATES_IN_ROOM: {
+    case ACTIONS.GET_DAY_IN_ROOM: {
       return { ...state };
     }
 

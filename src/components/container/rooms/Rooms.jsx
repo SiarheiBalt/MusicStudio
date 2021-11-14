@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import Preloader from '../../commons/preloader/Preloader';
 
 const Rooms = () => {
-  const data = useSelector((store) => store.reserveRoom.rooms);
+  const { rooms, chosenDay } = useSelector((store) => store.reserveRoom);
   const dispatch = useDispatch();
 
   const addReserveTime = (formData) => {
@@ -24,11 +24,11 @@ const Rooms = () => {
     dispatch({ type: ACTIONS.GET_ROOMS });
   }, [dispatch]);
 
-  if (!data) {
+  if (!rooms) {
     return <Preloader />;
   }
 
-  const reserveItem = data.map((room) => (
+  const reserveItem = rooms.map((room) => (
     <Route
       key={room.id}
       path={`/${room.name}`}
@@ -41,6 +41,7 @@ const Rooms = () => {
           <ReserveItem
             dates={room.dates}
             itemInfo={itemInfo}
+            chosenDay={chosenDay}
             addReserveTime={addReserveTime}
           />
         );
@@ -50,10 +51,10 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className='rooms form'>
+      <div className="rooms form">
         <RoomsInfo />
-        <Route exact path='/rooms'>
-          <Redirect to={`/${data[0].name}`} />
+        <Route exact path="/rooms">
+          <Redirect to={`/${rooms[0].name}`} />
         </Route>
         {reserveItem}
       </div>

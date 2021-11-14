@@ -7,7 +7,7 @@ import DataSelect from '../dateSelect/DateSelect';
 
 import cl from './ReserveItem.module.css';
 
-const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
+const ReserveItem = ({ dates, itemInfo, addReserveTime, chosenDay }) => {
   const [isModal, setIsModal] = useState(false);
   const [dayForModal, setDayForModal] = useState({});
 
@@ -41,15 +41,16 @@ const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
       day={dayForModal}
       itemInfo={itemInfo}
       addReserveTime={addReserveTime}
+      chosenDay={chosenDay}
     />
   );
 
   return (
-    <div className='item'>
+    <div className="item">
       {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
-      <Shedule timeData={dates} openModal={openModal} />
+      <Shedule timeData={dates} openModal={openModal} name={itemInfo.name} />
     </div>
   );
 };

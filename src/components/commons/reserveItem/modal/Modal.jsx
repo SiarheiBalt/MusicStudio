@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import ReserveForm from './reserveForm/ReserveForm';
 
 import cl from './Modal.module.css';
+import SmallPreloader from '../../preloader/SmallPreloader';
 
-const Modal = ({ closeModal, day, itemInfo, addReserveTime }) => {
+const Modal = ({ closeModal, day, itemInfo, addReserveTime, chosenDay }) => {
   const [selectedHours, setSelectedHours] = useState([]);
 
   const hourClick = (hour) => {
@@ -33,19 +34,22 @@ const Modal = ({ closeModal, day, itemInfo, addReserveTime }) => {
     setSelectedHours([]);
   };
 
+  const reserveForm = chosenDay ? (
+    <ReserveForm
+      selectedHours={selectedHours}
+      closeModal={closeModal}
+      day={day}
+      hourClick={hourClick}
+      itemInfo={itemInfo}
+      addReserve={addReserve}
+    />
+  ) : (
+    <SmallPreloader />
+  );
+
   return (
     <div className={cl.background}>
-      <div className={cl.container}>
-        {' '}
-        <ReserveForm
-          selectedHours={selectedHours}
-          closeModal={closeModal}
-          day={day}
-          hourClick={hourClick}
-          itemInfo={itemInfo}
-          addReserve={addReserve}
-        />
-      </div>
+      <div className={cl.container}>{reserveForm}</div>
     </div>
   );
 };
