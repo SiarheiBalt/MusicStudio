@@ -11,10 +11,15 @@ import {
   tooltiptext,
   disabled,
 } from './Hour.module.css';
+import { checkUserLocalStorage } from '../../../../../utils/localStorage';
 
 const Hour = ({ time, hourClick, isSelected }) => {
+  const isAuth = checkUserLocalStorage();
+
   const onClick = () => {
-    hourClick(time.hour);
+    if (isAuth) {
+      hourClick(time.hour);
+    }
   };
 
   const isFree = time.isFree;

@@ -10,6 +10,16 @@ import DataSelect from '../dateSelect/DateSelect';
 import cl from './ReserveItem.module.css';
 import { ACTIONS } from '../../../redux/constants';
 
+const clearReserveStatus = {
+  rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
+};
+const getItem = {
+  rooms: ACTIONS.GET_ROOMS,
+};
+const getDay = {
+  rooms: ACTIONS.GET_DAY_IN_ROOM,
+};
+
 const ReserveItem = ({
   dates,
   itemInfo,
@@ -19,20 +29,17 @@ const ReserveItem = ({
   error,
 }) => {
   const dispatch = useDispatch();
-
   const [isModal, setIsModal] = useState(false);
-  // const [dayForModal, setDayForModal] = useState({});
 
-  const openModal = (day) => {
+  const openModal = () => {
     setIsModal(true);
-    // setDayForModal(day);
   };
 
   const closeModal = () => {
     setIsModal(false);
-    dispatch({ type: ACTIONS.CLEAR_ROOM_SERVER_STATUS });
+    dispatch({ type: clearReserveStatus[itemInfo.type] });
     dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
-    dispatch({ type: ACTIONS.GET_ROOMS });
+    dispatch({ type: getItem[itemInfo.type] });
   };
 
   const getDateFromPicker = (date) => {
@@ -46,8 +53,7 @@ const ReserveItem = ({
     if (dayFromPicker.length === 1) {
       const day = dayFromPicker[0];
       const data = { dayId: day.id, name: itemInfo.name };
-      dispatch({ type: ACTIONS.GET_DAY_IN_ROOM, data });
-      // setDayForModal(day);
+      dispatch({ type: getDay[itemInfo.name], data });
       setIsModal(true);
     }
   };

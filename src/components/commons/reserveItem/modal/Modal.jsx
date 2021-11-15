@@ -9,6 +9,10 @@ import { getUserLocalStorage } from '../../../../utils/localStorage';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../../../../redux/constants';
 
+const clearServerStatus = {
+  rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
+};
+
 const Modal = ({
   closeModal,
   itemInfo,
@@ -37,22 +41,21 @@ const Modal = ({
   };
 
   const addReserve = () => {
-    dispatch({ type: ACTIONS.CLEAR_ROOM_SERVER_STATUS });
-    const { userId, token } = getUserLocalStorage();
-    const formData = {
-      auth: token,
-      name: itemInfo.name,
-      dayId: chosenDay.id,
-      reserveTime: selectedHours,
-      userId,
-    };
-    addReserveTime(formData);
-    setSelectedHours([]);
-    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
-    const data = { dayId: chosenDay.id, name: itemInfo.name };
-    setTimeout(() => {
-      dispatch({ type: ACTIONS.GET_DAY_IN_ROOM, data });
-    }, 1000);
+    dispatch({ type: clearServerStatus[itemInfo.type] });
+    const isAuth = getUserLocalStorage();
+    if (isAuth) {
+      const { userId, token } = getUserLocalStorage();
+      const formData = {
+        auth: token,
+        name: itemInfo.name,
+        dayId: chosenDay.id,
+        reserveTime: selectedHours,
+        userId,
+      };
+      addReserveTime(formData);
+      setSelectedHours([]);
+      dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
+    }
   };
 
   const reserveForm = chosenDay ? (

@@ -8,7 +8,7 @@ const Day = ({ day, openModal, name }) => {
   const getDay = () => {
     const data = { dayId: day.id, name };
     dispatch({ type: ACTIONS.GET_DAY_IN_ROOM, data });
-    openModal(day);
+    openModal();
   };
 
   const countFreeTime = day.reserveTime.reduce((acc, time) => {

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { checkUserLocalStorage } from '../../../../../utils/localStorage';
 import ServerStatus from '../../../authForm/serverStatus/ServerStatus';
 
 import { Button } from '../../../button/Button';
@@ -9,7 +10,6 @@ import cl from './ReserveForm.module.css';
 
 const title = 'Резервирование времени';
 const buttonActionText = 'Зарезервировать';
-const text = 'Кликайте по свободным часам чтобы выбрать время';
 
 const ReserveForm = ({
   closeModal,
@@ -20,6 +20,11 @@ const ReserveForm = ({
   serverMessage,
   error,
 }) => {
+  const isAuth = checkUserLocalStorage();
+  const text = isAuth
+    ? 'Кликайте по свободным часам чтобы выбрать время'
+    : 'Войдите либо зарегистрируйтесь в приложении для резервирования';
+
   const hours = day.reserveTime.map((time, i) => {
     const isSelected = selectedHours.some((item) => item === time.hour);
     return (
