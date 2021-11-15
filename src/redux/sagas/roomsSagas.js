@@ -73,6 +73,7 @@ function* getReserveRoomSaga(action) {
     const data = yield response.json();
     const message = data.message;
     if (response.status === 201) {
+      const message = 'Время зарезервировано';
       yield put({ type: ACTIONS.GET_DAY_IN_ROOM, data: action.formData });
       yield put({ type: ACTIONS.RESERVE_ROOM_SUCCES, message });
     } else {
