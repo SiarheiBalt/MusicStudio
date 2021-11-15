@@ -1,13 +1,27 @@
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+
+import ReserveServicesTable from './reserveServicesTable/ReserveServicesTable';
+
+import cl from './Profile.module.css';
+import UserInfo from './userInfo/UserInfo';
 
 const Profile = () => {
-  const isAuth = useSelector((store) => store.authReducer.isAuth);
-  if (!isAuth) return <Redirect to="Login" />;
+  const data = useSelector((store) => store.authReducer);
+
+  const title = 'Нет заказанных услуг';
+
+  const orderedServices =
+    data.orderedServices.length === 0 ? (
+      <h2 className={cl.title}>{title}</h2>
+    ) : (
+      <ReserveServicesTable data={data.orderedServices} />
+    );
 
   return (
-    <div>
-      <h2>profile</h2>
+    <div className={cl.profile}>
+      <UserInfo />
+
+      {orderedServices}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 .information {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 .block__right {
   width: 49%;

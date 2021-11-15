@@ -1,7 +1,8 @@
-import cl from './CloseIcoButton.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+
+import cl from './CloseIcoButton.module.css';
 
 const CloseIcoButton = ({ close }) => {
   const onClick = () => {

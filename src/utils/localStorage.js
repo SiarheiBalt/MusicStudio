@@ -7,6 +7,7 @@ export const setUserLocalStorage = (data) => {
       userId: data.userId,
       token: data.token,
       name: data.name,
+      email: data.email,
     })
   );
 };

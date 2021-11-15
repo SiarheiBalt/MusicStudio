@@ -1,11 +1,13 @@
-import Shedule from '../shedule/Shedule';
-import cl from './ReserveItem.module.css';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
+
+import Shedule from '../shedule/Shedule';
 import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
-import PropTypes from 'prop-types';
 
-const ReserveItem = ({ dates, itemInfo }) => {
+import cl from './ReserveItem.module.css';
+
+const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
   const [isModal, setIsModal] = useState(false);
   const [dayForModal, setDayForModal] = useState({});
 
@@ -34,11 +36,16 @@ const ReserveItem = ({ dates, itemInfo }) => {
   };
 
   const modall = isModal && (
-    <Modal closeModal={closeModal} day={dayForModal} itemInfo={itemInfo} />
+    <Modal
+      closeModal={closeModal}
+      day={dayForModal}
+      itemInfo={itemInfo}
+      addReserveTime={addReserveTime}
+    />
   );
 
   return (
-    <div className={'item'}>
+    <div className='item'>
       {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
@@ -53,6 +60,7 @@ ReserveItem.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }),
+  addReserveTime: PropTypes.func.isRequired,
 };
 
 export default ReserveItem;
