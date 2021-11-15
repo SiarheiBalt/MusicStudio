@@ -22,7 +22,6 @@ const DataSelect = ({ getDateFromPicker }) => {
     };
     getDateFromPicker(obj);
   };
-
   const onChangeDataPicker = (date) => {
     const today = new Date();
     if (date > today) {
