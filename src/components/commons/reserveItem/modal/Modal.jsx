@@ -5,8 +5,20 @@ import ReserveForm from './reserveForm/ReserveForm';
 
 import cl from './Modal.module.css';
 import SmallPreloader from '../../preloader/SmallPreloader';
+import { getUserLocalStorage } from '../../../../utils/localStorage';
+import { useDispatch } from 'react-redux';
+import { ACTIONS } from '../../../../redux/constants';
 
-const Modal = ({ closeModal, day, itemInfo, addReserveTime, chosenDay }) => {
+const Modal = ({
+  closeModal,
+  itemInfo,
+  addReserveTime,
+  chosenDay,
+  serverMessage,
+  error,
+}) => {
+  const dispatch = useDispatch();
+
   const [selectedHours, setSelectedHours] = useState([]);
 
   const hourClick = (hour) => {
@@ -25,23 +37,34 @@ const Modal = ({ closeModal, day, itemInfo, addReserveTime, chosenDay }) => {
   };
 
   const addReserve = () => {
+    dispatch({ type: ACTIONS.CLEAR_ROOM_SERVER_STATUS });
+    const { userId, token } = getUserLocalStorage();
     const formData = {
-      resrveDate: day,
-      selectedTime: selectedHours,
-      itemInfo,
+      auth: token,
+      name: itemInfo.name,
+      dayId: chosenDay.id,
+      reserveTime: selectedHours,
+      userId,
     };
     addReserveTime(formData);
     setSelectedHours([]);
+    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
+    const data = { dayId: chosenDay.id, name: itemInfo.name };
+    setTimeout(() => {
+      dispatch({ type: ACTIONS.GET_DAY_IN_ROOM, data });
+    }, 1000);
   };
 
   const reserveForm = chosenDay ? (
     <ReserveForm
       selectedHours={selectedHours}
       closeModal={closeModal}
-      day={day}
+      day={chosenDay}
       hourClick={hourClick}
       itemInfo={itemInfo}
       addReserve={addReserve}
+      serverMessage={serverMessage}
+      error={error}
     />
   ) : (
     <SmallPreloader />
@@ -56,11 +79,6 @@ const Modal = ({ closeModal, day, itemInfo, addReserveTime, chosenDay }) => {
 
 Modal.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  day: PropTypes.shape().isRequired,
-  itemInfo: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
   addReserveTime: PropTypes.func.isRequired,
 };
 

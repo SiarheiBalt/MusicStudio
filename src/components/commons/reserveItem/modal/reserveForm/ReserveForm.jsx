@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import ServerStatus from '../../../authForm/serverStatus/ServerStatus';
 
 import { Button } from '../../../button/Button';
 import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
@@ -16,6 +17,8 @@ const ReserveForm = ({
   hourClick,
   selectedHours,
   addReserve,
+  serverMessage,
+  error,
 }) => {
   const hours = day.reserveTime.map((time, i) => {
     const isSelected = selectedHours.some((item) => item === time.hour);
@@ -36,6 +39,7 @@ const ReserveForm = ({
       <div className={cl.hours}>{hours}</div>
       <span className={cl.text}>{text}</span>
       <div className={cl.reserve}>
+        <ServerStatus error={error} message={serverMessage} />
         <Button
           text={buttonActionText}
           onClick={addReserve}

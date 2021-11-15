@@ -45,9 +45,43 @@ function* getDayInRoomSaga(action) {
     if (response.status === 200) {
       yield put({ type: ACTIONS.GET_DAY_IN_ROOM_SUCCES, day });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function* dayInRoomSaga() {
   yield takeEvery(ACTIONS.GET_DAY_IN_ROOM, getDayInRoomSaga);
+}
+
+function* getReserveRoomSaga(action) {
+  try {
+    const response = yield call(() => {
+      let body = action.formData;
+
+      body = JSON.stringify(body);
+      let headers = {};
+      const method = 'POST';
+      headers['Content-type'] = 'application/json';
+      return fetch('/api/rooms/time', {
+        method,
+        body,
+        headers,
+      });
+    });
+
+    const data = yield response.json();
+    const message = data.message;
+    if (response.status === 201) {
+      yield put({ type: ACTIONS.RESERVE_ROOM_SUCCES, message });
+    } else {
+      yield put({ type: ACTIONS.SET_RESERVE_ROOM_ERROR, message });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* reserveRoomSaga() {
+  yield takeEvery(ACTIONS.RESERVE_ROOM, getReserveRoomSaga);
 }

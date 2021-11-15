@@ -1,23 +1,38 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import Shedule from '../shedule/Shedule';
 import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
 
 import cl from './ReserveItem.module.css';
+import { ACTIONS } from '../../../redux/constants';
 
-const ReserveItem = ({ dates, itemInfo, addReserveTime, chosenDay }) => {
+const ReserveItem = ({
+  dates,
+  itemInfo,
+  addReserveTime,
+  chosenDay,
+  serverMessage,
+  error,
+}) => {
+  const dispatch = useDispatch();
+
   const [isModal, setIsModal] = useState(false);
-  const [dayForModal, setDayForModal] = useState({});
+  // const [dayForModal, setDayForModal] = useState({});
 
   const openModal = (day) => {
     setIsModal(true);
-    setDayForModal(day);
+    // setDayForModal(day);
   };
 
   const closeModal = () => {
     setIsModal(false);
+    dispatch({ type: ACTIONS.CLEAR_ROOM_SERVER_STATUS });
+    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
+    dispatch({ type: ACTIONS.GET_ROOMS });
   };
 
   const getDateFromPicker = (date) => {
@@ -30,7 +45,9 @@ const ReserveItem = ({ dates, itemInfo, addReserveTime, chosenDay }) => {
 
     if (dayFromPicker.length === 1) {
       const day = dayFromPicker[0];
-      setDayForModal(day);
+      const data = { dayId: day.id, name: itemInfo.name };
+      dispatch({ type: ACTIONS.GET_DAY_IN_ROOM, data });
+      // setDayForModal(day);
       setIsModal(true);
     }
   };
@@ -38,15 +55,16 @@ const ReserveItem = ({ dates, itemInfo, addReserveTime, chosenDay }) => {
   const modall = isModal && (
     <Modal
       closeModal={closeModal}
-      day={dayForModal}
       itemInfo={itemInfo}
       addReserveTime={addReserveTime}
       chosenDay={chosenDay}
+      serverMessage={serverMessage}
+      error={error}
     />
   );
 
   return (
-    <div className="item">
+    <div className='item'>
       {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />

@@ -12,12 +12,13 @@ import { useEffect } from 'react';
 import Preloader from '../../commons/preloader/Preloader';
 
 const Rooms = () => {
-  const { rooms, chosenDay } = useSelector((store) => store.reserveRoom);
+  const { rooms, chosenDay, serverMessage, error } = useSelector(
+    (store) => store.reserveRoom
+  );
   const dispatch = useDispatch();
 
   const addReserveTime = (formData) => {
     dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
-    dispatch({ type: ACTIONS.ADD_ORDER_IN_USER, formData });
   };
 
   useEffect(() => {
@@ -43,6 +44,8 @@ const Rooms = () => {
             itemInfo={itemInfo}
             chosenDay={chosenDay}
             addReserveTime={addReserveTime}
+            serverMessage={serverMessage}
+            error={error}
           />
         );
       }}
@@ -51,9 +54,9 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className="rooms form">
+      <div className='rooms form'>
         <RoomsInfo />
-        <Route exact path="/rooms">
+        <Route exact path='/rooms'>
           <Redirect to={`/${rooms[0].name}`} />
         </Route>
         {reserveItem}

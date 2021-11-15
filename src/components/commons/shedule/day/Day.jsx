@@ -48,6 +48,7 @@ Day.propTypes = {
     reserveTime: PropTypes.arrayOf(PropTypes.shape),
     year: PropTypes.number.isRequired,
   }).isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default Day;

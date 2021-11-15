@@ -7,10 +7,6 @@ import { container, text, red, green } from './ServerStatus.module.css';
 const ServerStatus = ({ error, message }) => {
   const serverText = error || message;
 
-  if (serverText) {
-    console.log(serverText);
-  }
-
   const textClass = classNames(text, { [red]: error }, { [green]: message });
 
   return (

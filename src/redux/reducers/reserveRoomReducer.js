@@ -1,10 +1,11 @@
 import { getDateInfo } from '../../utils/date';
-import { getUserLocalStorage } from '../../utils/localStorage';
 import { ACTIONS } from '../constants';
 
 const defaultState = {
   rooms: null,
   chosenDay: null,
+  serverMessage: null,
+  error: null,
 };
 
 const reserveRoom = (state = defaultState, action) => {
@@ -39,33 +40,22 @@ const reserveRoom = (state = defaultState, action) => {
     case ACTIONS.GET_DAY_IN_ROOM: {
       return { ...state };
     }
-
+    case ACTIONS.CLEAR_CHOSEN_DAY: {
+      return { ...state, chosenDay: null };
+    }
     case ACTIONS.RESERVE_ROOM: {
-      const dayId = action.formData.resrveDate.id;
-      const reserveTime = action.formData.selectedTime;
-
-      const rooms = state.rooms.map((room) => {
-        room.dates = room.dates.map((day) => {
-          if (dayId === day.id) {
-            day.reserveTime = day.reserveTime.map((hourInfo) => {
-              const hour = hourInfo.hour;
-              const findHour = reserveTime.some((el) => el === hour);
-              if (findHour) {
-                hourInfo.isFree = false;
-                hourInfo.customer = getUserLocalStorage();
-              }
-              return hourInfo;
-            });
-          }
-          return day;
-        });
-        return room;
-      });
-
-      return {
-        ...state,
-        rooms,
-      };
+      return { ...state };
+    }
+    case ACTIONS.RESERVE_ROOM_SUCCES: {
+      const message = action.message;
+      return { ...state, serverMessage: message };
+    }
+    case ACTIONS.SET_RESERVE_ROOM_ERROR: {
+      const message = action.message;
+      return { ...state, error: message };
+    }
+    case ACTIONS.CLEAR_ROOM_SERVER_STATUS: {
+      return { ...state, serverMessage: null, error: null };
     }
     case ACTIONS.RESERVE_ROOM_CANCEL: {
       const dayId = action.formData.dayId;
