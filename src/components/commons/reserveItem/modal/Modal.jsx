@@ -49,13 +49,15 @@ const Modal = ({
       const { userId, token } = getUserLocalStorage();
       const formData = {
         auth: token,
+        userId,
         name: itemInfo.name,
+        type: itemInfo.type,
         dayId: chosenDay.id,
         reserveTime: selectedHours,
-        userId,
-        type: itemInfo.type,
-        date: chosenDay.date,
-        monthName: chosenDay.monthName,
+        date: {
+          date: chosenDay.date,
+          monthName: chosenDay.monthName,
+        },
         actionTime: getTimeNow(),
       };
       addReserveTime(formData);
@@ -89,6 +91,8 @@ const Modal = ({
 Modal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   addReserveTime: PropTypes.func.isRequired,
+  serverMessage: PropTypes.string,
+  error: PropTypes.string,
 };
 
 export default Modal;

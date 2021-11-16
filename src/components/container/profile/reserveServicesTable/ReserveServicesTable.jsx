@@ -14,6 +14,11 @@ import { ACTIONS } from '../../../../redux/constants';
 
 import cl from './../Profile.module.css';
 
+const actions = {
+  record: ACTIONS.RESERVE_RECORD_CANCEL,
+  rooms: ACTIONS.RESERVE_ROOM_CANCEL,
+};
+
 const tableHeaderText = {
   col1: 'Заказанная услуга',
   col2: 'На дату',
@@ -24,14 +29,7 @@ function createData(service, date, time, button) {
   return { service, date, time, button };
 }
 
-const actions = {
-  record: ACTIONS.RESERVE_RECORD_CANCEL,
-  rooms: ACTIONS.RESERVE_ROOM_CANCEL,
-};
-
 const ReserveServicesTable = ({ data }) => {
-  console.log(data);
-
   const dispatch = useDispatch();
 
   const cancelReserve = (info) => {
@@ -43,12 +41,12 @@ const ReserveServicesTable = ({ data }) => {
     dispatch({ type: ACTIONS.DELL_ORDER_IN_USER, orderId: info.orderId });
   };
 
-  const rowsArray = data.map((element) => {
+  const rowsArray = data.map((order) => {
     return createData(
-      element.type + ' ' + element.name,
-      element.date.date + ' ' + element.date.monthName,
-      element.reservedTime.join(', '),
-      <Button text={'Отменить'} onClick={() => cancelReserve(element)} />
+      order.type + ' ' + order.name,
+      order.date.date + ' ' + order.date.monthName,
+      order.reserveTime.join(', '),
+      <Button text={'Отменить'} onClick={() => cancelReserve(order)} />
     );
   });
 
@@ -85,8 +83,8 @@ const ReserveServicesTable = ({ data }) => {
 ReserveServicesTable.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      orderId: PropTypes.string.isRequired,
-      reservedTime: PropTypes.arrayOf(PropTypes.string).isRequired,
+      _id: PropTypes.string.isRequired,
+      reserveTime: PropTypes.arrayOf(PropTypes.string).isRequired,
       name: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       actionTime: PropTypes.string.isRequired,
