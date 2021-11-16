@@ -2,14 +2,14 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { ACTIONS } from '../../../redux/constants';
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 import RoomsInfo from './roomsInfo/RoomsInfo';
+import Preloader from '../../commons/preloader/Preloader';
 
 import './../../../App.css';
-import { useEffect } from 'react';
-import Preloader from '../../commons/preloader/Preloader';
 
 const Rooms = () => {
   const { rooms, chosenDay, serverMessage, error } = useSelector(

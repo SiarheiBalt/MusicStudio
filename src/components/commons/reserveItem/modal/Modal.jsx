@@ -8,9 +8,11 @@ import SmallPreloader from '../../preloader/SmallPreloader';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../../../../redux/constants';
+import { getTimeNow } from '../../../../utils/date';
 
 const clearServerStatus = {
   rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
+  records: ACTIONS.CLEAR_RECORD_SERVER_STATUS,
 };
 
 const Modal = ({
@@ -51,6 +53,10 @@ const Modal = ({
         dayId: chosenDay.id,
         reserveTime: selectedHours,
         userId,
+        type: itemInfo.type,
+        date: chosenDay.date,
+        monthName: chosenDay.monthName,
+        actionTime: getTimeNow(),
       };
       addReserveTime(formData);
       setSelectedHours([]);

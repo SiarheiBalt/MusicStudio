@@ -62,6 +62,10 @@ const authReducer = (state = defaultState, action) => {
       return { ...state, registrationMessage: action.message };
     case ACTIONS.CLEAN_AUTH_ERROR_MESSAGE:
       return { ...state, registrationMessage: null, error: null };
+    case ACTIONS.GET_USER_ORDERS:
+      return { ...state };
+    case ACTIONS.GET_USER_ORDERS_SUCCES:
+      return { ...state, orderedServices: action.orders };
     default:
       return state;
   }

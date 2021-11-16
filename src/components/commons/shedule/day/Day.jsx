@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../../../../redux/constants';
 
-const Day = ({ day, openModal, name }) => {
+const getDayAction = {
+  rooms: ACTIONS.GET_DAY_IN_ROOM,
+  records: ACTIONS.GET_DAY_IN_RECORD,
+};
+
+const Day = ({ day, openModal, itemInfo }) => {
   const dispatch = useDispatch();
   const getDay = () => {
-    const data = { dayId: day.id, name };
-    dispatch({ type: ACTIONS.GET_DAY_IN_ROOM, data });
+    const data = { dayId: day.id, name: itemInfo.name };
+    dispatch({ type: getDayAction[itemInfo.type], data });
     openModal();
   };
 
@@ -48,7 +53,7 @@ Day.propTypes = {
     reserveTime: PropTypes.arrayOf(PropTypes.shape),
     year: PropTypes.number.isRequired,
   }).isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.shape(),
 };
 
 export default Day;

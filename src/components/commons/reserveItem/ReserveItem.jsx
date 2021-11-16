@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-
 import { useDispatch } from 'react-redux';
 
 import Shedule from '../shedule/Shedule';
@@ -12,12 +11,15 @@ import { ACTIONS } from '../../../redux/constants';
 
 const clearReserveStatus = {
   rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
+  records: ACTIONS.CLEAR_RECORD_SERVER_STATUS,
 };
 const getItem = {
   rooms: ACTIONS.GET_ROOMS,
+  records: ACTIONS.GET_RECORDS,
 };
 const getDay = {
   rooms: ACTIONS.GET_DAY_IN_ROOM,
+  records: ACTIONS.GET_DAY_IN_RECORD,
 };
 
 const ReserveItem = ({
@@ -53,7 +55,7 @@ const ReserveItem = ({
     if (dayFromPicker.length === 1) {
       const day = dayFromPicker[0];
       const data = { dayId: day.id, name: itemInfo.name };
-      dispatch({ type: getDay[itemInfo.name], data });
+      dispatch({ type: getDay[itemInfo.type], data });
       setIsModal(true);
     }
   };
@@ -74,7 +76,7 @@ const ReserveItem = ({
       {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
-      <Shedule timeData={dates} openModal={openModal} name={itemInfo.name} />
+      <Shedule timeData={dates} openModal={openModal} itemInfo={itemInfo} />
     </div>
   );
 };

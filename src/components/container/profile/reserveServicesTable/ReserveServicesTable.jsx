@@ -30,6 +30,8 @@ const actions = {
 };
 
 const ReserveServicesTable = ({ data }) => {
+  console.log(data);
+
   const dispatch = useDispatch();
 
   const cancelReserve = (info) => {

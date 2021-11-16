@@ -10,6 +10,12 @@ import {
   dayInRoomSaga,
   reserveRoomSaga,
 } from './sagas/roomsSagas';
+import {
+  allRecordsSaga,
+  dayInRecordSaga,
+  reserveRecordSaga,
+} from './sagas/recordsSagas';
+import { userOrdersSaga } from './sagas/profileSagas';
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -27,10 +33,15 @@ const store = createStore(
 
 sagaMiddleWare.run(registrationUserSaga);
 sagaMiddleWare.run(loginUserSaga);
+
 sagaMiddleWare.run(allRoomsSaga);
 sagaMiddleWare.run(dayInRoomSaga);
 sagaMiddleWare.run(reserveRoomSaga);
 
-window.store = store;
+sagaMiddleWare.run(allRecordsSaga);
+sagaMiddleWare.run(dayInRecordSaga);
+sagaMiddleWare.run(reserveRecordSaga);
+
+sagaMiddleWare.run(userOrdersSaga);
 
 export default store;

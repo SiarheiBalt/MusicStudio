@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const dayInShedule = 14;
 
-const Shedule = ({ timeData, openModal, name }) => {
+const Shedule = ({ timeData, openModal, itemInfo }) => {
   const daysNextTwoWeeks = timeData.map((day, i) => {
     return (
       i < dayInShedule && (
-        <Day key={day.id} day={day} openModal={openModal} name={name} />
+        <Day key={day.id} day={day} openModal={openModal} itemInfo={itemInfo} />
       )
     );
   });
