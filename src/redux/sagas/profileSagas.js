@@ -58,7 +58,6 @@ function* getCancelUserOrderSaga(action) {
         auth: token,
       };
       yield put({ type: ACTIONS.GET_USER_ORDERS, formData });
-      const data = yield response.json();
     }
   } catch (error) {
     console.log(error);
