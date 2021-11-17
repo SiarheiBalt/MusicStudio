@@ -13,11 +13,7 @@ import { Button } from './../../../commons/button/Button';
 import { ACTIONS } from '../../../../redux/constants';
 
 import cl from './../Profile.module.css';
-
-const actions = {
-  record: ACTIONS.RESERVE_RECORD_CANCEL,
-  rooms: ACTIONS.RESERVE_ROOM_CANCEL,
-};
+import { getUserLocalStorage } from '../../../../utils/localStorage';
 
 const tableHeaderText = {
   col1: 'Заказанная услуга',
@@ -33,19 +29,18 @@ const ReserveServicesTable = ({ data }) => {
   const dispatch = useDispatch();
 
   const cancelReserve = (info) => {
-    const formData = {
-      dayId: info.date.id,
-      reservedTime: info.reservedTime,
-    };
-    dispatch({ type: actions[info.type], formData });
-    dispatch({ type: ACTIONS.DELL_ORDER_IN_USER, orderId: info.orderId });
+    const { userId, token } = getUserLocalStorage();
+    dispatch({
+      type: ACTIONS.CANCEL_ORDER_IN_USER,
+      formData: { ...info, userId, auth: token },
+    });
   };
 
   const rowsArray = data.map((order) => {
     return createData(
       order.type + ' ' + order.name,
       order.date.date + ' ' + order.date.monthName,
-      order.reserveTime.join(', '),
+      order.reserveTime.sort().join(', '),
       <Button text={'Отменить'} onClick={() => cancelReserve(order)} />
     );
   });

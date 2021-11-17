@@ -15,7 +15,7 @@ import {
   dayInRecordSaga,
   reserveRecordSaga,
 } from './sagas/recordsSagas';
-import { userOrdersSaga } from './sagas/profileSagas';
+import { cancelUserOrderSaga, userOrdersSaga } from './sagas/profileSagas';
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -43,5 +43,6 @@ sagaMiddleWare.run(dayInRecordSaga);
 sagaMiddleWare.run(reserveRecordSaga);
 
 sagaMiddleWare.run(userOrdersSaga);
+sagaMiddleWare.run(cancelUserOrderSaga);
 
 export default store;

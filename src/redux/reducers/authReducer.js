@@ -5,7 +5,6 @@ import {
   setUserLocalStorage,
 } from './../../utils/localStorage';
 import { ACTIONS } from '../constants';
-import { getTimeNow } from '../../utils/date';
 
 let defaultState = {
   user: null,
@@ -17,27 +16,10 @@ let defaultState = {
 
 const authReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case ACTIONS.ADD_ORDER_IN_USER:
-      const data = {
-        type: action.formData.itemInfo.type,
-        name: action.formData.itemInfo.name,
-        dayId: action.formData.resrveDate.id,
-        reservedTime: action.formData.selectedTime,
-        date: {
-          date: action.formData.resrveDate.date,
-          monthName: action.formData.resrveDate.monthName,
-        },
-        orderId: Math.random().toString(36).substr(2, 9),
-        actionTime: getTimeNow(),
-      };
-      return { ...state, orderedServices: [...state.orderedServices, data] };
-    case ACTIONS.DELL_ORDER_IN_USER:
-      const orderId = action.orderId;
-      const orderedServices = state.orderedServices.filter((order) => {
-        return orderId !== order.orderId;
-      });
-
-      return { ...state, orderedServices };
+    case ACTIONS.CANCEL_ORDER_IN_USER:
+      return state;
+    case ACTIONS.CANCEL_ORDER_IN_USER_SUCCES:
+      return { ...state };
     case ACTIONS.REGISTRATION_USER:
       return { ...state };
     case ACTIONS.LOGIN_USER:

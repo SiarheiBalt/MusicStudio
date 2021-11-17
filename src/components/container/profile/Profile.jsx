@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import { ACTIONS } from '../../../redux/constants';
 import { getUserLocalStorage } from '../../../utils/localStorage';
 
+const title = 'Нет заказанных услуг';
+
 const Profile = () => {
   const data = useSelector((store) => store.authReducer);
 
@@ -21,8 +23,6 @@ const Profile = () => {
     };
     dispatch({ type: ACTIONS.GET_USER_ORDERS, formData });
   }, []);
-
-  const title = 'Нет заказанных услуг';
 
   const orderedServices =
     data.orderedServices.length === 0 ? (

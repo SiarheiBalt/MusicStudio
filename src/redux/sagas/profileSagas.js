@@ -34,3 +34,30 @@ function* getUserOrdersSaga(action) {
 export function* userOrdersSaga() {
   yield takeEvery(ACTIONS.GET_USER_ORDERS, getUserOrdersSaga);
 }
+
+function* getCancelUserOrderSaga(action) {
+  try {
+    const response = yield call(() => {
+      let body = action.formData;
+      body = JSON.stringify(body);
+      let headers = {};
+      const method = 'POST';
+      headers['Content-type'] = 'application/json';
+      return fetch('/api/orders/del', {
+        method,
+        body,
+        headers,
+      });
+    });
+    if (response.status === 200) {
+      yield put({ type: ACTIONS.CANCEL_ORDER_IN_USER_SUCCES });
+      const data = yield response.json();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* cancelUserOrderSaga() {
+  yield takeEvery(ACTIONS.CANCEL_ORDER_IN_USER, getCancelUserOrderSaga);
+}
