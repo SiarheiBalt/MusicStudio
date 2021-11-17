@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const ReserveForm = ({ day, hourClick, selectedHours, addReserve }) => {
   const hours = day.reserveTime.map((time, i) => {
-    const isSelected = selectedHours.some((item) => item === time.hour);
+    const isSelected = selectedHours.some((hour) => hour === time.hour);
     return (
       <Hour key={i} time={time} hourClick={hourClick} isSelected={isSelected} />
     );

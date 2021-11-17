@@ -10,7 +10,7 @@ import ReserveForm from '../../../commons/reserveItem/modal/reserveForm/ReserveF
 
 import cl from './Modal.module.css';
 
-const text = 'Выберите интересующую дату';
+const datePickerText = 'Выберите интересующую дату';
 
 const Modal = ({ closeModal, dates, instrumentId }) => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
         <CloseIcoButton close={closeModal} />
         <div className={cl.picker}>
           <DataSelect getDateFromPicker={getDateFromPicker} />{' '}
-          <span className={cl.text}>{text} </span>
+          <span className={cl.text}>{datePickerText} </span>
         </div>
         <ReserveForm
           selectedHours={selectedHours}
