@@ -22,7 +22,7 @@ const Profile = () => {
       auth: token,
     };
     dispatch({ type: ACTIONS.GET_USER_ORDERS, formData });
-  }, []);
+  }, [dispatch]);
 
   const orderedServices =
     data.orderedServices.length === 0 ? (

@@ -1,4 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { getUserLocalStorage } from '../../utils/localStorage';
 import { ACTIONS } from '../constants';
 
 function* getUserOrdersSaga(action) {
@@ -51,6 +52,12 @@ function* getCancelUserOrderSaga(action) {
     });
     if (response.status === 200) {
       yield put({ type: ACTIONS.CANCEL_ORDER_IN_USER_SUCCES });
+      const { userId, token } = getUserLocalStorage();
+      const formData = {
+        userId,
+        auth: token,
+      };
+      yield put({ type: ACTIONS.GET_USER_ORDERS, formData });
       const data = yield response.json();
     }
   } catch (error) {
