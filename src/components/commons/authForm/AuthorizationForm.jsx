@@ -1,9 +1,13 @@
-import cl from './AuthorizationForm.module.css';
-import './../../../App.css';
-import LoginRegisterationForm from './LoginRegisterationForm';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { ACTIONS } from '../../../redux/constants';
+import ServerStatus from './serverStatus/ServerStatus';
+import LoginForm from './loginForm/LoginForm';
+import RegisterationForm from './registrationForm/RegistrationForm';
+
+import './../../../App.css';
+import cl from './AuthorizationForm.module.css';
 
 const AuthorizationForm = ({ error, registrationUserMessage }) => {
   const dispatch = useDispatch();
@@ -29,29 +33,11 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
 
   const formType =
     formState === typeForm.registration ? (
-      <LoginRegisterationForm
-        onClick={loginSubmit}
-        type={typeForm.login}
-        typeForm={typeForm}
-      />
+      <LoginForm submit={loginSubmit} />
     ) : (
-      <LoginRegisterationForm
-        onClick={registrationSubmit}
-        type={typeForm.registration}
-        typeForm={typeForm}
-      />
+      <RegisterationForm submit={registrationSubmit} />
     );
 
-  const serverError = !!error && (
-    <div className={cl.container__error}>
-      <span className={cl.error}>{error}</span>
-    </div>
-  );
-  const serverMessage = !!registrationUserMessage && (
-    <div className={cl.registration__message}>
-      <span className={cl.message__text}>{registrationUserMessage}</span>
-    </div>
-  );
   return (
     <div className={`${cl.form} form`}>
       <div className={cl.button__container}>
@@ -60,8 +46,7 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
         </button>
       </div>
       {formType}
-      {serverError}
-      {serverMessage}
+      <ServerStatus error={error} message={registrationUserMessage} />
     </div>
   );
 };

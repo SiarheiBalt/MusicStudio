@@ -85,8 +85,10 @@ function getData(dateArray) {
   });
 }
 
-function createData() {
+export function createData() {
   return getData(twoMonthsArray);
 }
 
-export default createData;
+export function getTimeNow() {
+  return format(today, 'dd/MM/yyyy');
+}

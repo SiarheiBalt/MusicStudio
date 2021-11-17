@@ -29,7 +29,7 @@ const Instrument = ({ image, specifications, dates, instrumentId, name }) => {
         </div>
         <div className={cl.form}>
           <span className={cl.text}>{name}</span>
-          <Button action={buttonText} onClick={openModal} />
+          <Button text={buttonText} action={buttonText} onClick={openModal} />
         </div>
       </div>
       {modal}

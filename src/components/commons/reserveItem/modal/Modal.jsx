@@ -1,23 +1,28 @@
-import cl from './Modal.module.css';
-import ReserveForm from './reserveForm/ReserveForm';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ACTIONS } from '../../../../redux/constants';
 import CloseIcoButton from './closeIcoButton/CloseIcoButton';
 
-const Modal = ({ closeModal, day, itemInfo }) => {
+import ReserveForm from './reserveForm/ReserveForm';
+
+import cl from './Modal.module.css';
+
+const Modal = ({ closeModal, day, itemInfo, addReserveTime }) => {
   const [selectedHours, setSelectedHours] = useState([]);
-  const dispatch = useDispatch();
 
   const hourClick = (hour) => {
-    let array = selectedHours.concat();
-    if (selectedHours.some((element) => element === hour)) {
-      array = selectedHours.filter((element) => element !== hour && element);
+    let selectedHoursClone = selectedHours.concat();
+    const isHourInSelectedHours = selectedHours.some(
+      (element) => element === hour
+    );
+    if (isHourInSelectedHours) {
+      selectedHoursClone = selectedHours.filter(
+        (element) => element !== hour && element
+      );
     } else {
-      array.push(hour);
+      selectedHoursClone.push(hour);
     }
-    setSelectedHours(array);
+    setSelectedHours(selectedHoursClone);
   };
 
   const addReserve = () => {
@@ -26,7 +31,7 @@ const Modal = ({ closeModal, day, itemInfo }) => {
       selectedTime: selectedHours,
       itemInfo,
     };
-    dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
+    addReserveTime(formData);
     setSelectedHours([]);
   };
 
@@ -52,6 +57,7 @@ Modal.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  addReserveTime: PropTypes.func.isRequired,
 };
 
 export default Modal;
