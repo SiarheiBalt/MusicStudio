@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { ACTIONS } from '../../../../redux/constants';
+import CloseIcoButton from './closeIcoButton/CloseIcoButton';
 
 import ReserveForm from './reserveForm/ReserveForm';
 
@@ -36,13 +38,11 @@ const Modal = ({ closeModal, day, itemInfo, addReserveTime }) => {
   return (
     <div className={cl.background}>
       <div className={cl.container}>
-        {' '}
+        <CloseIcoButton close={closeModal} />{' '}
         <ReserveForm
           selectedHours={selectedHours}
-          closeModal={closeModal}
           day={day}
           hourClick={hourClick}
-          itemInfo={itemInfo}
           addReserve={addReserve}
         />
       </div>

@@ -2,13 +2,17 @@
   max-width: -webkit-fill-available;
   max-height: -webkit-fill-available;
   object-fit: cover;
-  cursor: pointer;
-  border-radius: 15px;
-  border: solid 2px;
+  border-radius: inherit;
   box-shadow: 0 0 40px rgb(0 0 0 / 85%);
 }
 .image__container {
   width: inherit;
+  position: relative;
+  border-radius: 15px;
+  border: solid 2px;
+  display: flex;
+  height: 380px;
+  background-color: #00000078;
 }
 .instrument {
   width: 285px;
@@ -28,7 +32,21 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  z-index: 1;
 }
 .text {
   color: whitesmoke;
+}
+.container {
+  width: 100%;
+  background-color: #5f9ea0f5;
+  position: absolute;
+  bottom: 0;
+  height: 0px;
+  transition: height 1s;
+  border-radius: inherit;
+}
+.image:hover + .container,
+.container:hover {
+  height: 90px;
 }
