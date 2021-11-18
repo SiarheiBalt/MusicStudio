@@ -3,7 +3,6 @@ import { checkUserLocalStorage } from '../../../../../utils/localStorage';
 import ServerStatus from '../../../authForm/serverStatus/ServerStatus';
 
 import { Button } from '../../../button/Button';
-import CloseIcoButton from '../closeIcoButton/CloseIcoButton';
 import Hour from '../hour/Hour';
 
 import cl from './ReserveForm.module.css';
@@ -26,7 +25,7 @@ const ReserveForm = ({
     : 'Войдите либо зарегистрируйтесь в приложении для резервирования';
 
   const hours = day.reserveTime.map((time, i) => {
-    const isSelected = selectedHours.some((item) => item === time.hour);
+    const isSelected = selectedHours.some((hour) => hour === time.hour);
     return (
       <Hour key={i} time={time} hourClick={hourClick} isSelected={isSelected} />
     );
@@ -36,7 +35,6 @@ const ReserveForm = ({
 
   return (
     <div className={cl.container}>
-      <CloseIcoButton close={closeModal} />
       <h3
         className={cl.title}
       >{`${day.date} - ${day.monthName} (${day.dayofWeek})`}</h3>
@@ -56,7 +54,6 @@ const ReserveForm = ({
 };
 
 ReserveForm.propTypes = {
-  closeModal: PropTypes.func.isRequired,
   hourClick: PropTypes.func.isRequired,
   day: PropTypes.shape({
     date: PropTypes.number.isRequired,

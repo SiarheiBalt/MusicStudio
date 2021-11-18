@@ -1,0 +1,9 @@
+.list__item {
+  color: whitesmoke;
+}
+.list__item::marker {
+  color: whitesmoke;
+}
+.list {
+  margin-top: 8px;
+}

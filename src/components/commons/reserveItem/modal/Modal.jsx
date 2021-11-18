@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { ACTIONS } from '../../../../redux/constants';
+import CloseIcoButton from './closeIcoButton/CloseIcoButton';
 
 import ReserveForm from './reserveForm/ReserveForm';
 
