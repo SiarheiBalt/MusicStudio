@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ACTIONS } from '../../../../redux/constants';
-import CloseIcoButton from './closeIcoButton/CloseIcoButton';
+import { useDispatch } from 'react-redux';
 
 import ReserveForm from './reserveForm/ReserveForm';
 
-import cl from './Modal.module.css';
+import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';
 import SmallPreloader from '../../preloader/SmallPreloader';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
-import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../../../../redux/constants';
 import { getTimeNow } from '../../../../utils/date';
+
+import cl from './Modal.module.css';
 
 const clearServerStatus = {
   rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
@@ -69,16 +69,18 @@ const Modal = ({
   };
 
   const reserveForm = chosenDay ? (
-    <ReserveForm
-      selectedHours={selectedHours}
-      closeModal={closeModal}
-      day={chosenDay}
-      hourClick={hourClick}
-      itemInfo={itemInfo}
-      addReserve={addReserve}
-      serverMessage={serverMessage}
-      error={error}
-    />
+    <>
+      <CloseIcoButton close={closeModal} />
+      <ReserveForm
+        selectedHours={selectedHours}
+        day={chosenDay}
+        hourClick={hourClick}
+        itemInfo={itemInfo}
+        addReserve={addReserve}
+        serverMessage={serverMessage}
+        error={error}
+      />{' '}
+    </>
   ) : (
     <SmallPreloader />
   );

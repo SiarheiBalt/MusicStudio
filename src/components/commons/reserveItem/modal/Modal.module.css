@@ -17,4 +17,5 @@
   box-shadow: 0 0 20px rgb(0 0 0 / 20%);
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }

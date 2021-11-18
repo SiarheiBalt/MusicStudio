@@ -11,7 +11,6 @@ const title = 'Резервирование времени';
 const buttonActionText = 'Зарезервировать';
 
 const ReserveForm = ({
-  closeModal,
   day,
   hourClick,
   selectedHours,
