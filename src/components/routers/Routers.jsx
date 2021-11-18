@@ -10,6 +10,7 @@ import Authorization from '../container/authorization/Authorization';
 import Instruments from '../container/instruments/Instruments';
 import PrivateRoute from './PrivateRoute';
 import NoPage from '../container/nopage/NoPage';
+import Admin from '../container/admin/Admin';
 
 const Routers = () => {
   const isAuth = useSelector((store) => store.authReducer.isAuth);
@@ -34,6 +35,8 @@ const Routers = () => {
             isAuth={isAuth}
             component={Profile}
           />
+          <Route path='/instruments' component={Instruments} />
+          <PrivateRoute exact path='/admin' isAuth={isAuth} component={Admin} />
           <Route path='/instruments' component={Instruments} />
           <Route component={NoPage} />
         </Switch>
