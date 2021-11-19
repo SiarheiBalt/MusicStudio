@@ -48,8 +48,9 @@ const Modal = ({
     dispatch({ type: clearServerStatus[itemInfo.type] });
     const isAuth = getUserLocalStorage();
     if (isAuth) {
-      const { userId, token } = getUserLocalStorage();
+      const { userId, token, email } = getUserLocalStorage();
       const formData = {
+        userEmail: email,
         auth: token,
         userId,
         name: itemInfo.name,
