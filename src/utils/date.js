@@ -92,3 +92,14 @@ export function createData() {
 export function getTimeNow() {
   return format(today, 'dd/MM/yyyy');
 }
+
+export function getDateInfo(item) {
+  const date = new Date(item);
+  return {
+    date: date.getDate(),
+    dayofWeek: format(new Date(date), 'eeee', { locale: ru }),
+    month: date.getMonth(),
+    year: getYear(date),
+    monthName: format(new Date(date), 'MMMM', { locale: ru }),
+  };
+}
