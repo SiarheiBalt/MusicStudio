@@ -14,7 +14,14 @@ import { getTimeNow } from '../../../../utils/date';
 
 const datePickerText = 'Выберите интересующую дату';
 
-const Modal = ({ closeModal, dates, instrumentName, chosenDay }) => {
+const Modal = ({
+  closeModal,
+  dates,
+  instrumentName,
+  chosenDay,
+  serverMessage,
+  error,
+}) => {
   const dispatch = useDispatch();
 
   const date = new Date();
@@ -86,6 +93,8 @@ const Modal = ({ closeModal, dates, instrumentName, chosenDay }) => {
       day={chosenDay}
       hourClick={hourClick}
       addReserve={addReserve}
+      serverMessage={serverMessage}
+      error={error}
     />
   ) : (
     <></>

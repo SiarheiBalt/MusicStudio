@@ -72,7 +72,6 @@ function* getReserveInstrumentSaga(action) {
     const data = yield response.json();
     const message = data.message;
     if (response.status === 201) {
-      console.log(response.status);
       const message = 'Время зарезервировано';
       yield put({
         type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENT,

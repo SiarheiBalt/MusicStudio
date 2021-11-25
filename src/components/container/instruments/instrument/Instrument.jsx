@@ -19,6 +19,8 @@ const Instrument = ({
   instrumentId,
   name,
   chosenDay,
+  error,
+  serverMessage,
 }) => {
   const dispatch = useDispatch();
   const [isModal, setModal] = useState(false);
@@ -36,6 +38,8 @@ const Instrument = ({
       instrumentId={instrumentId}
       instrumentName={name}
       chosenDay={chosenDay}
+      error={error}
+      serverMessage={serverMessage}
     />
   );
 

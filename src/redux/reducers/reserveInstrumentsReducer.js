@@ -34,7 +34,6 @@ const reserveInstruments = (state = defaultState, action) => {
       return { ...state };
 
     case ACTIONS.GET_CHOSEN_DAY_INSTRUMENTS_SUCCES:
-      console.log(action.day);
       let chosenDay = getDateInfo(action.day.date);
       chosenDay.reserveTime = action.day.reserveTime;
       chosenDay.id = action.day.id;
@@ -51,6 +50,9 @@ const reserveInstruments = (state = defaultState, action) => {
       const message = action.message;
       return { ...state, error: message };
     }
+
+    case ACTIONS.CLEAR_INSTRUMENT_SERVER_STATUS:
+      return { ...state, serverMessage: null, error: null };
 
     case ACTIONS.CLEAR_CHOSEN_DAY_INSTRUMENT:
       return {
