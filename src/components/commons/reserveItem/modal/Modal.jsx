@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import ReserveForm from './reserveForm/ReserveForm';
 
 import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';
-import SmallPreloader from '../../preloader/SmallPreloader';
+import Preloader from '../../preloader/Preloader';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
 import { ACTIONS } from '../../../../redux/constants';
 import { getTimeNow } from '../../../../utils/date';
@@ -83,7 +83,7 @@ const Modal = ({
       />{' '}
     </>
   ) : (
-    <SmallPreloader />
+    <Preloader />
   );
 
   return (

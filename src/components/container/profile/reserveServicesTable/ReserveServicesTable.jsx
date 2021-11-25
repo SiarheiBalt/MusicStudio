@@ -21,8 +21,14 @@ const tableHeaderText = {
   col3: 'Зарезервированные часы',
 };
 
-function createData(service, date, time, button) {
-  return { service, date, time, button };
+function createData(order, cancelReserve) {
+  const { type, name, date, reserveTime } = order;
+  return {
+    service: `${type} ${name}`,
+    date: `${date.date} ${date.monthName}`,
+    time: `${reserveTime.sort().join(', ')}`,
+    button: <Button text={'Отменить'} onClick={() => cancelReserve(order)} />,
+  };
 }
 
 const ReserveServicesTable = ({ data }) => {
@@ -37,12 +43,7 @@ const ReserveServicesTable = ({ data }) => {
   };
 
   const rowsArray = data.map((order) => {
-    return createData(
-      order.type + ' ' + order.name,
-      order.date.date + ' ' + order.date.monthName,
-      order.reserveTime.sort().join(', '),
-      <Button text={'Отменить'} onClick={() => cancelReserve(order)} />
-    );
+    return createData(order, cancelReserve);
   });
 
   const rows = rowsArray.map((row) => {

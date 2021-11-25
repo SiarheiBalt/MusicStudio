@@ -26,7 +26,7 @@ const Rooms = () => {
   }, [dispatch]);
 
   if (!rooms) {
-    return <Preloader />;
+    return <Preloader height={'100vh'} />;
   }
 
   const reserveItem = rooms.map((room) => (

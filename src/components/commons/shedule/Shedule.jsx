@@ -2,12 +2,12 @@ import Day from './day/Day';
 import cl from './Shedule.module.css';
 import PropTypes from 'prop-types';
 
-const dayInShedule = 14;
+const dayOnShedule = 14;
 
 const Shedule = ({ timeData, openModal, itemInfo }) => {
   const daysNextTwoWeeks = timeData.map((day, i) => {
     return (
-      i < dayInShedule && (
+      i < dayOnShedule && (
         <Day key={day.id} day={day} openModal={openModal} itemInfo={itemInfo} />
       )
     );

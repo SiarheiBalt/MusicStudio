@@ -27,7 +27,7 @@ const Recording = () => {
   }, [dispatch]);
 
   if (!records) {
-    return <Preloader />;
+    return <Preloader height={'100vh'} />;
   }
 
   const reserveItem = records.map((record) => (

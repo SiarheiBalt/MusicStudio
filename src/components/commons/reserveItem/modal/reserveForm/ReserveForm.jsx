@@ -20,7 +20,7 @@ const ReserveForm = ({
 }) => {
   const isAuth = checkUserLocalStorage();
   const text = isAuth
-    ? 'Кликайте по свободным часам чтобы выбрать время'
+    ? 'Выберите свободное время'
     : 'Войдите либо зарегистрируйтесь в приложении для резервирования';
 
   const hours = day.reserveTime.map((time, i) => {
