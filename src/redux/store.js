@@ -6,7 +6,7 @@ import reserveRoom from './reducers/reserveRoomReducer';
 import reserveRecord from './reducers/reserveRecordReducer';
 import { loginUserSaga, registrationUserSaga } from './sagas/authSagas';
 import adminReducer from './reducers/adminReducer';
-import { userOrdersSaga } from './sagas/adminSagas';
+import { userOrdersSaga } from './sagas/adminApi';
 
 const sagaMiddleWare = createSagaMiddleware();
 

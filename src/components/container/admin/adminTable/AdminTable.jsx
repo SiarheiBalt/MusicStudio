@@ -23,8 +23,15 @@ const tableHeaderText = {
   col4: 'Зарезервированные часы',
 };
 
-function createData(user, service, date, time, button) {
-  return { user, service, date, time, button };
+function createRowsArray(element, cancelReserve) {
+  const { owner, type, name, date, reserveTime } = element;
+  return {
+    user: owner,
+    service: `${type} ${name}`,
+    date: `${date.date} ${date.monthName}`,
+    time: reserveTime.join(', '),
+    button: <Button text={'Отменить'} onClick={() => cancelReserve(element)} />,
+  };
 }
 
 export default function AdminTable({ data }) {
@@ -39,40 +46,36 @@ export default function AdminTable({ data }) {
   };
 
   const rowsArray = data.map((element) => {
-    return createData(
-      element.owner,
-      element.type + ' ' + element.name,
-      element.date.date + ' ' + element.date.monthName,
-      element.reserveTime.join(', '),
-      <Button text={'Отменить'} onClick={() => cancelReserve(element)} />
-    );
+    return createRowsArray(element, cancelReserve);
   });
 
-  const rows = rowsArray.map((row) => {
-    return (
-      <TableRow key={row.date + ' ' + row.time}>
-        <TableCell align='left'>{row.user}</TableCell>
-        <TableCell align='right' scope='row'>
-          {row.service}
-        </TableCell>
-        <TableCell align='right'>{row.date}</TableCell>
-        <TableCell align='right'>{row.time}</TableCell>
-        <TableCell align='right'>{row.button}</TableCell>
-      </TableRow>
-    );
-  });
-
-  const [rowsAfterSearch, setRowsAfterSearch] = useState(rows);
+  const [rowsArrayAfterSearch, setRowsArrayAfterSearch] = useState(rowsArray);
   const [input, setInput] = useState('');
 
   const onchangeInput = (event) => {
     setInput(event.target.value);
-    let result = rows.filter((row) => {
-      let user = row.props.children[0].props.children;
+    let result = rowsArray.filter((row) => {
+      let user = row.user;
       return user.toLowerCase().includes(event.target.value);
     });
-    setRowsAfterSearch(result);
+    setRowsArrayAfterSearch(result);
   };
+
+  const rows = rowsArrayAfterSearch.map((row) => {
+    const { date, time, user, button, service } = row;
+    const key = Math.random().toString(36);
+    return (
+      <TableRow key={key}>
+        <TableCell align='left'>{user}</TableCell>
+        <TableCell align='right' scope='row'>
+          {service}
+        </TableCell>
+        <TableCell align='right'>{date}</TableCell>
+        <TableCell align='right'>{time}</TableCell>
+        <TableCell align='right'>{button}</TableCell>
+      </TableRow>
+    );
+  });
 
   return (
     <TableContainer component={Paper}>
@@ -89,7 +92,7 @@ export default function AdminTable({ data }) {
             <TableCell align='right'></TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{rowsAfterSearch}</TableBody>
+        <TableBody>{rows}</TableBody>
       </Table>
     </TableContainer>
   );

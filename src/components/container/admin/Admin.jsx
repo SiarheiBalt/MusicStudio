@@ -10,13 +10,13 @@ import { getUserLocalStorage } from '../../../utils/localStorage';
 
 const Admin = () => {
   const data = useSelector((store) => store.adminReducer);
-  const dispatch = useDispatch();
+  const actionDispatch = useDispatch();
 
   useEffect(() => {
     const { userId, token } = getUserLocalStorage();
     let formData = { userId, auth: token };
-    dispatch({ type: ACTIONS.GET_ALL_ORDERS, formData });
-  }, [dispatch]);
+    actionDispatch({ type: ACTIONS.GET_ALL_ORDERS, formData });
+  }, [actionDispatch]);
 
   const table = data.orders ? <AdminTable data={data.orders} /> : <></>;
 
