@@ -6,6 +6,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+
+import { Button } from '../../../commons/button/Button';
+import { getUserLocalStorage } from '../../../../utils/localStorage';
+import { Input } from '../../../commons/input/Input';
+
+const ico = <FontAwesomeIcon icon={faSearch} />;
 
 const tableHeaderText = {
   col1: 'Пользователь',
@@ -14,47 +23,76 @@ const tableHeaderText = {
   col4: 'Зарезервированные часы',
 };
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createRowsArray(element, cancelReserve) {
+  const { owner, type, name, date, reserveTime } = element;
+  return {
+    user: owner,
+    service: `${type} ${name}`,
+    date: `${date.date} ${date.monthName}`,
+    time: reserveTime.join(', '),
+    button: <Button text={'Отменить'} onClick={() => cancelReserve(element)} />,
+  };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+export default function AdminTable({ data }) {
+  const cancelReserve = (info) => {
+    const { token } = getUserLocalStorage();
+    const formData = {
+      ...info,
+      auth: token,
+      userId: info.owner,
+    };
+    console.log('cancel reserve, Admin');
+  };
 
-export default function AdminTable() {
+  const rowsArray = data.map((element) => {
+    return createRowsArray(element, cancelReserve);
+  });
+
+  const [rowsArrayAfterSearch, setRowsArrayAfterSearch] = useState(rowsArray);
+  const [input, setInput] = useState('');
+
+  const onchangeInput = (event) => {
+    setInput(event.target.value);
+    let result = rowsArray.filter((row) => {
+      let user = row.user;
+      return user.toLowerCase().includes(event.target.value);
+    });
+    setRowsArrayAfterSearch(result);
+  };
+
+  const rows = rowsArrayAfterSearch.map((row) => {
+    const { date, time, user, button, service } = row;
+    const key = Math.random().toString(36);
+    return (
+      <TableRow key={key}>
+        <TableCell align='left'>{user}</TableCell>
+        <TableCell align='right' scope='row'>
+          {service}
+        </TableCell>
+        <TableCell align='right'>{date}</TableCell>
+        <TableCell align='right'>{time}</TableCell>
+        <TableCell align='right'>{button}</TableCell>
+      </TableRow>
+    );
+  });
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell>{tableHeaderText.col1}</TableCell>
+            <TableCell>
+              {tableHeaderText.col1}{' '}
+              <Input value={input} onchangeInput={onchangeInput} /> {ico}
+            </TableCell>
             <TableCell align='right'>{tableHeaderText.col2}</TableCell>
             <TableCell align='right'>{tableHeaderText.col3}</TableCell>
             <TableCell align='right'>{tableHeaderText.col4}</TableCell>
             <TableCell align='right'></TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component='th' scope='row'>
-                {row.name}
-              </TableCell>
-              <TableCell align='right'>{row.calories}</TableCell>
-              <TableCell align='right'>{row.fat}</TableCell>
-              <TableCell align='right'>{row.carbs}</TableCell>
-              <TableCell align='right'>{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        <TableBody>{rows}</TableBody>
       </Table>
     </TableContainer>
   );

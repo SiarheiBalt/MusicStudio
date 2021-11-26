@@ -10,17 +10,19 @@ import {
   instrumentsSaga,
   reserveInstrumentSaga,
 } from './sagas/instrumentsApi';
+import adminReducer from './reducers/adminReducer';
+import { userOrdersSaga } from './sagas/adminApi';
 
 const sagaMiddleWare = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const store = createStore(
   combineReducers({
     reserveRoom,
     authReducer,
     reserveInstruments,
     reserveRecord,
+    adminReducer,
   }),
   composeEnhancers(applyMiddleware(sagaMiddleWare))
 );
@@ -30,6 +32,7 @@ sagaMiddleWare.run(loginUserSaga);
 sagaMiddleWare.run(instrumentsSaga);
 sagaMiddleWare.run(dayInstrumentsSaga);
 sagaMiddleWare.run(reserveInstrumentSaga);
+sagaMiddleWare.run(userOrdersSaga);
 
 window.store = store;
 
