@@ -17,14 +17,14 @@ const Instruments = () => {
 
   if (!instruments) return <></>; // Preloader
 
-  const instrumentsData = instruments.map((element, i) => (
+  const instrumentComponents = instruments.map((instrument, i) => (
     <Instrument
-      dates={element.dates}
-      key={element.instrumentId}
-      image={element.image}
-      specifications={element.specifications}
-      instrumentId={element.instrumentId}
-      name={element.name}
+      dates={instrument.dates}
+      key={instrument.instrumentId}
+      image={instrument.image}
+      specifications={instrument.specifications}
+      instrumentId={instrument.instrumentId}
+      name={instrument.name}
       chosenDay={chosenDay}
       serverMessage={serverMessage}
       error={error}
@@ -33,7 +33,7 @@ const Instruments = () => {
 
   return (
     <>
-      <div className={cl.instruments}>{instrumentsData}</div>
+      <div className={cl.instruments}>{instrumentComponents}</div>
     </>
   );
 };
