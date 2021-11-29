@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -9,10 +9,19 @@ import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/Cl
 import ReserveForm from '../../../commons/reserveItem/modal/reserveForm/ReserveForm';
 
 import cl from './Modal.module.css';
+import { getUserLocalStorage } from '../../../../utils/localStorage';
+import { getTimeNow } from '../../../../utils/date';
 
 const datePickerText = 'Выберите интересующую дату';
 
-const Modal = ({ closeModal, dates, instrumentId }) => {
+const Modal = ({
+  closeModal,
+  dates,
+  instrumentName,
+  chosenDay,
+  serverMessage,
+  error,
+}) => {
   const dispatch = useDispatch();
 
   const date = new Date();
@@ -23,9 +32,12 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
   };
   const initDay = findDayFromPicker(initDate, dates);
 
-  const [selectedHours, setSelectedHours] = useState([]);
-  const [day, setDay] = useState(initDay);
+  useEffect(() => {
+    const formData = { name: instrumentName, dayId: initDay.id };
+    dispatch({ type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENT, formData });
+  }, []);
 
+  const [selectedHours, setSelectedHours] = useState([]);
   const hourClick = (hour) => {
     let selectedHoursClone = selectedHours.concat();
     const isHourInSelectedHours = selectedHours.some(
@@ -42,21 +54,51 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
   };
 
   const addReserve = () => {
-    const data = {
-      id: instrumentId,
-      day,
-      selectedHours,
-    };
-    dispatch({ type: ACTIONS.RESERVE_INSTRUMENT, data });
+    const isAuth = getUserLocalStorage();
+    if (isAuth) {
+      const { userId, token, email } = getUserLocalStorage();
+      const formData = {
+        userEmail: email,
+        auth: token,
+        userId,
+        name: instrumentName,
+        dayId: chosenDay.id,
+        reserveTime: selectedHours,
+        actionTime: getTimeNow(),
+        date: {
+          date: chosenDay.date,
+          monthName: chosenDay.monthName,
+        },
+        type: 'instrument',
+      };
+      setSelectedHours([]);
+      dispatch({ type: ACTIONS.RESERVE_INSTRUMENT, formData });
+    }
   };
 
   const getDateFromPicker = (date) => {
+    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY_INSTRUMENT });
     const day = findDayFromPicker(date, dates);
     if (day) {
-      setDay(day);
+      const formData = { name: instrumentName, dayId: day.id };
+      dispatch({ type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENT, formData });
     }
     setSelectedHours([]);
   };
+
+  const reserveForm = chosenDay ? (
+    <ReserveForm
+      selectedHours={selectedHours}
+      closeModal={closeModal}
+      day={chosenDay}
+      hourClick={hourClick}
+      addReserve={addReserve}
+      serverMessage={serverMessage}
+      error={error}
+    />
+  ) : (
+    <></>
+  );
 
   return (
     <div className={cl.background}>
@@ -66,13 +108,7 @@ const Modal = ({ closeModal, dates, instrumentId }) => {
           <DataSelect getDateFromPicker={getDateFromPicker} />{' '}
           <span className={cl.text}>{datePickerText} </span>
         </div>
-        <ReserveForm
-          selectedHours={selectedHours}
-          closeModal={closeModal}
-          day={day}
-          hourClick={hourClick}
-          addReserve={addReserve}
-        />
+        {reserveForm}
       </div>
     </div>
   );
