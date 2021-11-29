@@ -13,6 +13,7 @@ let defaultState = {
   error: null,
   registrationMessage: null,
   orderedServices: [],
+  isAdmin: false,
 };
 
 const authReducer = (state = defaultState, action) => {
@@ -30,7 +31,6 @@ const authReducer = (state = defaultState, action) => {
         orderId: Math.random().toString(36).substr(2, 9),
         actionTime: getTimeNow(),
       };
-      console.log(data);
       return { ...state, orderedServices: [...state.orderedServices, data] };
     case ACTIONS.DELL_ORDER_IN_USER:
       const orderId = action.orderId;
@@ -44,18 +44,28 @@ const authReducer = (state = defaultState, action) => {
     case ACTIONS.LOGIN_USER:
       return state;
     case ACTIONS.SET_USER:
+      const isAdmin = action.data.role === 'admin';
       setUserLocalStorage(action.data);
-      return { ...state, isAuth: true, user: action.data.name, error: null };
-    case ACTIONS.DEFINE_USER:
+      return {
+        ...state,
+        isAuth: true,
+        user: action.data.name,
+        error: null,
+        isAdmin,
+      };
+    case ACTIONS.DEFINE_USER: {
       if (checkUserLocalStorage()) {
         const user = getUserLocalStorage();
-        return { ...state, isAuth: true, user: user.name };
+        const isAdmin = user.role === 'admin';
+        return { ...state, isAuth: true, user: user.name, isAdmin };
       }
       return state;
-    case ACTIONS.LOGOUT_USER:
+    }
+    case ACTIONS.LOGOUT_USER: {
       cleanUserLocalStorage();
-      return { ...state, isAuth: false, user: null };
-
+      const isAdmin = false;
+      return { ...state, isAuth: false, user: null, isAdmin };
+    }
     case ACTIONS.SET_USER_ERROR:
       return { ...state, error: action.errorText };
 

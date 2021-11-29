@@ -24,9 +24,9 @@ const tableHeaderText = {
 };
 
 function createRowsArray(element, cancelReserve) {
-  const { owner, type, name, date, reserveTime } = element;
+  const { userEmail, type, name, date, reserveTime } = element;
   return {
-    user: owner,
+    user: userEmail,
     service: `${type} ${name}`,
     date: `${date.date} ${date.monthName}`,
     time: reserveTime.join(', '),

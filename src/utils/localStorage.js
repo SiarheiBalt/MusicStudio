@@ -4,10 +4,7 @@ export const setUserLocalStorage = (data) => {
   localStorage.setItem(
     storageName,
     JSON.stringify({
-      userId: data.userId,
-      token: data.token,
-      name: data.name,
-      email: data.email,
+      ...data,
     })
   );
 };
