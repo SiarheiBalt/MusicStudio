@@ -4,7 +4,7 @@ body {
 
 .app {
   overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
+  /* margin-right: calc(-1 * (100vw - 100%)); */
   background-image: url('./assets/images/backgroud.jpg');
   background-size: cover;
   background-repeat: no-repeat;
