@@ -13,17 +13,18 @@ const reserveInstruments = (state = defaultState, action) => {
     case ACTIONS.GET_INSTRUMENTS:
       return state;
     case ACTIONS.GET_INSTRUMENTS_SUCCES: {
-      let instruments = action.data.map((instrument) => {
+      const instruments = action.data.map((instrument) => {
         instrument.dates = instrument.dates.map((day) => {
-          let { date, dayofWeek, monthName, month, year } = getDateInfo(
+          const { date, dayofWeek, monthName, month, year } = getDateInfo(
             day.date
           );
-          day.dayofWeek = dayofWeek;
-          day.monthName = monthName;
-          day.month = month;
-          day.year = year;
-          day.date = date;
-          return day;
+          const changedDay = day;
+          changedDay.dayofWeek = dayofWeek;
+          changedDay.monthName = monthName;
+          changedDay.month = month;
+          changedDay.year = year;
+          changedDay.date = date;
+          return changedDay;
         });
         return instrument;
       });

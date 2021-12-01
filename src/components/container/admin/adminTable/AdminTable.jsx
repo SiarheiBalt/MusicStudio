@@ -54,8 +54,8 @@ export default function AdminTable({ data }) {
 
   const onchangeInput = (event) => {
     setInput(event.target.value);
-    let result = rowsArray.filter((row) => {
-      let user = row.user;
+    const result = rowsArray.filter((row) => {
+      const { user } = row;
       return user.toLowerCase().includes(event.target.value);
     });
     setRowsArrayAfterSearch(result);
