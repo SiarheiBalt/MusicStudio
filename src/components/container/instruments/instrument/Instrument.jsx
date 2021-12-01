@@ -7,7 +7,7 @@ import Specifications from './specifications/Specifications';
 
 import cl from './Instrument.module.css';
 import { useDispatch } from 'react-redux';
-import { ACTIONS } from '../../../../redux/constants';
+import { CLEAR_CHOSEN_DAY_INSTRUMENT } from '../../../../redux/constants';
 
 const altText = 'image not find';
 const buttonText = 'Зарезервировать';
@@ -27,7 +27,7 @@ const Instrument = ({
 
   const openModal = () => setModal(true);
   const closeModal = () => {
-    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY_INSTRUMENT });
+    dispatch({ type: CLEAR_CHOSEN_DAY_INSTRUMENT });
     setModal(false);
   };
 

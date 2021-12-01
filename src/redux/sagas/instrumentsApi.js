@@ -1,5 +1,13 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { ACTIONS } from '../constants';
+import {
+  GET_CHOSEN_DAY_INSTRUMENT,
+  GET_CHOSEN_DAY_INSTRUMENTS_SUCCES,
+  GET_INSTRUMENTS,
+  GET_INSTRUMENTS_SUCCES,
+  RESERVE_INSTRUMENT,
+  RESERVE_INSTRUMENT_SUCCES,
+  SET_RESERVE_INSTRUMENTS_ERROR,
+} from '../constants';
 
 function* getInstrumentsSaga() {
   try {
@@ -11,7 +19,7 @@ function* getInstrumentsSaga() {
     const data = yield response.json();
     if (response.ok) {
       yield put({
-        type: ACTIONS.GET_INSTRUMENTS_SUCCES,
+        type: GET_INSTRUMENTS_SUCCES,
         data,
       });
     }
@@ -21,7 +29,7 @@ function* getInstrumentsSaga() {
 }
 
 export function* instrumentsSaga() {
-  yield takeEvery(ACTIONS.GET_INSTRUMENTS, getInstrumentsSaga);
+  yield takeEvery(GET_INSTRUMENTS, getInstrumentsSaga);
 }
 
 function* getDayInstrumentsSaga(action) {
@@ -44,14 +52,14 @@ function* getDayInstrumentsSaga(action) {
     const day = yield data[0].dates[0];
 
     if (response.status === 200) {
-      yield put({ type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENTS_SUCCES, day });
+      yield put({ type: GET_CHOSEN_DAY_INSTRUMENTS_SUCCES, day });
     }
   } catch (error) {
     console.log(error);
   }
 }
 export function* dayInstrumentsSaga() {
-  yield takeEvery(ACTIONS.GET_CHOSEN_DAY_INSTRUMENT, getDayInstrumentsSaga);
+  yield takeEvery(GET_CHOSEN_DAY_INSTRUMENT, getDayInstrumentsSaga);
 }
 
 function* getReserveInstrumentSaga(action) {
@@ -68,18 +76,17 @@ function* getReserveInstrumentSaga(action) {
         headers,
       });
     });
-
     const data = yield response.json();
     const message = data.message;
     if (response.status === 201) {
       const message = 'Время зарезервировано';
       yield put({
-        type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENT,
+        type: GET_CHOSEN_DAY_INSTRUMENT,
         formData: action.formData,
       });
-      yield put({ type: ACTIONS.RESERVE_INSTRUMENT_SUCCES, message });
+      yield put({ type: RESERVE_INSTRUMENT_SUCCES, message });
     } else {
-      yield put({ type: ACTIONS.SET_RESERVE_INSTRUMENTS_ERROR, message });
+      yield put({ type: SET_RESERVE_INSTRUMENTS_ERROR, message });
     }
   } catch (error) {
     console.log(error);
@@ -87,5 +94,5 @@ function* getReserveInstrumentSaga(action) {
 }
 
 export function* reserveInstrumentSaga() {
-  yield takeEvery(ACTIONS.RESERVE_INSTRUMENT, getReserveInstrumentSaga);
+  yield takeEvery(RESERVE_INSTRUMENT, getReserveInstrumentSaga);
 }

@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { ACTIONS } from '../../../../redux/constants';
+import {
+  CLEAR_CHOSEN_DAY_INSTRUMENT,
+  GET_CHOSEN_DAY_INSTRUMENT,
+  RESERVE_INSTRUMENT,
+} from '../../../../redux/constants';
 import { findDayFromPicker } from '../../../../utils/time';
 import DataSelect from '../../../commons/dateSelect/DateSelect';
 import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';
@@ -34,7 +38,7 @@ const Modal = ({
 
   useEffect(() => {
     const formData = { name: instrumentName, dayId: initDay.id };
-    dispatch({ type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENT, formData });
+    dispatch({ type: GET_CHOSEN_DAY_INSTRUMENT, formData });
   }, []);
 
   const [selectedHours, setSelectedHours] = useState([]);
@@ -72,16 +76,16 @@ const Modal = ({
         type: 'instrument',
       };
       setSelectedHours([]);
-      dispatch({ type: ACTIONS.RESERVE_INSTRUMENT, formData });
+      dispatch({ type: RESERVE_INSTRUMENT, formData });
     }
   };
 
   const getDateFromPicker = (date) => {
-    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY_INSTRUMENT });
+    dispatch({ type: CLEAR_CHOSEN_DAY_INSTRUMENT });
     const day = findDayFromPicker(date, dates);
     if (day) {
       const formData = { name: instrumentName, dayId: day.id };
-      dispatch({ type: ACTIONS.GET_CHOSEN_DAY_INSTRUMENT, formData });
+      dispatch({ type: GET_CHOSEN_DAY_INSTRUMENT, formData });
     }
     setSelectedHours([]);
   };
