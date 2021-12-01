@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import cl from './Header.module.css';
@@ -10,10 +11,21 @@ const Header = () => {
   const instruments = 'Инструменты';
   const soundRecord = 'Звукозапись';
 
+  const [checked, setChecked] = useState(false);
+
+  const onChangeInput = () => {
+    setChecked(!checked);
+  };
+
   return (
     <div className={'app-container'}>
       <div className={cl.hamburger__menu}>
-        <input id={cl.menu__toggle} type='checkbox' />
+        <input
+          id={cl.menu__toggle}
+          type='checkbox'
+          checked={checked}
+          onChange={onChangeInput}
+        />
         <label className={cl.menu__btn} htmlFor={cl.menu__toggle}>
           <span></span>
         </label>

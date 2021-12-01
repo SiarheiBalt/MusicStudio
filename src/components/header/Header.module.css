@@ -68,10 +68,8 @@
     position: fixed;
     top: 20px;
     left: 20px;
-
     width: 26px;
     height: 26px;
-
     cursor: pointer;
     z-index: 20;
   }
