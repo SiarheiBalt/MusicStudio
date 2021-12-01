@@ -21,14 +21,15 @@ const tableHeaderText = {
   col3: 'Зарезервированные часы',
 };
 
-function createData(order, cancelReserve) {
+function createRow(order, cancelReserve) {
   const { type, name, date, reserveTime } = order;
-  return {
+  const row = {
     service: `${type} ${name}`,
     date: `${date.date} ${date.monthName}`,
     time: `${reserveTime.sort().join(', ')}`,
     button: <Button text={'Отменить'} onClick={() => cancelReserve(order)} />,
   };
+  return row;
 }
 
 const ReserveServicesTable = ({ data }) => {
@@ -43,12 +44,13 @@ const ReserveServicesTable = ({ data }) => {
   };
 
   const rowsArray = data.map((order) => {
-    return createData(order, cancelReserve);
+    return createRow(order, cancelReserve);
   });
 
   const rows = rowsArray.map((row) => {
+    const key = Math.random().toString(36);
     return (
-      <TableRow key={row.date + row.time}>
+      <TableRow key={key}>
         <TableCell component='th' scope='row'>
           {row.service}
         </TableCell>
