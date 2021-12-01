@@ -24,3 +24,18 @@ body {
 .form h1 {
   color: lightgrey;
 }
+
+.react-datepicker__input-container {
+  position: inherit !important;
+}
+
+@media (max-width: 1250px) {
+  .app-container {
+    margin: 0 10px;
+  }
+}
+@media (max-width: 992px) {
+  .app-container {
+    /* font-size: 0.9em; */
+  }
+}

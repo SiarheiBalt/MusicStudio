@@ -1,5 +1,6 @@
 .contacts {
   height: 180px;
+  margin-bottom: 20px;
 }
 .list__item {
   background-color: whitesmoke;
