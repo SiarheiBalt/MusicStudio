@@ -37,7 +37,7 @@ const RegisterationForm = ({ submit }) => {
   }) => {
     return (
       <div className={cl.user__form}>
-        <h3 className='title'>{titleText}</h3>
+        <h3 className={cl.title}>{titleText}</h3>
         <div className={cl.item}>
           <div className='field'>
             <label htmlFor={'name'}>{fieldText.name}</label>

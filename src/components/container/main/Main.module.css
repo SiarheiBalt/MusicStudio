@@ -1,11 +1,19 @@
 .information {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
 }
 .block__right {
   width: 49%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+  .information {
+    display: block;
+  }
+  .block__right {
+    width: 100%;
+  }
 }
