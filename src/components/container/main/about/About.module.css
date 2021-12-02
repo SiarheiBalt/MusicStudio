@@ -3,8 +3,17 @@
 }
 .title {
   padding-top: 20px;
+  margin-top: 0;
   text-align: center;
 }
 .information {
   margin: 12px 25px;
+}
+@media (max-width: 700px) {
+  .about {
+    max-width: 100%;
+  }
+  .information {
+    padding-bottom: 15px;
+  }
 }

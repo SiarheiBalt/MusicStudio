@@ -8,3 +8,12 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+@media (max-width: 700px) {
+  .information {
+    display: block;
+  }
+  .block__right {
+    width: 100%;
+  }
+}
