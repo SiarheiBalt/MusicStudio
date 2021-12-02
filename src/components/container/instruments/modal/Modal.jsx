@@ -11,6 +11,7 @@ import { findDayFromPicker } from '../../../../utils/time';
 import DataSelect from '../../../commons/dateSelect/DateSelect';
 import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';
 import ReserveForm from '../../../commons/reserveItem/modal/reserveForm/ReserveForm';
+import Preloader from '../../../commons/preloader/Preloader';
 
 import cl from './Modal.module.css';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
@@ -101,7 +102,7 @@ const Modal = ({
       error={error}
     />
   ) : (
-    <></>
+    <Preloader height='220px' />
   );
 
   return (

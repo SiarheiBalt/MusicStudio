@@ -28,6 +28,6 @@ function* getUserOrdersSaga(action) {
   }
 }
 
-export function* userOrdersSaga() {
+export function* userOrdersSagaAdmin() {
   yield takeEvery(ACTIONS.GET_ALL_ORDERS, getUserOrdersSaga);
 }

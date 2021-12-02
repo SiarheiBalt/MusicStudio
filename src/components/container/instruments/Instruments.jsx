@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+
 import { GET_INSTRUMENTS } from '../../../redux/constants';
 import Instrument from './instrument/Instrument';
+import Preloader from '../../commons/preloader/Preloader';
+
 import cl from './Instruments.module.css';
 
 const Instruments = () => {
@@ -15,7 +18,7 @@ const Instruments = () => {
     dispatch({ type: GET_INSTRUMENTS });
   }, [dispatch]);
 
-  if (!instruments) return <></>; // Preloader
+  if (!instruments) return <Preloader height={'100vh'} />;
 
   const instrumentComponents = instruments.map((instrument, i) => {
     const { dates, instrumentId, image, specifications, name } = instrument;

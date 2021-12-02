@@ -5,6 +5,7 @@ import {
   setUserLocalStorage,
 } from './../../utils/localStorage';
 import { ACTIONS } from '../constants';
+import { getTimeNow } from '../../utils/date';
 
 let defaultState = {
   user: null,
