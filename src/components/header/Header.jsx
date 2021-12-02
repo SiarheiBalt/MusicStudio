@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import cl from './Header.module.css';
 
@@ -16,6 +17,16 @@ const Header = () => {
   const onChangeInput = () => {
     setChecked(!checked);
   };
+
+  const { isAdmin } = useSelector((store) => store.authReducer);
+
+  const adminPageLink = isAdmin && (
+    <span className={cl.link}>
+      <NavLink to='/admin' activeClassName={cl.activ}>
+        {admin}
+      </NavLink>
+    </span>
+  );
 
   return (
     <div className={'app-container'}>
@@ -56,11 +67,7 @@ const Header = () => {
               {profile}
             </NavLink>
           </span>
-          <span className={cl.link}>
-            <NavLink to='/admin' activeClassName={cl.activ}>
-              {admin}
-            </NavLink>
-          </span>
+          {adminPageLink}
         </header>
       </div>
     </div>
