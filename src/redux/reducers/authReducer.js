@@ -12,6 +12,7 @@ let defaultState = {
   error: null,
   registrationMessage: null,
   orderedServices: [],
+  isAdmin: false,
 };
 
 const authReducer = (state = defaultState, action) => {
@@ -20,23 +21,54 @@ const authReducer = (state = defaultState, action) => {
       return state;
     case ACTIONS.CANCEL_ORDER_IN_USER_SUCCES:
       return { ...state };
+    case ACTIONS.ADD_ORDER_IN_USER:
+      const data = {
+        type: action.formData.itemInfo.type,
+        name: action.formData.itemInfo.name,
+        dayId: action.formData.resrveDate.id,
+        reservedTime: action.formData.selectedTime,
+        date: {
+          date: action.formData.resrveDate.date,
+          monthName: action.formData.resrveDate.monthName,
+        },
+        orderId: Math.random().toString(36).substr(2, 9),
+        actionTime: getTimeNow(),
+      };
+      return { ...state, orderedServices: [...state.orderedServices, data] };
+    case ACTIONS.DELL_ORDER_IN_USER:
+      const orderId = action.orderId;
+      const orderedServices = state.orderedServices.filter((order) => {
+        return orderId !== order.orderId;
+      });
+
+      return { ...state, orderedServices };
     case ACTIONS.REGISTRATION_USER:
       return { ...state };
     case ACTIONS.LOGIN_USER:
       return state;
     case ACTIONS.SET_USER:
+      const isAdmin = action.data.role === 'admin';
       setUserLocalStorage(action.data);
-      return { ...state, isAuth: true, user: action.data.name, error: null };
-    case ACTIONS.DEFINE_USER:
+      return {
+        ...state,
+        isAuth: true,
+        user: action.data.name,
+        error: null,
+        isAdmin,
+      };
+    case ACTIONS.DEFINE_USER: {
       if (checkUserLocalStorage()) {
         const user = getUserLocalStorage();
-        return { ...state, isAuth: true, user: user.name };
+        const isAdmin = user.role === 'admin';
+        return { ...state, isAuth: true, user: user.name, isAdmin };
       }
       return state;
-    case ACTIONS.LOGOUT_USER:
+    }
+    case ACTIONS.LOGOUT_USER: {
       cleanUserLocalStorage();
-      return { ...state, isAuth: false, user: null };
-
+      const isAdmin = false;
+      return { ...state, isAuth: false, user: null, isAdmin };
+    }
     case ACTIONS.SET_USER_ERROR:
       return { ...state, error: action.errorText };
 
