@@ -2,23 +2,34 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { ACTIONS } from '../../../redux/constants';
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 import RoomsInfo from './roomsInfo/RoomsInfo';
+import Preloader from '../../commons/preloader/Preloader';
 
 import './../../../App.css';
 
 const Rooms = () => {
-  const data = useSelector((store) => store.reserveRoom.rooms);
+  const { rooms, chosenDay, serverMessage, error } = useSelector(
+    (store) => store.reserveRoom
+  );
   const dispatch = useDispatch();
 
   const addReserveTime = (formData) => {
     dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
-    dispatch({ type: ACTIONS.ADD_ORDER_IN_USER, formData });
   };
 
-  const reserveItem = data.map((room) => (
+  useEffect(() => {
+    dispatch({ type: ACTIONS.GET_ROOMS });
+  }, [dispatch]);
+
+  if (!rooms) {
+    return <Preloader height={'100vh'} />;
+  }
+
+  const reserveItem = rooms.map((room) => (
     <Route
       key={room.id}
       path={`/${room.name}`}
@@ -31,7 +42,10 @@ const Rooms = () => {
           <ReserveItem
             dates={room.dates}
             itemInfo={itemInfo}
+            chosenDay={chosenDay}
             addReserveTime={addReserveTime}
+            serverMessage={serverMessage}
+            error={error}
           />
         );
       }}
@@ -40,10 +54,10 @@ const Rooms = () => {
 
   return (
     <BrowserRouter>
-      <div className="rooms form">
+      <div className='rooms form'>
         <RoomsInfo />
-        <Route exact path="/rooms">
-          <Redirect to={`/${data[0].name}`} />
+        <Route exact path='/rooms'>
+          <Redirect to={`/${rooms[0].name}`} />
         </Route>
         {reserveItem}
       </div>

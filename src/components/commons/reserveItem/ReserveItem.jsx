@@ -1,23 +1,47 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Shedule from '../shedule/Shedule';
 import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
 
 import cl from './ReserveItem.module.css';
+import { ACTIONS } from '../../../redux/constants';
 
-const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
+const clearReserveStatus = {
+  rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
+  records: ACTIONS.CLEAR_RECORD_SERVER_STATUS,
+};
+const getItem = {
+  rooms: ACTIONS.GET_ROOMS,
+  records: ACTIONS.GET_RECORDS,
+};
+const getDay = {
+  rooms: ACTIONS.GET_DAY_IN_ROOM,
+  records: ACTIONS.GET_DAY_IN_RECORD,
+};
+
+const ReserveItem = ({
+  dates,
+  itemInfo,
+  addReserveTime,
+  chosenDay,
+  serverMessage,
+  error,
+}) => {
+  const dispatch = useDispatch();
   const [isModal, setIsModal] = useState(false);
-  const [dayForModal, setDayForModal] = useState({});
 
-  const openModal = (day) => {
+  const openModal = () => {
     setIsModal(true);
-    setDayForModal(day);
   };
 
   const closeModal = () => {
     setIsModal(false);
+    dispatch({ type: clearReserveStatus[itemInfo.type] });
+    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
+    dispatch({ type: getItem[itemInfo.type] });
   };
 
   const getDateFromPicker = (date) => {
@@ -30,7 +54,8 @@ const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
 
     if (dayFromPicker.length === 1) {
       const day = dayFromPicker[0];
-      setDayForModal(day);
+      const data = { dayId: day.id, name: itemInfo.name };
+      dispatch({ type: getDay[itemInfo.type], data });
       setIsModal(true);
     }
   };
@@ -38,9 +63,11 @@ const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
   const modall = isModal && (
     <Modal
       closeModal={closeModal}
-      day={dayForModal}
       itemInfo={itemInfo}
       addReserveTime={addReserveTime}
+      chosenDay={chosenDay}
+      serverMessage={serverMessage}
+      error={error}
     />
   );
 
@@ -49,7 +76,7 @@ const ReserveItem = ({ dates, itemInfo, addReserveTime }) => {
       {modall}
       <h2 className={cl.title}> {itemInfo.name}</h2>
       <DataSelect getDateFromPicker={getDateFromPicker} />
-      <Shedule timeData={dates} openModal={openModal} />
+      <Shedule timeData={dates} openModal={openModal} itemInfo={itemInfo} />
     </div>
   );
 };

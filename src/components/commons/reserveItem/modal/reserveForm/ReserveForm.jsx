@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { checkUserLocalStorage } from '../../../../../utils/localStorage';
+import ServerStatus from '../../../authForm/serverStatus/ServerStatus';
 
 import { Button } from '../../../button/Button';
 import Hour from '../hour/Hour';
@@ -7,9 +9,20 @@ import cl from './ReserveForm.module.css';
 
 const title = 'Резервирование времени';
 const buttonActionText = 'Зарезервировать';
-const text = 'Кликайте по свободным часам чтобы выбрать время';
 
-const ReserveForm = ({ day, hourClick, selectedHours, addReserve }) => {
+const ReserveForm = ({
+  day,
+  hourClick,
+  selectedHours,
+  addReserve,
+  serverMessage,
+  error,
+}) => {
+  const isAuth = checkUserLocalStorage();
+  const text = isAuth
+    ? 'Выберите свободное время'
+    : 'Войдите либо зарегистрируйтесь в приложении для резервирования';
+
   const hours = day.reserveTime.map((time, i) => {
     const isSelected = selectedHours.some((hour) => hour === time.hour);
     return (
@@ -28,6 +41,7 @@ const ReserveForm = ({ day, hourClick, selectedHours, addReserve }) => {
       <div className={cl.hours}>{hours}</div>
       <span className={cl.text}>{text}</span>
       <div className={cl.reserve}>
+        <ServerStatus error={error} message={serverMessage} />
         <Button
           text={buttonActionText}
           onClick={addReserve}

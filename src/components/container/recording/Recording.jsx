@@ -2,37 +2,51 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { ACTIONS } from '../../../redux/constants';
-import RecordingTypes from './recordingTypes/RecordingTypes';
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
+import RecordingTypes from './recordingTypes/RecordingTypes';
+import Preloader from '../../commons/preloader/Preloader';
 
 import './../../../App.css';
 import cl from './Recording.module.css';
 
 const Recording = () => {
-  const data = useSelector((store) => store.reserveRecord.record);
+  const { records, chosenDay, serverMessage, error } = useSelector(
+    (store) => store.reserveRecord
+  );
   const dispatch = useDispatch();
 
   const addReserveTime = (formData) => {
     dispatch({ type: ACTIONS.RESERVE_RECORD, formData });
-    dispatch({ type: ACTIONS.ADD_ORDER_IN_USER, formData });
   };
 
-  const reserveItem = data.map((record) => (
+  useEffect(() => {
+    dispatch({ type: ACTIONS.GET_RECORDS });
+  }, [dispatch]);
+
+  if (!records) {
+    return <Preloader height={'100vh'} />;
+  }
+
+  const reserveItem = records.map((record) => (
     <Route
       key={record.id}
       path={`/${record.name}`}
       render={() => {
         const itemInfo = {
           name: record.name,
-          type: 'record',
+          type: 'records',
         };
         return (
           <ReserveItem
             dates={record.dates}
             itemInfo={itemInfo}
+            chosenDay={chosenDay}
             addReserveTime={addReserveTime}
+            serverMessage={serverMessage}
+            error={error}
           />
         );
       }}
@@ -44,7 +58,7 @@ const Recording = () => {
       <div className={`${cl.recording} form`}>
         <RecordingTypes />
         <Route exact path='/record'>
-          <Redirect to={`/${data[0].name}`} />
+          <Redirect to={`/${records[0].name}`} />
         </Route>
         {reserveItem}
       </div>

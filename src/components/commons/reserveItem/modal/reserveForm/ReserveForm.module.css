@@ -2,6 +2,8 @@
   font-size: 1.1em;
   font-weight: 600;
   margin: 20px 0;
+  width: 400px;
+  text-align: center;
 }
 .reserve {
   display: flex;

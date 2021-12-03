@@ -1,14 +1,28 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ReserveServicesTable from './reserveServicesTable/ReserveServicesTable';
 
 import cl from './Profile.module.css';
 import UserInfo from './userInfo/UserInfo';
+import { useEffect } from 'react';
+import { ACTIONS } from '../../../redux/constants';
+import { getUserLocalStorage } from '../../../utils/localStorage';
+
+const title = 'Нет заказанных услуг';
 
 const Profile = () => {
   const data = useSelector((store) => store.authReducer);
 
-  const title = 'Нет заказанных услуг';
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { userId, token } = getUserLocalStorage();
+    const formData = {
+      userId,
+      auth: token,
+    };
+    dispatch({ type: ACTIONS.GET_USER_ORDERS, formData });
+  }, [dispatch]);
 
   const orderedServices =
     data.orderedServices.length === 0 ? (
