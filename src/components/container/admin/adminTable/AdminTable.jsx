@@ -9,10 +9,13 @@ import Paper from '@mui/material/Paper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { ACTIONS } from '../../../../redux/constants';
 import { Button } from '../../../commons/button/Button';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
 import { Input } from '../../../commons/input/Input';
+import ConfirmModall from '../../../commons/modal/ConfirmModall';
 
 const ico = <FontAwesomeIcon icon={faSearch} />;
 
@@ -35,6 +38,14 @@ function createRowsArray(element, cancelReserve) {
 }
 
 export default function AdminTable({ data }) {
+  const dispatch = useDispatch();
+  const [isModal, setIsModal] = useState(false);
+  const [cancelData, setCancelData] = useState({});
+
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
   const cancelReserve = (info) => {
     const { token } = getUserLocalStorage();
     const formData = {
@@ -42,7 +53,17 @@ export default function AdminTable({ data }) {
       auth: token,
       userId: info.owner,
     };
-    console.log('cancel reserve, Admin');
+    setCancelData(formData);
+    setIsModal(true);
+  };
+
+  const confirmCancelReserve = () => {
+    setIsModal(false);
+    dispatch({
+      type: ACTIONS.CANCEL_ORDER_IN_USER_ADMIN,
+      formData: cancelData,
+    });
+    closeModal();
   };
 
   const rowsArray = data.map((element) => {
@@ -78,22 +99,31 @@ export default function AdminTable({ data }) {
   });
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              {tableHeaderText.col1}{' '}
-              <Input value={input} onchangeInput={onchangeInput} /> {ico}
-            </TableCell>
-            <TableCell align='right'>{tableHeaderText.col2}</TableCell>
-            <TableCell align='right'>{tableHeaderText.col3}</TableCell>
-            <TableCell align='right'>{tableHeaderText.col4}</TableCell>
-            <TableCell align='right'></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{rows}</TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {isModal && (
+        <ConfirmModall
+          closeModal={closeModal}
+          confirmCancelReserve={confirmCancelReserve}
+          cancelData={cancelData}
+        />
+      )}
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                {tableHeaderText.col1}{' '}
+                <Input value={input} onchangeInput={onchangeInput} /> {ico}
+              </TableCell>
+              <TableCell align='right'>{tableHeaderText.col2}</TableCell>
+              <TableCell align='right'>{tableHeaderText.col3}</TableCell>
+              <TableCell align='right'>{tableHeaderText.col4}</TableCell>
+              <TableCell align='right'></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{rows}</TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

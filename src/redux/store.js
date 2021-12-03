@@ -22,7 +22,7 @@ import {
   reserveInstrumentSaga,
 } from './sagas/instrumentsApi';
 import adminReducer from './reducers/adminReducer';
-import { userOrdersSagaAdmin } from './sagas/adminApi';
+import { cancelAdminOrderSaga, userOrdersSagaAdmin } from './sagas/adminApi';
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -44,6 +44,7 @@ sagaMiddleWare.run(instrumentsSaga);
 sagaMiddleWare.run(dayInstrumentsSaga);
 sagaMiddleWare.run(reserveInstrumentSaga);
 sagaMiddleWare.run(userOrdersSagaAdmin);
+sagaMiddleWare.run(cancelAdminOrderSaga);
 
 sagaMiddleWare.run(allRoomsSaga);
 sagaMiddleWare.run(dayInRoomSaga);

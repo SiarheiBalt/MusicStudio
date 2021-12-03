@@ -1,9 +1,7 @@
-// import { ACTIONS } from '../constants';
-
 import { ACTIONS } from '../constants';
 
 let defaultState = {
-  orders: null,
+  orders: [],
 };
 
 const adminReducer = (state = defaultState, action) => {
@@ -12,6 +10,10 @@ const adminReducer = (state = defaultState, action) => {
       return { ...state };
     case ACTIONS.GET_ALL_ORDERS_SUCCES:
       return { ...state, orders: action.data };
+    case ACTIONS.CANCEL_ORDER_IN_USER_ADMIN:
+      return { ...state };
+    case ACTIONS.CANCEL_ORDER_IN_USER_ADMIN_SUCCES:
+      return { ...state };
 
     default:
       return state;

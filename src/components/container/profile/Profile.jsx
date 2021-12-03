@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import ReserveServicesTable from './reserveServicesTable/ReserveServicesTable';
-
-import cl from './Profile.module.css';
 import UserInfo from './userInfo/UserInfo';
-import { useEffect } from 'react';
 import { ACTIONS } from '../../../redux/constants';
 import { getUserLocalStorage } from '../../../utils/localStorage';
+
+import cl from './Profile.module.css';
 
 const title = 'Нет заказанных услуг';
 
@@ -22,6 +22,7 @@ const Profile = () => {
       auth: token,
     };
     dispatch({ type: ACTIONS.GET_USER_ORDERS, formData });
+    console.log(data);
   }, [dispatch]);
 
   const orderedServices =
@@ -34,7 +35,6 @@ const Profile = () => {
   return (
     <div className={cl.profile}>
       <UserInfo />
-
       {orderedServices}
     </div>
   );

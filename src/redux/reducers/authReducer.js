@@ -19,7 +19,7 @@ let defaultState = {
 const authReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ACTIONS.CANCEL_ORDER_IN_USER:
-      return state;
+      return { ...state };
     case ACTIONS.CANCEL_ORDER_IN_USER_SUCCES:
       return { ...state };
     case ACTIONS.ADD_ORDER_IN_USER:
