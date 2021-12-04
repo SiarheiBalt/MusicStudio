@@ -20,8 +20,12 @@ const Header = () => {
 
   const { isAdmin } = useSelector((store) => store.authReducer);
 
+  const closeMenu = () => {
+    setChecked(false);
+  };
+
   const adminPageLink = isAdmin && (
-    <span className={cl.link}>
+    <span className={cl.link} onClick={closeMenu}>
       <NavLink to='/admin' activeClassName={cl.activ}>
         {admin}
       </NavLink>
@@ -38,32 +42,44 @@ const Header = () => {
           onChange={onChangeInput}
         />
         <label className={cl.menu__btn} htmlFor={cl.menu__toggle}>
-          <span></span>
+          <span className={'button'}></span>
         </label>
 
         <header className={`${cl.header} ${cl.menu__box}`}>
           <span className={cl.link}>
-            <NavLink to='/main' activeClassName={cl.activ}>
+            <NavLink to='/main' activeClassName={cl.activ} onClick={closeMenu}>
               {main}
             </NavLink>
           </span>
           <span className={cl.link}>
-            <NavLink to='/rooms' activeClassName={cl.activ}>
+            <NavLink to='/rooms' activeClassName={cl.activ} onClick={closeMenu}>
               {rooms}
             </NavLink>
           </span>
           <span className={cl.link}>
-            <NavLink to='/instruments' activeClassName={cl.activ}>
+            <NavLink
+              to='/instruments'
+              activeClassName={cl.activ}
+              onClick={closeMenu}
+            >
               {instruments}
             </NavLink>
           </span>
           <span className={cl.link}>
-            <NavLink to='/record' activeClassName={cl.activ}>
+            <NavLink
+              to='/record'
+              activeClassName={cl.activ}
+              onClick={closeMenu}
+            >
               {soundRecord}
             </NavLink>
           </span>
           <span className={cl.link}>
-            <NavLink to='/profile' activeClassName={cl.activ}>
+            <NavLink
+              to='/profile'
+              activeClassName={cl.activ}
+              onClick={closeMenu}
+            >
               {profile}
             </NavLink>
           </span>
