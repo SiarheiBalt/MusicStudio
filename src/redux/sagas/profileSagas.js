@@ -16,7 +16,6 @@ function* getUserOrdersSaga(action) {
         headers,
       });
     });
-
     const data = yield response.json();
 
     if (response.status === 500) {

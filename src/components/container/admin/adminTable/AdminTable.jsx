@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 import { ACTIONS } from '../../../../redux/constants';
 import { Button } from '../../../commons/button/Button';
@@ -37,14 +39,10 @@ function createRowsArray(element, cancelReserve) {
   };
 }
 
-export default function AdminTable({ data }) {
+const AdminTable = ({ data }) => {
   const dispatch = useDispatch();
   const [isModal, setIsModal] = useState(false);
   const [cancelData, setCancelData] = useState({});
-
-  const closeModal = () => {
-    setIsModal(false);
-  };
 
   const cancelReserve = (info) => {
     const { token } = getUserLocalStorage();
@@ -70,8 +68,17 @@ export default function AdminTable({ data }) {
     return createRowsArray(element, cancelReserve);
   });
 
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
   const [rowsArrayAfterSearch, setRowsArrayAfterSearch] = useState(rowsArray);
   const [input, setInput] = useState('');
+
+  useEffect(() => {
+    setRowsArrayAfterSearch(rowsArray);
+    // eslint-disable-next-line
+  }, [data]);
 
   const onchangeInput = (event) => {
     setInput(event.target.value);
@@ -126,4 +133,20 @@ export default function AdminTable({ data }) {
       </TableContainer>
     </>
   );
-}
+};
+
+AdminTable.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      reserveTime: PropTypes.arrayOf(PropTypes.string).isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      actionTime: PropTypes.string.isRequired,
+      dayId: PropTypes.string.isRequired,
+      date: PropTypes.shape().isRequired,
+    })
+  ),
+};
+
+export default AdminTable;

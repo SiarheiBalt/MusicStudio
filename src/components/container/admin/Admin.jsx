@@ -18,7 +18,6 @@ const Admin = () => {
     const formData = { userId, auth: token };
     actionDispatch({ type: ACTIONS.GET_ALL_ORDERS, formData });
   }, [actionDispatch]);
-  console.log(data);
 
   const table = data.length === 0 ? <></> : <AdminTable data={data} />;
 

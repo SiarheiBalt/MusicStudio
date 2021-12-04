@@ -62,7 +62,7 @@ const Modal = ({
           monthName: chosenDay.monthName,
         },
         actionTime: getTimeNow(),
-      };
+      }; 
       addReserveTime(formData);
       setSelectedHours([]);
       dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });

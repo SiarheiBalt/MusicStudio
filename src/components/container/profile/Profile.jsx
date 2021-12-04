@@ -11,7 +11,7 @@ import cl from './Profile.module.css';
 const title = 'Нет заказанных услуг';
 
 const Profile = () => {
-  const data = useSelector((store) => store.authReducer);
+  const data = useSelector((store) => store.authReducer.orderedServices);
 
   const dispatch = useDispatch();
 
@@ -22,14 +22,13 @@ const Profile = () => {
       auth: token,
     };
     dispatch({ type: ACTIONS.GET_USER_ORDERS, formData });
-    console.log(data);
   }, [dispatch]);
 
   const orderedServices =
-    data.orderedServices.length === 0 ? (
+    data.length === 0 ? (
       <h2 className={cl.title}>{title}</h2>
     ) : (
-      <ReserveServicesTable data={data.orderedServices} />
+      <ReserveServicesTable data={data} />
     );
 
   return (

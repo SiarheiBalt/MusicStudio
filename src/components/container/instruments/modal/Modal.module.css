@@ -12,7 +12,7 @@
 }
 .container {
   width: 500px;
-  height: 450px;
+  min-height: 450px;
   background-color: whitesmoke;
   border-radius: 15px;
   box-shadow: 0 0 20px rgb(0 0 0 / 20%);
@@ -26,4 +26,10 @@
   display: flex;
   align-content: center;
   align-items: center;
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 300px;
+  }
 }
