@@ -57,7 +57,7 @@ ReserveForm.propTypes = {
   day: PropTypes.shape({
     date: PropTypes.number.isRequired,
     dayofWeek: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     month: PropTypes.number.isRequired,
     monthName: PropTypes.string.isRequired,
     reserveTime: PropTypes.arrayOf(PropTypes.shape),

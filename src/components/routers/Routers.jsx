@@ -10,9 +10,10 @@ import Authorization from '../container/authorization/Authorization';
 import Instruments from '../container/instruments/Instruments';
 import PrivateRoute from './PrivateRoute';
 import NoPage from '../container/nopage/NoPage';
+import Admin from '../container/admin/Admin';
 
 const Routers = () => {
-  const isAuth = useSelector((store) => store.authReducer.isAuth);
+  const { isAuth, isAdmin } = useSelector((store) => store.authReducer);
   return (
     <BrowserRouter>
       <Header />
@@ -33,6 +34,13 @@ const Routers = () => {
             path='/profile'
             isAuth={isAuth}
             component={Profile}
+          />
+          <Route path='/instruments' component={Instruments} />
+          <PrivateRoute
+            exact
+            path='/admin'
+            isAuth={isAdmin}
+            component={Admin}
           />
           <Route path='/instruments' component={Instruments} />
           <Route component={NoPage} />

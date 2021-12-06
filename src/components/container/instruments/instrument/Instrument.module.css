@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 25px;
+  margin-bottom: 25px;
 }
 .form {
   background-color: cadetblue;

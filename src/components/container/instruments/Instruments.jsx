@@ -1,24 +1,45 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+
+import { GET_INSTRUMENTS } from '../../../redux/constants';
 import Instrument from './instrument/Instrument';
+import Preloader from '../../commons/preloader/Preloader';
+
 import cl from './Instruments.module.css';
 
 const Instruments = () => {
-  const data = useSelector((state) => state.reserveInstruments.instruments);
+  const { instruments, chosenDay, serverMessage, error } = useSelector(
+    (state) => state.reserveInstruments
+  );
+  const dispatch = useDispatch();
 
-  const instruments = data.map((element, i) => (
-    <Instrument
-      dates={element.dates}
-      key={element.instrumentId}
-      image={element.image}
-      specifications={element.specifications}
-      instrumentId={element.instrumentId}
-      name={element.name}
-    />
-  ));
+  useEffect(() => {
+    dispatch({ type: GET_INSTRUMENTS });
+  }, [dispatch]);
+
+  if (!instruments) return <Preloader height={'100vh'} />;
+
+  const instrumentComponents = instruments.map((instrument, i) => {
+    const { dates, instrumentId, image, specifications, name } = instrument;
+    return (
+      <Instrument
+        dates={dates}
+        key={instrumentId}
+        image={image}
+        specifications={specifications}
+        instrumentId={instrumentId}
+        name={name}
+        chosenDay={chosenDay}
+        serverMessage={serverMessage}
+        error={error}
+      />
+    );
+  });
 
   return (
     <>
-      <div className={cl.instruments}>{instruments}</div>
+      <div className={cl.instruments}>{instrumentComponents}</div>
     </>
   );
 };

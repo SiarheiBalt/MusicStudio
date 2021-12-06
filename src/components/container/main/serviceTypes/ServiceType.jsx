@@ -29,7 +29,7 @@ const ServiceType = () => {
   reiciendis, aut inventore?`;
 
   return (
-    <div className='services form'>
+    <div className={`${cl.services} form`}>
       <h1 className={cl.title}>{typeServiseText}</h1>
       <div className={cl.content}>
         <h2 className='title'>{titleRoomText}</h2>

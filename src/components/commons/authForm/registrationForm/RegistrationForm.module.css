@@ -52,3 +52,6 @@
 .button:hover {
   background-color: rgb(203, 229, 238);
 }
+.title {
+  text-align: center;
+}

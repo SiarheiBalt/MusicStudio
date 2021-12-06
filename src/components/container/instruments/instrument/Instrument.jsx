@@ -6,18 +6,46 @@ import Modal from '../modal/Modal';
 import Specifications from './specifications/Specifications';
 
 import cl from './Instrument.module.css';
+import { useDispatch } from 'react-redux';
+import {
+  CLEAR_CHOSEN_DAY_INSTRUMENT,
+  CLEAR_INSTRUMENT_SERVER_STATUS,
+} from '../../../../redux/constants';
 
 const altText = 'image not find';
 const buttonText = 'Зарезервировать';
 
-const Instrument = ({ image, specifications, dates, instrumentId, name }) => {
+const Instrument = ({
+  image,
+  specifications,
+  dates,
+  instrumentId,
+  name,
+  chosenDay,
+  error,
+  serverMessage,
+}) => {
+  const dispatch = useDispatch();
   const [isModal, setModal] = useState(false);
 
   const openModal = () => setModal(true);
-  const closeModal = () => setModal(false);
+  const closeModal = () => {
+    dispatch({ type: CLEAR_CHOSEN_DAY_INSTRUMENT });
+    dispatch({ type: CLEAR_INSTRUMENT_SERVER_STATUS });
+
+    setModal(false);
+  };
 
   const modal = isModal && (
-    <Modal closeModal={closeModal} dates={dates} instrumentId={instrumentId} />
+    <Modal
+      closeModal={closeModal}
+      dates={dates}
+      instrumentId={instrumentId}
+      instrumentName={name}
+      chosenDay={chosenDay}
+      error={error}
+      serverMessage={serverMessage}
+    />
   );
 
   return (
