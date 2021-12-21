@@ -21,9 +21,10 @@ function* getRegistrationUserSaga(action) {
       yield put({ type: ACTIONS.SET_USER_ERROR, errorText: data.message });
     }
     if (response.ok) {
+      const message = 'Пользователь создан';
       yield put({
         type: ACTIONS.REGISTRATION_USER_SUCCES,
-        message: data.message,
+        message,
       });
     }
   } catch (error) {
@@ -53,7 +54,8 @@ function* getLoginUserSaga(action) {
     if (response.status === 200) {
       yield put({ type: ACTIONS.SET_USER, data });
     } else {
-      yield put({ type: ACTIONS.SET_USER_ERROR, errorText: data.message });
+      const errorText = 'Неверный логин или пароль';
+      yield put({ type: ACTIONS.SET_USER_ERROR, errorText });
     }
   } catch (error) {
     console.log(error);

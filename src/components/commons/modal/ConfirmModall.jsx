@@ -1,6 +1,8 @@
 import { Button } from '../button/Button';
 import CloseIcoButton from '../reserveItem/modal/closeIcoButton/CloseIcoButton';
+
 import cl from './ConfirmModall.module.css';
+import '../../../App.css';
 
 const ConfirmModall = ({ closeModal, confirmCancelReserve, cancelData }) => {
   const { name, type, date } = cancelData;
@@ -15,7 +17,7 @@ const ConfirmModall = ({ closeModal, confirmCancelReserve, cancelData }) => {
 
   return (
     <div className={cl.background}>
-      <div className={cl.container}>
+      <div className={`${cl.container} form`}>
         <CloseIcoButton close={closeModal} />
         <div className={cl.content__container}>
           <h3 className={cl.title}>{confirmText}</h3>

@@ -17,7 +17,7 @@ import cl from './Modal.module.css';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
 import { getTimeNow } from '../../../../utils/date';
 
-const datePickerText = 'Выберите интересующую дату';
+const datePickerText = 'Выберите дату';
 
 const Modal = ({
   closeModal,
@@ -40,6 +40,7 @@ const Modal = ({
   useEffect(() => {
     const formData = { name: instrumentName, dayId: initDay.id };
     dispatch({ type: GET_CHOSEN_DAY_INSTRUMENT, formData });
+    // eslint-disable-next-line
   }, []);
 
   const [selectedHours, setSelectedHours] = useState([]);
@@ -78,6 +79,7 @@ const Modal = ({
       };
       setSelectedHours([]);
       dispatch({ type: RESERVE_INSTRUMENT, formData });
+      dispatch({ type: CLEAR_CHOSEN_DAY_INSTRUMENT });
     }
   };
 

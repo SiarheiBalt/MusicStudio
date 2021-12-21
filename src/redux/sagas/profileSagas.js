@@ -16,8 +16,8 @@ function* getUserOrdersSaga(action) {
         headers,
       });
     });
-
     const data = yield response.json();
+
     if (response.status === 500) {
       yield put({ type: ACTIONS.SET_USER_ERROR, errorText: data.message });
     }
@@ -50,6 +50,7 @@ function* getCancelUserOrderSaga(action) {
         headers,
       });
     });
+
     if (response.status === 200) {
       yield put({ type: ACTIONS.CANCEL_ORDER_IN_USER_SUCCES });
       const { userId, token } = getUserLocalStorage();
