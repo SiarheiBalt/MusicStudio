@@ -1,4 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+
 import {
   GET_CHOSEN_DAY_INSTRUMENT,
   GET_CHOSEN_DAY_INSTRUMENTS_SUCCES,
@@ -38,14 +39,11 @@ function* getDayInstrumentsSaga(action) {
       let body = action.formData;
       body = JSON.stringify(body);
       const method = 'POST';
-      let headers = {};
-      headers['Content-type'] = 'application/json';
-
       const url = '/api/instruments/dates';
       return fetch(url, {
         method,
         body,
-        headers,
+        headers: { 'content-type': 'application/json' },
       });
     });
     const data = yield response.json();
@@ -67,13 +65,11 @@ function* getReserveInstrumentSaga(action) {
     const response = yield call(() => {
       let body = action.formData;
       body = JSON.stringify(body);
-      let headers = {};
       const method = 'POST';
-      headers['Content-type'] = 'application/json';
       return fetch('/api/instruments/time', {
         method,
         body,
-        headers,
+        headers: { 'content-type': 'application/json' },
       });
     });
     const data = yield response.json();

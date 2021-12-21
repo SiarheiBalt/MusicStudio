@@ -7,6 +7,7 @@ import {
   GET_CHOSEN_DAY_INSTRUMENT,
   RESERVE_INSTRUMENT,
 } from '../../../../redux/constants';
+
 import { findDayFromPicker } from '../../../../utils/time';
 import DataSelect from '../../../commons/dateSelect/DateSelect';
 import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';

@@ -1,5 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { ACTIONS } from '../constants';
+
+import {
+  GET_ALL_ORDERS_SUCCES,
+  GET_ALL_ORDERS,
+  CANCEL_ORDER_IN_USER_ADMIN_SUCCES,
+  CANCEL_ORDER_IN_USER_ADMIN,
+} from '../constants';
+
 import { getUserLocalStorage } from '../../utils/localStorage';
 
 function* getUserOrdersSaga(action) {
@@ -7,20 +14,18 @@ function* getUserOrdersSaga(action) {
     const response = yield call(() => {
       let body = action.formData;
       body = JSON.stringify(body);
-      let headers = {};
       const method = 'POST';
-      headers['Content-type'] = 'application/json';
       return fetch('/api/admin/orders', {
         method,
         body,
-        headers,
+        headers: { 'content-type': 'application/json' },
       });
     });
     const data = yield response.json();
 
     if (response.ok) {
       yield put({
-        type: ACTIONS.GET_ALL_ORDERS_SUCCES,
+        type: GET_ALL_ORDERS_SUCCES,
         data,
       });
     }
@@ -30,7 +35,7 @@ function* getUserOrdersSaga(action) {
 }
 
 export function* userOrdersSagaAdmin() {
-  yield takeEvery(ACTIONS.GET_ALL_ORDERS, getUserOrdersSaga);
+  yield takeEvery(GET_ALL_ORDERS, getUserOrdersSaga);
 }
 
 function* getCancelAdminOrderSaga(action) {
@@ -38,25 +43,23 @@ function* getCancelAdminOrderSaga(action) {
     const response = yield call(() => {
       let body = action.formData;
       body = JSON.stringify(body);
-      let headers = {};
       const method = 'POST';
-      headers['Content-type'] = 'application/json';
       return fetch('/api/orders/del', {
         method,
         body,
-        headers,
+        headers: { 'content-type': 'application/json' },
       });
     });
 
     if (response.status === 200) {
-      yield put({ type: ACTIONS.CANCEL_ORDER_IN_USER_ADMIN_SUCCES });
+      yield put({ type: CANCEL_ORDER_IN_USER_ADMIN_SUCCES });
       const { userId, token } = getUserLocalStorage();
       const formData = {
         userId,
         auth: token,
       };
 
-      yield put({ type: ACTIONS.GET_ALL_ORDERS, formData });
+      yield put({ type: GET_ALL_ORDERS, formData });
     }
   } catch (error) {
     console.log(error);
@@ -64,5 +67,5 @@ function* getCancelAdminOrderSaga(action) {
 }
 
 export function* cancelAdminOrderSaga() {
-  yield takeEvery(ACTIONS.CANCEL_ORDER_IN_USER_ADMIN, getCancelAdminOrderSaga);
+  yield takeEvery(CANCEL_ORDER_IN_USER_ADMIN, getCancelAdminOrderSaga);
 }

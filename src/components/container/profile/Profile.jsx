@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
+import { GET_USER_ORDERS } from '../../../redux/constants';
+
 import ReserveServicesTable from './reserveServicesTable/ReserveServicesTable';
 import UserInfo from './userInfo/UserInfo';
-import { ACTIONS } from '../../../redux/constants';
 import { getUserLocalStorage } from '../../../utils/localStorage';
 
 import cl from './Profile.module.css';
@@ -21,7 +22,7 @@ const Profile = () => {
       userId,
       auth: token,
     };
-    dispatch({ type: ACTIONS.GET_USER_ORDERS, formData });
+    dispatch({ type: GET_USER_ORDERS, formData });
   }, [dispatch]);
 
   const orderedServices =

@@ -4,7 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-import { ACTIONS } from '../../../redux/constants';
+import { RESERVE_RECORD, GET_RECORDS } from '../../../redux/constants';
+
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 import RecordingTypes from './recordingTypes/RecordingTypes';
 import Preloader from '../../commons/preloader/Preloader';
@@ -19,11 +20,11 @@ const Recording = () => {
   const dispatch = useDispatch();
 
   const addReserveTime = (formData) => {
-    dispatch({ type: ACTIONS.RESERVE_RECORD, formData });
+    dispatch({ type: RESERVE_RECORD, formData });
   };
 
   useEffect(() => {
-    dispatch({ type: ACTIONS.GET_RECORDS });
+    dispatch({ type: GET_RECORDS });
   }, [dispatch]);
 
   if (!records) {

@@ -13,7 +13,8 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
-import { ACTIONS } from '../../../../redux/constants';
+import { CANCEL_ORDER_IN_USER_ADMIN } from '../../../../redux/constants';
+
 import { Button } from '../../../commons/button/Button';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
 import { Input } from '../../../commons/input/Input';
@@ -58,7 +59,7 @@ const AdminTable = ({ data }) => {
   const confirmCancelReserve = () => {
     setIsModal(false);
     dispatch({
-      type: ACTIONS.CANCEL_ORDER_IN_USER_ADMIN,
+      type: CANCEL_ORDER_IN_USER_ADMIN,
       formData: cancelData,
     });
     closeModal();

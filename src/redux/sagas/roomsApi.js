@@ -1,17 +1,26 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { ACTIONS } from '../constants';
 
-function* getAllRecordsSaga() {
+import {
+  GET_ROOMS,
+  GET_DAY_IN_ROOM_SUCCES,
+  GET_DAY_IN_ROOM,
+  RESERVE_ROOM_SUCCES,
+  SET_RESERVE_ROOM_ERROR,
+  RESERVE_ROOM,
+  GET_ROOMS_SUCCES,
+} from '../constants';
+
+function* getAllRoomsSaga() {
   try {
     const response = yield call(() => {
-      const url = '/api/records/all';
+      const url = '/api/rooms/all';
       return fetch(url);
     });
 
     const data = yield response.json();
     if (response.ok) {
       yield put({
-        type: ACTIONS.GET_RECORDS_SUCCES,
+        type: GET_ROOMS_SUCCES,
         data,
       });
     }
@@ -20,53 +29,47 @@ function* getAllRecordsSaga() {
   }
 }
 
-export function* allRecordsSaga() {
-  yield takeEvery(ACTIONS.GET_RECORDS, getAllRecordsSaga);
+export function* allRoomsSaga() {
+  yield takeEvery(GET_ROOMS, getAllRoomsSaga);
 }
 
-function* getDayInRecordSaga(action) {
+function* getDayInRoomSaga(action) {
   try {
     const response = yield call(() => {
       let body = action.data;
       body = JSON.stringify(body);
       const method = 'POST';
-      let headers = {};
-      headers['Content-type'] = 'application/json';
-
-      const url = '/api/records/dates';
+      const url = '/api/rooms/dates';
       return fetch(url, {
         method,
         body,
-        headers,
+        headers: { 'content-type': 'application/json' },
       });
     });
     const data = yield response.json();
     const day = yield data[0].dates[0];
     if (response.status === 200) {
-      yield put({ type: ACTIONS.GET_DAY_IN_RECORD_SUCCES, day });
+      yield put({ type: GET_DAY_IN_ROOM_SUCCES, day });
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-export function* dayInRecordSaga() {
-  yield takeEvery(ACTIONS.GET_DAY_IN_RECORD, getDayInRecordSaga);
+export function* dayInRoomSaga() {
+  yield takeEvery(GET_DAY_IN_ROOM, getDayInRoomSaga);
 }
 
-function* getReserveRecordSaga(action) {
+function* getReserveRoomSaga(action) {
   try {
     const response = yield call(() => {
       let body = action.formData;
-
       body = JSON.stringify(body);
-      let headers = {};
       const method = 'POST';
-      headers['Content-type'] = 'application/json';
-      return fetch('/api/records/time', {
+      return fetch('/api/rooms/time', {
         method,
         body,
-        headers,
+        headers: { 'content-type': 'application/json' },
       });
     });
 
@@ -74,16 +77,16 @@ function* getReserveRecordSaga(action) {
     const message = data.message;
     if (response.status === 201) {
       const message = 'Время зарезервировано';
-      yield put({ type: ACTIONS.GET_DAY_IN_RECORD, data: action.formData });
-      yield put({ type: ACTIONS.RESERVE_RECORD_SUCCES, message });
+      yield put({ type: GET_DAY_IN_ROOM, data: action.formData });
+      yield put({ type: RESERVE_ROOM_SUCCES, message });
     } else {
-      yield put({ type: ACTIONS.SET_RESERVE_RECORDS_ERROR, message });
+      yield put({ type: SET_RESERVE_ROOM_ERROR, message });
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-export function* reserveRecordSaga() {
-  yield takeEvery(ACTIONS.RESERVE_RECORD, getReserveRecordSaga);
+export function* reserveRoomSaga() {
+  yield takeEvery(RESERVE_ROOM, getReserveRoomSaga);
 }

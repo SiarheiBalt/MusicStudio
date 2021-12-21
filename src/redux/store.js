@@ -4,18 +4,18 @@ import authReducer from './reducers/authReducer';
 import reserveInstruments from './reducers/reserveInstrumentsReducer';
 import reserveRoom from './reducers/reserveRoomReducer';
 import reserveRecord from './reducers/reserveRecordReducer';
-import { loginUserSaga, registrationUserSaga } from './sagas/authSagas';
+import { loginUserSaga, registrationUserSaga } from './sagas/authApi';
 import {
   allRoomsSaga,
   dayInRoomSaga,
   reserveRoomSaga,
-} from './sagas/roomsSagas';
+} from './sagas/roomsApi.js';
 import {
   allRecordsSaga,
   dayInRecordSaga,
   reserveRecordSaga,
-} from './sagas/recordsSagas';
-import { cancelUserOrderSaga, userOrdersSaga } from './sagas/profileSagas';
+} from './sagas/recordsApi';
+import { cancelUserOrderSaga, userOrdersSaga } from './sagas/profileApi';
 import {
   dayInstrumentsSaga,
   instrumentsSaga,
