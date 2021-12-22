@@ -1,5 +1,17 @@
 import { getDateInfo } from '../../utils/date';
-import { ACTIONS } from '../constants';
+
+import {
+  GET_ROOMS_SUCCES,
+  GET_ROOMS,
+  GET_DAY_IN_ROOM_SUCCES,
+  GET_DAY_IN_ROOM,
+  CLEAR_CHOSEN_DAY,
+  RESERVE_ROOM,
+  RESERVE_ROOM_SUCCES,
+  SET_RESERVE_ROOM_ERROR,
+  CLEAR_ROOM_SERVER_STATUS,
+  RESERVE_ROOM_CANCEL,
+} from '../constants';
 
 const defaultState = {
   rooms: null,
@@ -10,7 +22,7 @@ const defaultState = {
 
 const reserveRoom = (state = defaultState, action) => {
   switch (action.type) {
-    case ACTIONS.GET_ROOMS_SUCCES: {
+    case GET_ROOMS_SUCCES: {
       const rooms = action.data.map((room) => {
         room.dates = room.dates.map((day) => {
           let { date, dayofWeek, monthName, month, year } = getDateInfo(
@@ -27,37 +39,37 @@ const reserveRoom = (state = defaultState, action) => {
       });
       return { ...state, rooms };
     }
-    case ACTIONS.GET_ROOMS: {
+    case GET_ROOMS: {
       return { ...state };
     }
-    case ACTIONS.GET_DAY_IN_ROOM_SUCCES: {
+    case GET_DAY_IN_ROOM_SUCCES: {
       let chosenDay = getDateInfo(action.day.date);
       chosenDay.reserveTime = action.day.reserveTime;
       chosenDay.id = action.day.id;
 
       return { ...state, chosenDay };
     }
-    case ACTIONS.GET_DAY_IN_ROOM: {
+    case GET_DAY_IN_ROOM: {
       return { ...state };
     }
-    case ACTIONS.CLEAR_CHOSEN_DAY: {
+    case CLEAR_CHOSEN_DAY: {
       return { ...state, chosenDay: null };
     }
-    case ACTIONS.RESERVE_ROOM: {
+    case RESERVE_ROOM: {
       return { ...state };
     }
-    case ACTIONS.RESERVE_ROOM_SUCCES: {
+    case RESERVE_ROOM_SUCCES: {
       const message = action.message;
       return { ...state, serverMessage: message };
     }
-    case ACTIONS.SET_RESERVE_ROOM_ERROR: {
+    case SET_RESERVE_ROOM_ERROR: {
       const message = action.message;
       return { ...state, error: message };
     }
-    case ACTIONS.CLEAR_ROOM_SERVER_STATUS: {
+    case CLEAR_ROOM_SERVER_STATUS: {
       return { ...state, serverMessage: null, error: null };
     }
-    case ACTIONS.RESERVE_ROOM_CANCEL: {
+    case RESERVE_ROOM_CANCEL: {
       const dayId = action.formData.dayId;
       const reserveTime = action.formData.reservedTime;
 

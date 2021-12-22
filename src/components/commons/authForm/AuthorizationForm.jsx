@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ACTIONS } from '../../../redux/constants';
 import ServerStatus from './serverStatus/ServerStatus';
 import LoginForm from './loginForm/LoginForm';
 import RegisterationForm from './registrationForm/RegistrationForm';
+import { CLEAN_AUTH_ERROR_MESSAGE } from '../../../redux/constants';
+import { REGISTRATION_USER } from '../../../redux/constants';
+import { LOGIN_USER } from '../../../redux/constants';
 
 import './../../../App.css';
 import cl from './AuthorizationForm.module.css';
@@ -15,7 +17,7 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
   const [formState, setFormState] = useState(typeForm.registration);
 
   const changeFormState = () => {
-    dispatch({ type: ACTIONS.CLEAN_AUTH_ERROR_MESSAGE });
+    dispatch({ type: CLEAN_AUTH_ERROR_MESSAGE });
     if (formState === typeForm.login) {
       setFormState(typeForm.registration);
     } else {
@@ -24,11 +26,11 @@ const AuthorizationForm = ({ error, registrationUserMessage }) => {
   };
 
   const registrationSubmit = (userData) => {
-    dispatch({ type: ACTIONS.REGISTRATION_USER, body: userData });
+    dispatch({ type: REGISTRATION_USER, body: userData });
   };
 
   const loginSubmit = (userData) => {
-    dispatch({ type: ACTIONS.LOGIN_USER, body: userData });
+    dispatch({ type: LOGIN_USER, body: userData });
   };
 
   const formType =

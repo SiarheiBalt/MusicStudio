@@ -1,5 +1,16 @@
 import { getDateInfo } from '../../utils/date';
-import { ACTIONS } from '../constants';
+import {
+  GET_RECORDS_SUCCES,
+  GET_RECORDS,
+  GET_DAY_IN_RECORD_SUCCES,
+  GET_DAY_IN_RECORD,
+  CLEAR_CHOSEN_DAY,
+  RESERVE_RECORD,
+  RESERVE_RECORD_SUCCES,
+  SET_RESERVE_RECORDS_ERROR,
+  CLEAR_RECORD_SERVER_STATUS,
+  RESERVE_RECORD_CANCEL,
+} from '../constants';
 
 const defaultState = {
   records: null,
@@ -10,7 +21,7 @@ const defaultState = {
 
 const reserveRecord = (state = defaultState, action) => {
   switch (action.type) {
-    case ACTIONS.GET_RECORDS_SUCCES: {
+    case GET_RECORDS_SUCCES: {
       const records = action.data.map((record) => {
         record.dates = record.dates.map((day) => {
           let { date, dayofWeek, monthName, month, year } = getDateInfo(
@@ -27,37 +38,37 @@ const reserveRecord = (state = defaultState, action) => {
       });
       return { ...state, records };
     }
-    case ACTIONS.GET_RECORDS: {
+    case GET_RECORDS: {
       return { ...state };
     }
-    case ACTIONS.GET_DAY_IN_RECORD_SUCCES: {
+    case GET_DAY_IN_RECORD_SUCCES: {
       let chosenDay = getDateInfo(action.day.date);
       chosenDay.reserveTime = action.day.reserveTime;
       chosenDay.id = action.day.id;
 
       return { ...state, chosenDay };
     }
-    case ACTIONS.GET_DAY_IN_RECORD: {
+    case GET_DAY_IN_RECORD: {
       return { ...state };
     }
-    case ACTIONS.CLEAR_CHOSEN_DAY: {
+    case CLEAR_CHOSEN_DAY: {
       return { ...state, chosenDay: null };
     }
-    case ACTIONS.RESERVE_RECORD: {
+    case RESERVE_RECORD: {
       return { ...state };
     }
-    case ACTIONS.RESERVE_RECORD_SUCCES: {
+    case RESERVE_RECORD_SUCCES: {
       const message = action.message;
       return { ...state, serverMessage: message };
     }
-    case ACTIONS.SET_RESERVE_RECORDS_ERROR: {
+    case SET_RESERVE_RECORDS_ERROR: {
       const message = action.message;
       return { ...state, error: message };
     }
-    case ACTIONS.CLEAR_RECORD_SERVER_STATUS: {
+    case CLEAR_RECORD_SERVER_STATUS: {
       return { ...state, serverMessage: null, error: null };
     }
-    case ACTIONS.RESERVE_RECORD_CANCEL: {
+    case RESERVE_RECORD_CANCEL: {
       const dayId = action.formData.dayId;
       const reserveTime = action.formData.reservedTime;
 

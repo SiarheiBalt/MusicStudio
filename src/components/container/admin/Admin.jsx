@@ -4,21 +4,23 @@ import { useEffect } from 'react';
 import UserInfo from '../profile/userInfo/UserInfo';
 import AdminTable from './adminTable/AdminTable';
 
+import { GET_ALL_ORDERS } from '../../../redux/constants';
+
 import cl from './Admin.module.css';
-import { ACTIONS } from '../../../redux/constants';
 import { getUserLocalStorage } from '../../../utils/localStorage';
 
 const Admin = () => {
-  const data = useSelector((store) => store.adminReducer);
+  const data = useSelector((store) => store.adminReducer.orders);
+
   const actionDispatch = useDispatch();
 
   useEffect(() => {
     const { userId, token } = getUserLocalStorage();
-    let formData = { userId, auth: token };
-    actionDispatch({ type: ACTIONS.GET_ALL_ORDERS, formData });
+    const formData = { userId, auth: token };
+    actionDispatch({ type: GET_ALL_ORDERS, formData });
   }, [actionDispatch]);
 
-  const table = data.orders ? <AdminTable data={data.orders} /> : <></>;
+  const table = data.length === 0 ? <></> : <AdminTable data={data} />;
 
   return (
     <div className={cl.admin}>

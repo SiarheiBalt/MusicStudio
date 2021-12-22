@@ -5,21 +5,29 @@ import { useDispatch } from 'react-redux';
 import Shedule from '../shedule/Shedule';
 import Modal from './modal/Modal';
 import DataSelect from '../dateSelect/DateSelect';
+import {
+  CLEAR_ROOM_SERVER_STATUS,
+  CLEAR_RECORD_SERVER_STATUS,
+  GET_ROOMS,
+  GET_RECORDS,
+  GET_DAY_IN_ROOM,
+  GET_DAY_IN_RECORD,
+  CLEAR_CHOSEN_DAY,
+} from '../../../redux/constants';
 
 import cl from './ReserveItem.module.css';
-import { ACTIONS } from '../../../redux/constants';
 
 const clearReserveStatus = {
-  rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
-  records: ACTIONS.CLEAR_RECORD_SERVER_STATUS,
+  rooms: CLEAR_ROOM_SERVER_STATUS,
+  records: CLEAR_RECORD_SERVER_STATUS,
 };
 const getItem = {
-  rooms: ACTIONS.GET_ROOMS,
-  records: ACTIONS.GET_RECORDS,
+  rooms: GET_ROOMS,
+  records: GET_RECORDS,
 };
 const getDay = {
-  rooms: ACTIONS.GET_DAY_IN_ROOM,
-  records: ACTIONS.GET_DAY_IN_RECORD,
+  rooms: GET_DAY_IN_ROOM,
+  records: GET_DAY_IN_RECORD,
 };
 
 const ReserveItem = ({
@@ -40,7 +48,7 @@ const ReserveItem = ({
   const closeModal = () => {
     setIsModal(false);
     dispatch({ type: clearReserveStatus[itemInfo.type] });
-    dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
+    dispatch({ type: CLEAR_CHOSEN_DAY });
     dispatch({ type: getItem[itemInfo.type] });
   };
 

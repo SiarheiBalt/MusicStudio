@@ -1,11 +1,14 @@
 import cl from './Day.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { ACTIONS } from '../../../../redux/constants';
+import {
+  GET_DAY_IN_ROOM,
+  GET_DAY_IN_RECORD,
+} from '../../../../redux/constants';
 
 const getDayAction = {
-  rooms: ACTIONS.GET_DAY_IN_ROOM,
-  records: ACTIONS.GET_DAY_IN_RECORD,
+  rooms: GET_DAY_IN_ROOM,
+  records: GET_DAY_IN_RECORD,
 };
 
 const Day = ({ day, openModal, itemInfo }) => {

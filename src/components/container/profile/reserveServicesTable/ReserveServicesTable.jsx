@@ -10,8 +10,9 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import { CANCEL_ORDER_IN_USER } from '../../../../redux/constants';
+
 import { Button } from './../../../commons/button/Button';
-import { ACTIONS } from '../../../../redux/constants';
 
 import cl from './../Profile.module.css';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
@@ -49,7 +50,7 @@ const ReserveServicesTable = ({ data }) => {
   const confirmCancelReserve = () => {
     setIsModal(false);
     dispatch({
-      type: ACTIONS.CANCEL_ORDER_IN_USER,
+      type: CANCEL_ORDER_IN_USER,
       formData: cancelData,
     });
     closeModal();

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { ACTIONS } from '../../../../redux/constants';
 
 import { Button } from './../../button/Button';
+import { LOGOUT_USER } from '../../../../redux/constants';
 
 import './../../../../App.css';
 import cl from './LogoutForm.module.css';
@@ -16,11 +16,11 @@ const LogoutForm = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch({ type: ACTIONS.LOGOUT_USER });
+    dispatch({ type: LOGOUT_USER });
   };
 
   return (
-    <div className="form">
+    <div className='form'>
       <div className={cl.container}>
         <h2 className={cl.title}>{titleText}</h2>
         <Button text={buttomText} onClick={logout} />

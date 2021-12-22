@@ -4,17 +4,22 @@ import { useDispatch } from 'react-redux';
 
 import ReserveForm from './reserveForm/ReserveForm';
 
+import {
+  CLEAR_ROOM_SERVER_STATUS,
+  CLEAR_RECORD_SERVER_STATUS,
+  CLEAR_CHOSEN_DAY,
+} from '../../../../redux/constants';
+
 import CloseIcoButton from '../../../commons/reserveItem/modal/closeIcoButton/CloseIcoButton';
 import Preloader from '../../preloader/Preloader';
 import { getUserLocalStorage } from '../../../../utils/localStorage';
-import { ACTIONS } from '../../../../redux/constants';
 import { getTimeNow } from '../../../../utils/date';
 
 import cl from './Modal.module.css';
 
 const clearServerStatus = {
-  rooms: ACTIONS.CLEAR_ROOM_SERVER_STATUS,
-  records: ACTIONS.CLEAR_RECORD_SERVER_STATUS,
+  rooms: CLEAR_ROOM_SERVER_STATUS,
+  records: CLEAR_RECORD_SERVER_STATUS,
 };
 
 const Modal = ({
@@ -65,7 +70,7 @@ const Modal = ({
       };
       addReserveTime(formData);
       setSelectedHours([]);
-      dispatch({ type: ACTIONS.CLEAR_CHOSEN_DAY });
+      dispatch({ type: CLEAR_CHOSEN_DAY });
     }
   };
 

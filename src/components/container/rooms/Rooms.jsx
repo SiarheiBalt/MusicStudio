@@ -4,7 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-import { ACTIONS } from '../../../redux/constants';
+import { RESERVE_ROOM, GET_ROOMS } from '../../../redux/constants';
+
 import ReserveItem from '../../commons/reserveItem/ReserveItem';
 import RoomsInfo from './roomsInfo/RoomsInfo';
 import Preloader from '../../commons/preloader/Preloader';
@@ -18,11 +19,11 @@ const Rooms = () => {
   const dispatch = useDispatch();
 
   const addReserveTime = (formData) => {
-    dispatch({ type: ACTIONS.RESERVE_ROOM, formData });
+    dispatch({ type: RESERVE_ROOM, formData });
   };
 
   useEffect(() => {
-    dispatch({ type: ACTIONS.GET_ROOMS });
+    dispatch({ type: GET_ROOMS });
   }, [dispatch]);
 
   if (!rooms) {

@@ -4,7 +4,24 @@ import {
   getUserLocalStorage,
   setUserLocalStorage,
 } from './../../utils/localStorage';
-import { ACTIONS } from '../constants';
+
+import {
+  CLEAN_AUTH_ERROR_MESSAGE,
+  CANCEL_ORDER_IN_USER,
+  CANCEL_ORDER_IN_USER_SUCCES,
+  ADD_ORDER_IN_USER,
+  DELL_ORDER_IN_USER,
+  REGISTRATION_USER,
+  LOGIN_USER,
+  SET_USER,
+  DEFINE_USER,
+  LOGOUT_USER,
+  SET_USER_ERROR,
+  REGISTRATION_USER_SUCCES,
+  GET_USER_ORDERS,
+  GET_USER_ORDERS_SUCCES,
+} from '../constants';
+
 import { getTimeNow } from '../../utils/date';
 
 let defaultState = {
@@ -18,11 +35,11 @@ let defaultState = {
 
 const authReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case ACTIONS.CANCEL_ORDER_IN_USER:
-      return state;
-    case ACTIONS.CANCEL_ORDER_IN_USER_SUCCES:
+    case CANCEL_ORDER_IN_USER:
       return { ...state };
-    case ACTIONS.ADD_ORDER_IN_USER:
+    case CANCEL_ORDER_IN_USER_SUCCES:
+      return { ...state };
+    case ADD_ORDER_IN_USER:
       const data = {
         type: action.formData.itemInfo.type,
         name: action.formData.itemInfo.name,
@@ -36,18 +53,18 @@ const authReducer = (state = defaultState, action) => {
         actionTime: getTimeNow(),
       };
       return { ...state, orderedServices: [...state.orderedServices, data] };
-    case ACTIONS.DELL_ORDER_IN_USER:
+    case DELL_ORDER_IN_USER:
       const orderId = action.orderId;
       const orderedServices = state.orderedServices.filter((order) => {
         return orderId !== order.orderId;
       });
 
       return { ...state, orderedServices };
-    case ACTIONS.REGISTRATION_USER:
+    case REGISTRATION_USER:
       return { ...state };
-    case ACTIONS.LOGIN_USER:
+    case LOGIN_USER:
       return state;
-    case ACTIONS.SET_USER:
+    case SET_USER:
       const isAdmin = action.data.role === 'admin';
       setUserLocalStorage(action.data);
       return {
@@ -57,7 +74,7 @@ const authReducer = (state = defaultState, action) => {
         error: null,
         isAdmin,
       };
-    case ACTIONS.DEFINE_USER: {
+    case DEFINE_USER: {
       if (checkUserLocalStorage()) {
         const user = getUserLocalStorage();
         const isAdmin = user.role === 'admin';
@@ -65,21 +82,21 @@ const authReducer = (state = defaultState, action) => {
       }
       return state;
     }
-    case ACTIONS.LOGOUT_USER: {
+    case LOGOUT_USER: {
       cleanUserLocalStorage();
       const isAdmin = false;
       return { ...state, isAuth: false, user: null, isAdmin };
     }
-    case ACTIONS.SET_USER_ERROR:
+    case SET_USER_ERROR:
       return { ...state, error: action.errorText };
 
-    case ACTIONS.REGISTRATION_USER_SUCCES:
+    case REGISTRATION_USER_SUCCES:
       return { ...state, registrationMessage: action.message };
-    case ACTIONS.CLEAN_AUTH_ERROR_MESSAGE:
+    case CLEAN_AUTH_ERROR_MESSAGE:
       return { ...state, registrationMessage: null, error: null };
-    case ACTIONS.GET_USER_ORDERS:
+    case GET_USER_ORDERS:
       return { ...state };
-    case ACTIONS.GET_USER_ORDERS_SUCCES:
+    case GET_USER_ORDERS_SUCCES:
       return { ...state, orderedServices: action.orders };
     default:
       return state;
